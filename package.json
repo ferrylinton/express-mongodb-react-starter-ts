@@ -1,0 +1,58 @@
+{
+  "name": "express-mongodb-react-starter-ts",
+  "version": "1.0.0",
+  "description": "Express + Mongodb + React starter (with typescript)",
+  "main": "./dist/server.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "start": "cd dist && cross-env NODE_ENV=production node --enable-source-maps ./server.js",
+    "build-server": "webpack --config ./webpack.config.server.js --mode=production",
+    "build": "npm run clean && concurrently 'npm:build-*'",
+    "dev-backend": "cross-env NODE_ENV=development nodemon",
+    "dev": "concurrently 'npm:dev-*'",
+    "test": "jest --runInBand --detectOpenHandles --forceExit",
+    "prepare": "husky",
+    "precommit": "eslint ."
+  },
+  "keywords": [
+    "express",
+    "react",
+    "mongodb",
+    "typscript"
+  ],
+  "author": "ferrylinton",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-favicon": "^2.0.4",
+    "winston": "^3.15.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.13",
+    "@types/node": "^22.7.7",
+    "@types/supertest": "^6.0.2",
+    "concurrently": "^9.0.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "husky": "^9.1.6",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.10",
+    "nodemon": "^3.1.7",
+    "rimraf": "^6.0.1",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.10.0",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

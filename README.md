@@ -1,2 +1,2 @@
-# express-mongodb-react-starter-ts
-Express + Mongodb + React starter (with typescript)
+# starter
+Project's starter
