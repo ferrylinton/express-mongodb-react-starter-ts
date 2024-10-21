@@ -1,5 +1,5 @@
 import cookieParser from 'cookie-parser';
-import express from "express";
+import express from 'express';
 import favicon from 'express-favicon';
 import path from 'path';
 
@@ -12,10 +12,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/assets", express.static(path.join(__dirname, 'assets')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
-app.get("/api/ping", (_, res) => {
-  res.status(200).json({ message: "OK" });
+app.get('/api/ping', (_, res) => {
+	res.status(200).json({ message: 'OK' });
 });
 
 export default app;
