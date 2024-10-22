@@ -7,7 +7,7 @@ export default [
 		files: ['**/*.{js,mjs,cjs,ts}'],
 	},
 	{
-		ignores: ['jest.config.js', 'webpack.config.server.js'],
+		ignores: ["dist", 'jest.config.js', 'webpack.config.server.js'],
 	},
 	{
 		languageOptions: { globals: globals.browser },
@@ -17,6 +17,8 @@ export default [
 	{
 		rules: {
 			'@typescript-eslint/no-explicit-any': 'off',
-		},
+			"no-unused-vars": "off",
+			"@typescript-eslint/no-unused-vars": "off"
+		}
 	},
 ];

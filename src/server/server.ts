@@ -1,14 +1,16 @@
 import app from './app';
 import { NODE_ENV, PORT } from './config/constant';
 import logger from './config/winston';
+import { initDb } from './db/create-collections';
 
 const callback = () => {
 	logger.info(`[SERVER] Server is running at 'http://127.0.0.1:${PORT}'`);
 	logger.info(`[SERVER] NODE_ENV : ${NODE_ENV}`);
 };
 
-const main = () => {
+const main = async () => {
 	try {
+		await initDb();
 		app.listen(parseInt(PORT), callback);
 	} catch (error) {
 		logger.error(error);
