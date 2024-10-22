@@ -3,7 +3,6 @@ import { TODO_COLLECTION } from '../db/db-constant';
 import { mapToObject } from '../utils/json-util';
 import { getCollection } from '../config/mongodb';
 
-
 /**
  * A service that handles CRUD operations of Todo's data
  * @author ferrylinton
@@ -22,7 +21,6 @@ import { getCollection } from '../config/mongodb';
  * @property {date} createdAt - Created date
  * @property {date|null} updatedAt - Updated date
  */
-
 
 /**
  * Find multiple Todo documents
@@ -60,12 +58,12 @@ export const findById = async (_id: string) => {
  * @returns Object of {@link InsertOneResult}
  */
 export const create = async (task: string) => {
-	const todo: Omit<Todo, "id"> = {
+	const todo: Omit<Todo, 'id'> = {
 		task,
 		done: false,
-		createdAt: new Date()
+		createdAt: new Date(),
 	};
-	const todoCollection = await getCollection<Omit<Todo, "id">>(TODO_COLLECTION);
+	const todoCollection = await getCollection<Omit<Todo, 'id'>>(TODO_COLLECTION);
 	return await todoCollection.insertOne(todo);
 };
 
@@ -82,7 +80,10 @@ export const update = async (_id: string) => {
 	const todoCollection = await getCollection<Todo>(TODO_COLLECTION);
 	const updatedAt = new Date();
 	const done = true;
-	return await todoCollection.updateOne({ _id: new ObjectId(_id) }, { $set: { done, updatedAt } });
+	return await todoCollection.updateOne(
+		{ _id: new ObjectId(_id) },
+		{ $set: { done, updatedAt } }
+	);
 };
 
 /**

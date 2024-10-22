@@ -16,13 +16,13 @@ import { CreateTodoSchema } from '../validations/TodoValidation';
  * @param {Function} next
  */
 const getTodoesHandler = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const todoes = await todoService.find();
-        res.status(200).json(todoes);
-    } catch (error) {
-        next(error);
-    }
-}
+	try {
+		const todoes = await todoService.find();
+		res.status(200).json(todoes);
+	} catch (error) {
+		next(error);
+	}
+};
 
 /**
  * Handler for Endpoint POST /todoes
@@ -32,30 +32,28 @@ const getTodoesHandler = async (req: Request, res: Response, next: NextFunction)
  * @param {Function} next
  */
 const postTodoHandler = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const total = await todoService.count();
+	try {
+		const total = await todoService.count();
 
-        if (total >= 20) {
-            res.status(400).json({
-                errorMaxData: "errorMaxData"
-            });
-        } else {
-            const validation = CreateTodoSchema.safeParse(req.body);
+		if (total >= 20) {
+			res.status(400).json({
+				errorMaxData: 'errorMaxData',
+			});
+		} else {
+			const validation = CreateTodoSchema.safeParse(req.body);
 
-            if (validation.success) {
-                const todo = await todoService.create(req.body.task);
-                res.status(201).json(todo);
-            } else {
-                const errorValidations = validation.error.issues;
-                res.status(400).json(errorValidations);
-            }
-        }
-
-
-    } catch (error) {
-        next(error);
-    }
-}
+			if (validation.success) {
+				const todo = await todoService.create(req.body.task);
+				res.status(201).json(todo);
+			} else {
+				const errorValidations = validation.error.issues;
+				res.status(400).json(errorValidations);
+			}
+		}
+	} catch (error) {
+		next(error);
+	}
+};
 
 /**
  * Handler for Endpoint GET /todoes/:id
@@ -65,17 +63,17 @@ const postTodoHandler = async (req: Request, res: Response, next: NextFunction) 
  * @param {Function} next
  */
 const getTodoByIdHandler = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const todo = await todoService.findById(req.params.id);
-        if (todo) {
-            res.status(200).json(todo);
-        } else {
-            res.status(404).json({ message: "Data is not found" });
-        }
-    } catch (error) {
-        next(error);
-    }
-}
+	try {
+		const todo = await todoService.findById(req.params.id);
+		if (todo) {
+			res.status(200).json(todo);
+		} else {
+			res.status(404).json({ message: 'Data is not found' });
+		}
+	} catch (error) {
+		next(error);
+	}
+};
 
 /**
  * Handler for Endpoint PUT /todoes/:id
@@ -85,13 +83,13 @@ const getTodoByIdHandler = async (req: Request, res: Response, next: NextFunctio
  * @param {Function} next
  */
 const putTodoHandler = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const updateResult = await todoService.update(req.params.id);
-        res.status(200).json(updateResult)
-    } catch (error) {
-        next(error);
-    }
-}
+	try {
+		const updateResult = await todoService.update(req.params.id);
+		res.status(200).json(updateResult);
+	} catch (error) {
+		next(error);
+	}
+};
 
 /**
  * Handler for Endpoint DELETE /todoes/:id
@@ -101,13 +99,13 @@ const putTodoHandler = async (req: Request, res: Response, next: NextFunction) =
  * @param {Function} next
  */
 const deleteTodoHandler = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const deleteResult = await todoService.deleteById(req.params.id);
-        res.status(200).json(deleteResult)
-    } catch (error) {
-        next(error);
-    }
-}
+	try {
+		const deleteResult = await todoService.deleteById(req.params.id);
+		res.status(200).json(deleteResult);
+	} catch (error) {
+		next(error);
+	}
+};
 
 /**
  * Create instance of Express.Router
@@ -116,8 +114,8 @@ const router = express.Router();
 
 router.get('/todoes', getTodoesHandler);
 router.post('/todoes', postTodoHandler);
-router.get("/todoes/:id", getTodoByIdHandler);
-router.put("/todoes/:id", putTodoHandler);
-router.delete("/todoes/:id", deleteTodoHandler);
+router.get('/todoes/:id', getTodoByIdHandler);
+router.put('/todoes/:id', putTodoHandler);
+router.delete('/todoes/:id', deleteTodoHandler);
 
 export default router;

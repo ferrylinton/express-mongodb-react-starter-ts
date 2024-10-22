@@ -1,1 +1,1 @@
-export const TODO_COLLECTION = "todoes";
+export const TODO_COLLECTION = 'todoes';
