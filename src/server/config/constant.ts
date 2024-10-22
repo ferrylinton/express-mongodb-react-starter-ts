@@ -30,3 +30,8 @@ export const MONGODB_AUTH_SOURCE = process.env.MONGODB_AUTH_SOURCE;
 export const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
 export const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
 export const MONGODB_DATABASE = process.env.MONGODB_DATABASE;
+
+export const RATE_LIMIT_WINDOW_IN_SECONDS = parseInt(
+	process.env.RATE_LIMIT_WINDOW_IN_SECONDS || '300'
+);
+export const RATE_LIMIT_MAX = parseInt(process.env.RATE_LIMIT_MAX || '100');

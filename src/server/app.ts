@@ -4,6 +4,7 @@ import express from 'express';
 import favicon from 'express-favicon';
 import path from 'path';
 import { restErrorHandler } from './middlewares/rest-middleware';
+import { rateLimitMiddleware } from './middlewares/rate-limit-middleware';
 
 const app = express();
 
@@ -20,7 +21,9 @@ app.get('/api/ping', (_, res) => {
 	res.status(200).json({ message: 'OK' });
 });
 
+app.use('/api', rateLimitMiddleware);
 app.use('/api', todoRouter);
+
 app.use(restErrorHandler);
 
 export default app;
