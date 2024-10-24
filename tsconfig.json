@@ -1,11 +1,19 @@
 {
-	"exclude": ["./src/client/"],
 	"compilerOptions": {
-		"target": "es6",
-		"module": "commonjs",
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"allowJs": false,
+		"skipLibCheck": true,
 		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
 		"strict": true,
-		"outDir": "./dist",
+		"forceConsistentCasingInFileNames": true,
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
 		"baseUrl": ".",
 		"paths": {
 			"@src/*": ["src/*"],
@@ -13,6 +21,13 @@
 			"@services/*": ["src/server/services/*"],
 			"@validations/*": ["src/server/validations/*"],
 			"@utils/*": ["src/server/utils/*"]
+		}
+	},
+	"include": ["src"],
+	"ts-node": {
+		"transpileOnly": true,
+		"compilerOptions": {
+			"module": "commonjs"
 		}
 	}
 }
