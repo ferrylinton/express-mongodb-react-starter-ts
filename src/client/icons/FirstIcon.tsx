@@ -1,5 +1,5 @@
-import { LastIcon } from "./LastIcon"
+import { LastIcon } from './LastIcon';
 
 export const FirstIcon = () => {
-    return <LastIcon rotate={true} />
-}
+	return <LastIcon rotate={true} />;
+};

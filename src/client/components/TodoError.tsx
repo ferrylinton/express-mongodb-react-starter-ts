@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useRouteError } from 'react-router-dom';
 
 export const TodoError = () => {
@@ -6,4 +6,4 @@ export const TodoError = () => {
 	console.error(error);
 	// Uncaught ReferenceError: path is not defined
 	return <div>Dang!</div>;
-}
+};

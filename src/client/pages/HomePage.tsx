@@ -1,19 +1,30 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from 'axios';
 import { Suspense, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Await, defer, isRouteErrorResponse, Link, LoaderFunction, useActionData, useAsyncError, useLoaderData, useLocation, useNavigation, useRouteError } from 'react-router-dom';
-import { AwaitErrorBoundary } from "../components/AwaitErrorBoundary";
-import { TodoTable } from "../components/TodoTable";
-import { TodoTableSkeleton } from "../components/TodoTableSkeleton";
-import { useAlertStore } from "../hooks/alert-store";
-import * as todoService from "../services/todo-service";
+import {
+	Await,
+	defer,
+	isRouteErrorResponse,
+	Link,
+	LoaderFunction,
+	useActionData,
+	useAsyncError,
+	useLoaderData,
+	useLocation,
+	useNavigation,
+	useRouteError,
+} from 'react-router-dom';
+import { AwaitErrorBoundary } from '../components/AwaitErrorBoundary';
+import { TodoTable } from '../components/TodoTable';
+import { TodoTableSkeleton } from '../components/TodoTableSkeleton';
+import { useAlertStore } from '../hooks/alert-store';
+import * as todoService from '../services/todo-service';
 
 interface LoaderData {
 	response: AxiosResponse<Todo[]>;
 }
 
 export const Component = () => {
-
 	const intl = useIntl();
 
 	const location = useLocation();
@@ -30,12 +41,11 @@ export const Component = () => {
 
 	useEffect(() => {
 		console.log(error);
-	}, [error])
+	}, [error]);
 
 	useEffect(() => {
 		console.log(navigation);
-	}, [navigation])
-
+	}, [navigation]);
 
 	return (
 		<>
@@ -43,32 +53,29 @@ export const Component = () => {
 				<div className="total">
 					<FormattedMessage id="total" values={{ total }} />
 				</div>
-				<Link to={"/add"} className="btn btn-primary">
+				<Link to={'/add'} className="btn btn-primary">
 					<FormattedMessage id="newTask" />
 				</Link>
 			</div>
 
 			<div className="todo-list">
-
 				<Suspense fallback={<TodoTableSkeleton />}>
 					<Await
 						resolve={loaderData.response}
 						errorElement={<AwaitErrorBoundary />}
-						children={(response) => <TodoTable response={response} />}>
-					</Await>
+						children={response => <TodoTable response={response} />}
+					></Await>
 				</Suspense>
-
-			</div >
+			</div>
 		</>
-	)
-}
+	);
+};
 
 export const loader: LoaderFunction = () => {
 	return defer({
-		response: todoService.find()
+		response: todoService.find(),
 	});
 };
-
 
 export function ErrorBoundary() {
 	const error = useRouteError() as any;
@@ -81,5 +88,5 @@ export function ErrorBoundary() {
 	);
 }
 
-Component.displayName = "HomeRoute";
-ErrorBoundary.displayName = "HomeErrorBoundary";
+Component.displayName = 'HomeRoute';
+ErrorBoundary.displayName = 'HomeErrorBoundary';

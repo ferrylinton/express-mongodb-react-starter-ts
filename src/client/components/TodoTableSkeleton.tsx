@@ -1,12 +1,11 @@
-
 export const TodoTableSkeleton = () => {
 	return (
 		<div className="todo-list">
 			<table>
 				<tbody>
-					{
-						["1", "2"].map((num) => {
-							return <tr key={num}>
+					{['1', '2'].map(num => {
+						return (
+							<tr key={num}>
 								<td>{num}</td>
 								<td>
 									<span className="skeleton-line"></span>
@@ -19,10 +18,10 @@ export const TodoTableSkeleton = () => {
 									</div>
 								</td>
 							</tr>
-						})
-					}
+						);
+					})}
 				</tbody>
 			</table>
 		</div>
-	)
-}
+	);
+};

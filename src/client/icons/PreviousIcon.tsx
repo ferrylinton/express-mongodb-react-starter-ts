@@ -1,5 +1,5 @@
-import { NextIcon } from "./NextIcon"
+import { NextIcon } from './NextIcon';
 
 export const PreviousIcon = () => {
-    return <NextIcon rotate={true} />
-}
+	return <NextIcon rotate={true} />;
+};
