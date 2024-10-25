@@ -1,26 +1,29 @@
-import { Todo } from '../../types/todo-type';
 import { create } from 'zustand';
 
 type ConfirmState = {
-	isDelete?: boolean;
-	todo?: Todo;
-	message?: string;
+	message: string;
 	show: boolean;
-	showConfirm: (message: string, todo: Todo, isDelete: boolean) => void;
+	okHandler: () => Promise<void>;
+	showConfirm: (message: string, okHandler: () => Promise<void>) => void;
 	hideConfirm: () => void;
 };
 
 const DEFAULT_VALUE: Partial<ConfirmState> = {
-	isDelete: undefined,
-	todo: undefined,
-	message: undefined,
+	message: 'Are you sure?',
 	show: false,
+	okHandler: () => {
+		return new Promise(resolve => resolve);
+	},
 };
 
 export const useConfirmStore = create<ConfirmState>(set => ({
+	message: 'Are you sure?',
 	show: false,
-	showConfirm: (message: string, todo: Todo, isDelete: boolean) => {
-		set(() => ({ show: true, message, todo, isDelete }));
+	okHandler: () => {
+		return new Promise(resolve => resolve);
+	},
+	showConfirm: (message: string, okHandler: () => Promise<void>) => {
+		set(() => ({ show: true, message, okHandler }));
 	},
 	hideConfirm: () => {
 		set(() => DEFAULT_VALUE);

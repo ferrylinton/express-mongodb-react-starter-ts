@@ -7,31 +7,24 @@ import {
 	isRouteErrorResponse,
 	Link,
 	LoaderFunction,
-	useActionData,
-	useAsyncError,
 	useLoaderData,
 	useLocation,
 	useNavigation,
-	useRouteError,
+	useRouteError
 } from 'react-router-dom';
 import { AwaitErrorBoundary } from '../components/AwaitErrorBoundary';
 import { TodoTable } from '../components/TodoTable';
 import { TodoTableSkeleton } from '../components/TodoTableSkeleton';
 import { useAlertStore } from '../hooks/alert-store';
-import * as todoService from '../services/todo-service';
+import { axiosInstance } from '../utils/axios';
 
 interface LoaderData {
 	response: AxiosResponse<Todo[]>;
 }
 
 export const Component = () => {
-	const intl = useIntl();
-
-	const location = useLocation();
 
 	const [total, setTotal] = useState<number>(0);
-
-	const { alert } = useAlertStore();
 
 	const navigation = useNavigation();
 
@@ -73,7 +66,7 @@ export const Component = () => {
 
 export const loader: LoaderFunction = () => {
 	return defer({
-		response: todoService.find(),
+		response: axiosInstance.get<Todo[]>(`/api/todoes`)
 	});
 };
 

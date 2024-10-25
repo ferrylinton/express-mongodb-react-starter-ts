@@ -1,27 +1,46 @@
-import { useEffect, useState } from 'react';
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import {
 	isRouteErrorResponse,
 	Link,
 	LoaderFunction,
 	useLoaderData,
-	useParams,
-	useRouteError,
+	useNavigate,
+	useRouteError
 } from 'react-router-dom';
 import { useAlertStore } from '../hooks/alert-store';
 import { useConfirmStore } from '../hooks/confirm-store';
-import * as todoService from '../services/todo-service';
+import { axiosInstance } from '../utils/axios';
 
 export const Component = () => {
+
 	const intl = useIntl();
 
-	const { showConfirm } = useConfirmStore();
+	const navigate = useNavigate();
+
+	const { alert } = useAlertStore();
+
+	const { showConfirm, hideConfirm } = useConfirmStore();
 
 	const todo = useLoaderData() as Todo | null;
 
+	const okHandler = async () => {
+		try {
+			await axiosInstance.delete(`/api/todoes/${todo?.id}`);
+			alert.success(
+				intl.formatMessage({ id: 'dataIsDeleted' }, { task: todo?.task }) as string
+			);
+
+			hideConfirm();
+			navigate('/', { replace: true });
+		} catch (error: any) {
+			console.log(error);
+			alert.error(error.response.data.message);
+		}
+	};
+
 	const onClickDelete = () => {
 		if (todo) {
-			showConfirm(intl.formatMessage({ id: 'deleteData' }), todo, true);
+			showConfirm(intl.formatMessage({ id: 'deleteData' }), okHandler);
 		}
 	};
 
@@ -100,8 +119,7 @@ export const Component = () => {
 
 export const loader: LoaderFunction = async ({ params }) => {
 	try {
-		console.log(params);
-		const { data } = await todoService.findById(params.id as string);
+		const { data } = await axiosInstance.get(`/api/todoes/${params.id}`);
 		return data;
 	} catch (error: any) {
 		console.error(error);

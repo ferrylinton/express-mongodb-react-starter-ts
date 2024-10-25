@@ -1,11 +1,11 @@
-import { Todo } from '../../types/todo-type';
 import clsx from 'clsx';
 import { FormattedDate, useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAlertStore } from '../hooks/alert-store';
 import { useConfirmStore } from '../hooks/confirm-store';
 import { CheckIcon } from '../icons/CheckIcon';
 import EyeIcon from '../icons/EyeIcon';
-import { useAlertStore } from '../hooks/alert-store';
+import { axiosInstance } from '../utils/axios';
 
 type Props = {
 	index: number;
@@ -13,17 +13,35 @@ type Props = {
 };
 
 export const TodoItem = ({ index, todo }: Props) => {
+
 	const intl = useIntl();
 
-	const { hideAlert } = useAlertStore();
+	const navigate = useNavigate();
 
-	const { showConfirm } = useConfirmStore();
+	const { alert } = useAlertStore();
 
-	const onClickUpdate = () => {
-		if (todo) {
-			showConfirm(intl.formatMessage({ id: 'updateData' }), todo, false);
+	const { showConfirm, hideConfirm } = useConfirmStore();
+
+	const okHandler = async () => {
+		try {
+			await axiosInstance.put<Todo>(`/api/todoes/${todo.id}`);
+			alert.success(
+				intl.formatMessage({ id: 'dataIsUpdated' }, { task: todo?.task }) as string
+			);
+
+			hideConfirm();
+			navigate('/', { replace: true });
+		} catch (error: any) {
+			console.log(error);
+			alert.error(error.response.data.message);
 		}
 	};
+
+	const onClickUpdate = () => {
+		showConfirm(intl.formatMessage({ id: 'updateData' }), okHandler);
+	};
+
+
 
 	return (
 		<>
