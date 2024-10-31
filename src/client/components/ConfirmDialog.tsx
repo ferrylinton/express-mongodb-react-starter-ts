@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { useConfirmStore } from '../hooks/confirm-store';
 
 export const ConfirmDialog = () => {
-
 	const { message, show, hideConfirm, okHandler } = useConfirmStore();
 
 	return (

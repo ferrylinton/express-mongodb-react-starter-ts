@@ -36,5 +36,6 @@
 	"url": "URL",
 	"method": "Method",
 	"createdAt": "Created At",
-	"keyword": "Keyword"
+	"keyword": "Keyword",
+	"duplicateData": "Data [{arg}] already exists"
 }

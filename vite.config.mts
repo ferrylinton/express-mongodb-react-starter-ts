@@ -1,33 +1,21 @@
-import { defineConfig } from 'vite';
-import { visualizer } from 'rollup-plugin-visualizer';
 import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 import virtualHtml from 'vite-plugin-virtual-html';
-import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [
-		react(),
-		visualizer({ open: true }),
-		virtualHtml({
-			pages: {
-				main: '/src/main.html',
-			},
-			indexPage: 'main',
-		}),
-	],
-	resolve: {
-		alias: {
-			'@src': path.resolve(__dirname, 'src'),
-			'@types': path.resolve(__dirname, 'src', 'types'),
-		},
-	},
-	server: {
-		port: 3000,
-		proxy: {
-			'/api': `http://localhost:5001`,
-		},
-	},
+	plugins: [react()].concat(
+		process.env.NODE_ENV === 'build'
+			? [
+					virtualHtml({
+						pages: {
+							main: '/index.html',
+						},
+						indexPage: 'main',
+					}),
+				]
+			: []
+	),
 	build: {
 		rollupOptions: {
 			output: {

@@ -1,18 +1,18 @@
 :root {
-	--background: hsl(0, 100%, 99%);
+	--background: hsl(0, 0%, 100%);
 	--background-h: 0;
-	--background-s: 100%;
+	--background-s: 0%;
 	--background-l: 100%;
 
-	--text: hsl(19, 100%, 14%);
-	--text-h: 19;
-	--text-s: 100%;
-	--text-l: 13%;
+	--text: hsl(0, 0%, 14%);
+	--text-h: 0;
+	--text-s: 0%;
+	--text-l: 14%;
 
-	--primary: hsl(16, 82%, 52%);
-	--primary-h: 16;
-	--primary-s: 82%;
-	--primary-l: 52%;
+	--primary: hsl(212, 74%, 45%);
+	--primary-h: 212;
+	--primary-s: 74%;
+	--primary-l: 45%;
 
 	--accent: hsl(107, 100%, 63%);
 	--accent-h: 107;
@@ -29,30 +29,34 @@
 	--danger-s: 90%;
 	--danger-l: 58%;
 
-	--inverse-text: hsl(0, 100%, 90%);
+	--inverse-text: hsl(0, 0%, 100%);
 	--inverse-text-h: 0;
-	--inverse-text-s: 100%;
-	--inverse-text-l: 90%;
+	--inverse-text-s: 0%;
+	--inverse-text-l: 100%;
 
 	--scrollbar: hsla(var(--background-h), var(--background-s), 50%, 1);
 	--scrollbar-track: hsla(var(--background-h), var(--background-s), 90%, 1);
+
+	--border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 20%));
+	--shadow-color: hsla(0, 0%, 0%, 0.07);
+	--light-text: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 20%));
 }
 
 .dark {
-	--background: hsl(20, 96%, 9%);
-	--background-h: 20;
-	--background-s: 96%;
-	--background-l: 9%;
+	--background: hsl(0, 0%, 12%);
+	--background-h: 0;
+	--background-s: 0%;
+	--background-l: 12%;
 
-	--text: hsl(0, 100%, 95%);
+	--text: hsl(0, 0%, 100%);
 	--text-h: 0;
-	--text-s: 100%;
-	--text-l: 95%;
+	--text-s: 0%;
+	--text-l: 100%;
 
-	--primary: hsl(0, 82%, 28%);
-	--primary-h: 0;
-	--primary-s: 82%;
-	--primary-l: 28%;
+	--primary: hsl(212, 74%, 45%);
+	--primary-h: 212;
+	--primary-s: 74%;
+	--primary-l: 45%;
 
 	--accent: hsl(107, 100%, 63%);
 	--accent-h: 107;
@@ -69,11 +73,14 @@
 	--danger-s: 78%;
 	--danger-l: 57%;
 
-	--inverse-text: hsl(0, 100%, 90%);
+	--inverse-text: hsl(0, 0%, 100%);
 	--inverse-text-h: 0;
-	--inverse-text-s: 100%;
-	--inverse-text-l: 90%;
+	--inverse-text-s: 0%;
+	--inverse-text-l: 100%;
 
 	--scrollbar: hsla(var(--background-h), var(--background-s), 50%, 1);
 	--scrollbar-track: hsla(var(--background-h), var(--background-s), 90%, 1);
+
+	--border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 20%));
+	--shadow-color: hsla(0, 0%, 0%, 0.426);
 }

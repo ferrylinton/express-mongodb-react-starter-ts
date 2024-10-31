@@ -1,7 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import ErrorPage from '../pages/ErrorPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
-import Layout from './Layout';
+import Layout from './Layout/Layout';
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(

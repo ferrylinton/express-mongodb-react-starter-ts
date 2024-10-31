@@ -1,84 +1,39 @@
 import { AxiosResponse } from 'axios';
-import { Suspense, useEffect, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import {
-	Await,
-	defer,
-	isRouteErrorResponse,
-	Link,
-	LoaderFunction,
-	useLoaderData,
-	useLocation,
-	useNavigation,
-	useRouteError
-} from 'react-router-dom';
-import { AwaitErrorBoundary } from '../components/AwaitErrorBoundary';
+import { Suspense } from 'react';
+import { Await, defer, LoaderFunction, useLoaderData } from 'react-router-dom';
+import { SimpleErrorBoundary } from '../components/SimpleErrorBoundary';
 import { TodoTable } from '../components/TodoTable';
 import { TodoTableSkeleton } from '../components/TodoTableSkeleton';
-import { useAlertStore } from '../hooks/alert-store';
 import { axiosInstance } from '../utils/axios';
 
 interface LoaderData {
-	response: AxiosResponse<Todo[]>;
+	response: Promise<AxiosResponse<Todo[]>>;
 }
 
 export const Component = () => {
-
-	const [total, setTotal] = useState<number>(0);
-
-	const navigation = useNavigation();
-
-	const error = useRouteError() as any;
-
 	const loaderData = useLoaderData() as LoaderData;
-
-	useEffect(() => {
-		console.log(error);
-	}, [error]);
-
-	useEffect(() => {
-		console.log(navigation);
-	}, [navigation]);
 
 	return (
 		<>
-			<div className="todo-list-toolbar">
-				<div className="total">
-					<FormattedMessage id="total" values={{ total }} />
-				</div>
-				<Link to={'/add'} className="btn btn-primary">
-					<FormattedMessage id="newTask" />
-				</Link>
-			</div>
-
-			<div className="todo-list">
-				<Suspense fallback={<TodoTableSkeleton />}>
-					<Await
-						resolve={loaderData.response}
-						errorElement={<AwaitErrorBoundary />}
-						children={response => <TodoTable response={response} />}
-					></Await>
-				</Suspense>
-			</div>
+			<Suspense fallback={<TodoTableSkeleton />}>
+				<Await
+					resolve={loaderData.response}
+					errorElement={<SimpleErrorBoundary />}
+					children={response => <TodoTable response={response} />}
+				/>
+			</Suspense>
 		</>
 	);
 };
 
 export const loader: LoaderFunction = () => {
 	return defer({
-		response: axiosInstance.get<Todo[]>(`/api/todoes`)
+		response: axiosInstance.get<Todo[]>(`/api/todoes`),
 	});
 };
 
 export function ErrorBoundary() {
-	const error = useRouteError() as any;
-	return isRouteErrorResponse(error) ? (
-		<h1>
-			{error.status} {error.statusText}
-		</h1>
-	) : (
-		<h1>{error.message || error}</h1>
-	);
+	return <SimpleErrorBoundary />;
 }
 
 Component.displayName = 'HomeRoute';

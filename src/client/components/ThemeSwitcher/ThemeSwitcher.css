@@ -1,0 +1,48 @@
+@import '@radix-ui/colors/black-alpha.css';
+
+/* reset */
+button {
+	all: unset;
+}
+
+.theme-switcher {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	& button {
+		width: 52px;
+		height: 32px;
+		border-radius: 9999px;
+		position: relative;
+		background-color: hsl(
+			var(--background-h),
+			var(--background-s),
+			calc(var(--background-l) - 2%)
+		);
+		border: solid 1px var(--border-color);
+
+		& span {
+			display: block;
+			width: 26px;
+			height: 26px;
+			border-radius: 9999px;
+			transition: transform 100ms;
+			transform: translateX(4px);
+			will-change: transform;
+			background-color: hsl(var(--text-h), var(--text-s), calc(var(--text-l) + 30%));
+
+			&[data-state='checked'] {
+				transform: translateX(20px);
+			}
+		}
+	}
+}
+
+.dark .theme-switcher {
+	& button {
+		& span {
+			background-color: hsl(var(--text-h), var(--text-s), calc(var(--text-l) - 40%));
+		}
+	}
+}

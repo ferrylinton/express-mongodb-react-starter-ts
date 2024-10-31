@@ -6,6 +6,7 @@ import path from 'path';
 import { restErrorHandler } from './middlewares/rest-middleware';
 import { rateLimitMiddleware } from './middlewares/rate-limit-middleware';
 import { reactMiddleware } from './middlewares/react-middleware';
+import { NODE_ENV } from './config/constant';
 
 const app = express();
 
@@ -26,9 +27,8 @@ app.use('/api', rateLimitMiddleware);
 app.use('/api', todoRouter);
 
 app.use(restErrorHandler);
-app.use(reactMiddleware);
-// app.all('*', (req, res) => {
-// 	res.status(404).send('<h1>404! Page not found</h1>');
-// });
+if (NODE_ENV === 'production') {
+	app.use(reactMiddleware);
+}
 
 export default app;

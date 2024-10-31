@@ -5,14 +5,13 @@ import {
 	LoaderFunction,
 	useLoaderData,
 	useNavigate,
-	useRouteError
+	useRouteError,
 } from 'react-router-dom';
 import { useAlertStore } from '../hooks/alert-store';
 import { useConfirmStore } from '../hooks/confirm-store';
 import { axiosInstance } from '../utils/axios';
 
 export const Component = () => {
-
 	const intl = useIntl();
 
 	const navigate = useNavigate();

@@ -7,7 +7,10 @@ export const restErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
 		logger.error(err);
 
 		if (err instanceof MongoServerError) {
-			res.status(400).json({ message: err.message });
+			res.status(400).json({
+				message: 'duplicateData',
+				formData: req.body,
+			});
 		} else {
 			res.status(err.status || 500);
 			res.json({ message: err.message });

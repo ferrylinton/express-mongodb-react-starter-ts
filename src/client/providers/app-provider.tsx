@@ -6,30 +6,21 @@ import idJson from '../messages/id.json';
 
 const THEME = 'theme';
 
-type Theme = 'light' | 'dark';
-
-type AppContextProps = {
-	theme: Theme;
-	toggleTheme: () => void;
-	locale: string;
-	setLocale: (locale: string) => void;
-};
-
 const getTheme = (): Theme => {
 	let theme = localStorage.getItem(THEME);
 
 	if (!theme) {
 		theme = 'light';
+		localStorage.setItem(THEME, theme);
 	}
 
-	localStorage.setItem(THEME, theme);
 	document.body.classList.add(theme);
 	return theme as Theme;
 };
 
 export const AppContext = createContext<AppContextProps>({
-	theme: getTheme(),
-	toggleTheme: () => Function(),
+	getTheme,
+	setTheme: (theme: Theme) => Function(theme),
 	locale: DEFAULT_LOCALE,
 	setLocale: () => Function(),
 });
@@ -37,17 +28,13 @@ export const AppContext = createContext<AppContextProps>({
 export const AppProvider = ({ children }: PropsWithChildren) => {
 	const [locale, setCurrentLocale] = useState<string>(DEFAULT_LOCALE);
 
-	const [theme, setTheme] = useState<Theme>('light');
+	const setTheme = (theme: Theme) => {
+		localStorage.setItem(THEME, theme);
 
-	const toggleTheme = () => {
-		if (theme === 'light') {
-			setTheme('dark');
-			localStorage.setItem(THEME, 'dark');
+		if (theme === 'dark') {
 			document.body.classList.add('dark');
 			document.body.classList.remove('light');
 		} else {
-			setTheme('light');
-			localStorage.setItem(THEME, 'light');
 			document.body.classList.remove('dark');
 			document.body.classList.add('light');
 		}
@@ -58,8 +45,8 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 	};
 
 	const value: AppContextProps = {
-		theme: 'light',
-		toggleTheme,
+		getTheme,
+		setTheme,
 		locale,
 		setLocale,
 	};

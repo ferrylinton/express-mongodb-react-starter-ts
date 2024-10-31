@@ -19,6 +19,7 @@ type AlertState = {
 		error: (message: string) => void;
 	};
 	hideAlert: (id: string) => void;
+	clearAlert: () => void;
 };
 
 export const useAlertStore = create<AlertState>(set => ({
@@ -55,6 +56,12 @@ export const useAlertStore = create<AlertState>(set => ({
 	hideAlert: (id: string) => {
 		set(state => ({
 			alertList: state.alertList.filter(alertItem => alertItem.id !== id),
+		}));
+	},
+
+	clearAlert: () => {
+		set(_state => ({
+			alertList: [],
 		}));
 	},
 }));

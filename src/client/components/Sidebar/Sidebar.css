@@ -1,0 +1,90 @@
+/* reset */
+button {
+	all: unset;
+}
+
+.sidebar {
+	min-width: 240px;
+	width: 240px;
+	overflow: auto;
+	position: fixed;
+	z-index: 200;
+	top: 0;
+	bottom: 0;
+	padding-top: 50px;
+	left: -100px;
+	transition: all 0.3s ease-in-out;
+	visibility: hidden;
+	opacity: 0;
+	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
+	color: var(--text);
+	display: flex;
+	flex-direction: column;
+	border-right: solid 1px
+		hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+
+	& .btn {
+		margin: 1rem 0.5rem;
+	}
+}
+
+.showSidebar .sidebar {
+	visibility: visible;
+	opacity: 1;
+	transform: translateX(100px) translateY(0);
+}
+
+.sidebar-overlay {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	height: 100%;
+	background-color: hsla(0, 0%, 0%, 0.5);
+	backdrop-filter: blur(2px);
+	z-index: 100;
+}
+
+.showSidebar .sidebar-overlay {
+	display: block;
+}
+
+.sidebar-menu {
+	width: 100%;
+	margin: 2rem 0;
+
+	& a {
+		width: 100%;
+		display: inline-block;
+		text-transform: uppercase;
+		padding: 0.7rem 1rem;
+		font-size: 0.9rem;
+		font-weight: normal;
+		color: var(--text);
+		border-bottom: solid 1px
+			hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+
+		&:hover {
+			background-color: hsl(
+				var(--background-h),
+				var(--background-s),
+				calc(var(--background-l) - 15%)
+			);
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.showSidebar .sidebar,
+	.sidebar {
+		transform: translateX(0) translateY(0);
+		position: static;
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.showSidebar .sidebar-overlay {
+		display: none;
+	}
+}

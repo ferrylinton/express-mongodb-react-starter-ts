@@ -13,7 +13,6 @@ type Props = {
 };
 
 export const TodoItem = ({ index, todo }: Props) => {
-
 	const intl = useIntl();
 
 	const navigate = useNavigate();
@@ -40,8 +39,6 @@ export const TodoItem = ({ index, todo }: Props) => {
 	const onClickUpdate = () => {
 		showConfirm(intl.formatMessage({ id: 'updateData' }), okHandler);
 	};
-
-
 
 	return (
 		<>

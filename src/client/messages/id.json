@@ -36,5 +36,6 @@
 	"url": "URL",
 	"method": "Metode",
 	"createdAt": "Tgl Dibuat",
-	"keyword": "Kata kunci"
+	"keyword": "Kata kunci",
+	"duplicateData": "Data [{arg}] sudah ada"
 }

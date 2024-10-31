@@ -17,6 +17,8 @@ import { CreateTodoSchema } from '../validations/TodoValidation';
  */
 const getTodoesHandler = async (req: Request, res: Response, next: NextFunction) => {
 	try {
+		await new Promise(r => setTimeout(r, 1000));
+		//throw new Error("testing");
 		const todoes = await todoService.find();
 		res.status(200).json(todoes);
 	} catch (error) {
@@ -33,6 +35,7 @@ const getTodoesHandler = async (req: Request, res: Response, next: NextFunction)
  */
 const postTodoHandler = async (req: Request, res: Response, next: NextFunction) => {
 	try {
+		await new Promise(r => setTimeout(r, 1000));
 		const total = await todoService.count();
 
 		if (total >= 20) {
@@ -46,8 +49,8 @@ const postTodoHandler = async (req: Request, res: Response, next: NextFunction) 
 				const todo = await todoService.create(req.body.task);
 				res.status(201).json(todo);
 			} else {
-				const errorValidations = validation.error.issues;
-				res.status(400).json(errorValidations);
+				const { fieldErrors } = validation.error.flatten();
+				res.status(400).json(fieldErrors);
 			}
 		}
 	} catch (error) {
