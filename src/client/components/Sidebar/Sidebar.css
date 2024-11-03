@@ -13,15 +13,17 @@ button {
 	bottom: 0;
 	padding-top: 50px;
 	left: -100px;
-	transition: all 0.3s ease-in-out;
+	transition-property: transform, opacity, visibility;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-in-out;
+
 	visibility: hidden;
 	opacity: 0;
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
-	color: var(--text);
 	display: flex;
 	flex-direction: column;
-	border-right: solid 1px
-		hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+	color: var(--text);
+	background-color: var(--background-95);
+	border-right: solid 1px var(--background-90);
 
 	& .btn {
 		margin: 1rem 0.5rem;
@@ -41,8 +43,8 @@ button {
 	top: 0;
 	right: 0;
 	height: 100%;
-	background-color: hsla(0, 0%, 0%, 0.5);
-	backdrop-filter: blur(2px);
+	background-color: hsla(var(--background-h), var(--background-s), 95%, 0.2);
+	backdrop-filter: blur(5px);
 	z-index: 100;
 }
 
@@ -54,24 +56,45 @@ button {
 	width: 100%;
 	margin: 2rem 0;
 
-	& a {
+	& a,
+	& .collapsible-trigger {
 		width: 100%;
-		display: inline-block;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		text-transform: uppercase;
 		padding: 0.7rem 1rem;
 		font-size: 0.9rem;
 		font-weight: normal;
+		cursor: pointer;
 		color: var(--text);
-		border-bottom: solid 1px
-			hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+		border-bottom: solid 1px var(--background-90);
 
 		&:hover {
-			background-color: hsl(
-				var(--background-h),
-				var(--background-s),
-				calc(var(--background-l) - 15%)
-			);
+			background-color: var(--background-85);
 		}
+
+		& .triangle-down {
+			border-top: 6px solid var(--background-60);
+		}
+
+		& .triangle-up {
+			border-bottom: 6px solid var(--background-60);
+		}
+	}
+}
+
+.collapsible-menu {
+	width: 100%;
+}
+
+.collapsible-content {
+	background-color: var(--background-90);
+	border-bottom: solid 1px var(--background-85);
+
+	& a {
+		border-bottom: none;
+		padding-left: 2rem;
 	}
 }
 

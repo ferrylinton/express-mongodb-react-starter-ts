@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import * as todoService from '../services/todo-service';
-import { CreateTodoSchema } from '../validations/TodoValidation';
+import { CreateTodoSchema } from '../validations/todo-validation';
 
 /**
  * A router that handles Todo REST API

@@ -2,9 +2,9 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { DotFilledIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { EnglishIcon } from '../icons/EnglishIcon';
-import { IndonesiaIcon } from '../icons/IndonesiaIcon';
-import { useAppContext } from '../providers/app-provider';
+import { EnglishIcon } from '../../icons/EnglishIcon';
+import { IndonesiaIcon } from '../../icons/IndonesiaIcon';
+import { useAppContext } from '../../providers/app-provider';
 
 export const LanguageMenu = () => {
 	const { locale, setLocale } = useAppContext();
@@ -40,7 +40,7 @@ export const LanguageMenu = () => {
 							<span>Indonesia</span>
 						</DropdownMenu.RadioItem>
 					</DropdownMenu.RadioGroup>
-					<DropdownMenu.Arrow className="DropdownMenuArrow" />
+					<DropdownMenu.Arrow />
 				</DropdownMenu.Content>
 			</DropdownMenu.Portal>
 		</DropdownMenu.Root>

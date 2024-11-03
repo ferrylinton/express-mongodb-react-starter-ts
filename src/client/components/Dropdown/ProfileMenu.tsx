@@ -1,11 +1,28 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { AvatarIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
+import Cookies from 'js-cookie';
 import { useState } from 'react';
-import { UserIcon } from '../icons/UserIcon';
+import { useNavigate } from 'react-router-dom';
+import { UserIcon } from '../../icons/UserIcon';
+import { useAppContext } from '../../providers/app-provider';
+import { LOGGED_USER_COOKIE } from '../../utils/constant';
 
 export const ProfileMenu = () => {
 	const [open, setOpen] = useState<boolean>(false);
+
+	const { setLogggedUser } = useAppContext();
+
+	const navigate = useNavigate();
+
+	const handleLink = (pathname: string) => {
+		navigate(pathname);
+	};
+
+	const logout = () => {
+		Cookies.remove(LOGGED_USER_COOKIE);
+		setLogggedUser(null);
+		navigate('/login');
+	};
 
 	return (
 		<DropdownMenu.Root open={open} onOpenChange={() => setOpen(!open)}>
@@ -17,9 +34,11 @@ export const ProfileMenu = () => {
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content className="dropdown-menu-content" sideOffset={5} align="end">
-					<DropdownMenu.Item>Profile</DropdownMenu.Item>
-					<DropdownMenu.Item>Logout</DropdownMenu.Item>
-					<DropdownMenu.Arrow className="DropdownMenuArrow" />
+					<DropdownMenu.Item onClick={() => handleLink('/profile')}>
+						Profile
+					</DropdownMenu.Item>
+					<DropdownMenu.Item onClick={() => logout()}>Logout</DropdownMenu.Item>
+					<DropdownMenu.Arrow />
 				</DropdownMenu.Content>
 			</DropdownMenu.Portal>
 		</DropdownMenu.Root>

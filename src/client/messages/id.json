@@ -37,5 +37,14 @@
 	"method": "Metode",
 	"createdAt": "Tgl Dibuat",
 	"keyword": "Kata kunci",
-	"duplicateData": "Data [{arg}] sudah ada"
+	"duplicateData": "Data [{arg}] sudah ada",
+	"login": "Login",
+	"register": "Daftar",
+	"username": "Nama Pengguna",
+	"password": "Kata Sandi",
+	"email": "Email",
+	"role": "Peran",
+	"reset": "Ulang",
+	"passwordConfirm": "Konfirmasi Kata Sandi",
+	"forgotPassword": "Lupa Kata Sandi"
 }

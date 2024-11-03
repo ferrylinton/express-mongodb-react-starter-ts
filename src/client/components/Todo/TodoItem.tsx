@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { FormattedDate, useIntl } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAlertStore } from '../hooks/alert-store';
-import { useConfirmStore } from '../hooks/confirm-store';
-import { CheckIcon } from '../icons/CheckIcon';
-import EyeIcon from '../icons/EyeIcon';
-import { axiosInstance } from '../utils/axios';
+import { useAlertStore } from '../../hooks/alert-store';
+import { useConfirmStore } from '../../hooks/confirm-store';
+import { CheckIcon } from '../../icons/CheckIcon';
+import EyeIcon from '../../icons/EyeIcon';
+import { axiosInstance } from '../../utils/axios';
 
 type Props = {
 	index: number;

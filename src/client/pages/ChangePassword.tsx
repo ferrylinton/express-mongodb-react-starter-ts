@@ -12,5 +12,5 @@ export function ErrorBoundary() {
 	return <SimpleErrorBoundary />;
 }
 
-Component.displayName = 'HomeRoute';
-ErrorBoundary.displayName = 'HomeErrorBoundary';
+Component.displayName = 'ChangePasswordRoute';
+ErrorBoundary.displayName = 'ChangePasswordErrorBoundary';

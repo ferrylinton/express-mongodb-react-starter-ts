@@ -2,31 +2,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-@import 'animate.css';
 @import './reset.css';
 @import './normalize.css';
 @import './variable.css';
-@import './dropdown.css';
-@import './toggle-theme-classic.css';
-@import './react-dropdown-menu.css';
+@import 'animate.css';
+@import './animate.css';
+@import '../../components/Layout/Layout.css';
+@import '../../components/Sidebar/Sidebar.css';
+@import '../../components/Dropdown/Dropdown.css';
+@import './form.css';
 @import './todo.css';
 
-* {
+*,
+button {
 	box-sizing: border-box;
 }
 
 body {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Poppins', sans-serif !important;
 }
 
 #root {
 	min-height: 100dvh;
 	width: 100%;
-	min-width: 350px;
+	min-width: 400px;
 	display: flex;
 	flex-direction: column;
 	background-color: var(--background);
 	color: var(--text);
+}
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* Window's Scrollbar */
@@ -67,14 +76,6 @@ svg {
 	fill: currentColor;
 }
 
-.main {
-	overflow: auto;
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-}
-
 .container {
 	position: relative;
 	height: 100%;
@@ -86,6 +87,26 @@ svg {
 	gap: 0.5rem;
 	justify-content: start;
 	align-items: center;
+}
+
+.container-center {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.container-center > *:first-child {
+	width: 100%;
+	max-width: 350px;
+}
+
+@media (min-width: 768px) {
+	.container-center > *:first-child {
+		border: solid 1px var(--background-80);
+		border-radius: 5px;
+		padding: 4rem 1.5rem;
+	}
 }
 
 /** Button **/
@@ -211,18 +232,6 @@ svg {
 .dark .alert-danger {
 	text-shadow: 1px 1px hsl(0, 0%, 5%);
 	box-shadow: hsl(0, 0%, 5%) 0 5px 10px -5px;
-}
-
-@keyframes slidedown {
-	from {
-		translate: 0 -50px;
-		scale: 75%;
-	}
-
-	to {
-		translate: 0 0;
-		scale: 100%;
-	}
 }
 
 /* Confirm */

@@ -9,20 +9,20 @@
 	justify-content: center;
 	align-items: center;
 	background-color: transparent;
-	margin: 0 0.5rem;
-}
 
-.toggle-menu:hover {
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 8%));
-}
-
-.dark .toggle-menu:hover {
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 8%));
+	&:hover {
+		background-color: hsla(
+			var(--background-h),
+			var(--background-s),
+			calc(var(--background-l) - 20%),
+			0.5
+		);
+	}
 }
 
 .toggle-menu span {
 	width: 30px;
-	height: 0.15rem;
+	height: 0.1rem;
 	display: block;
 	border-radius: 10px;
 	transition: transform 0.5s ease-in-out;
@@ -30,7 +30,7 @@
 }
 
 .showSidebar .toggle-menu span:nth-child(1) {
-	transform: translateY(11px) rotate(45deg);
+	transform: translateY(9px) rotate(45deg);
 }
 
 .showSidebar .toggle-menu span:nth-child(2) {

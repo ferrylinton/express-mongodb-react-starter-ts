@@ -1,0 +1,37 @@
+.navbar {
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 500;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--background-100);
+	border-bottom: solid 1px var(--background-90);
+	padding: 0 0.5rem;
+}
+
+.logo {
+	font-family: 'Montserrat', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+	line-height: 1;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	text-shadow: 0 2px 2px var(--background-70);
+	margin: 0 0.3rem;
+}
+
+.navbar-group {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media (min-width: 768px) {
+	.navbar {
+		padding: 0 2rem;
+	}
+}

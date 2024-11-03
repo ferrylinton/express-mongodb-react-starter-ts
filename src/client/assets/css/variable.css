@@ -4,6 +4,14 @@
 	--background-s: 0%;
 	--background-l: 100%;
 
+	--background-100: hsl(var(--background-h), var(--background-s), 100%);
+	--background-95: hsl(var(--background-h), var(--background-s), 95%);
+	--background-90: hsl(var(--background-h), var(--background-s), 90%);
+	--background-85: hsl(var(--background-h), var(--background-s), 85%);
+	--background-80: hsl(var(--background-h), var(--background-s), 80%);
+	--background-70: hsl(var(--background-h), var(--background-s), 70%);
+	--background-60: hsl(var(--background-h), var(--background-s), 60%);
+
 	--text: hsl(0, 0%, 14%);
 	--text-h: 0;
 	--text-s: 0%;
@@ -36,17 +44,21 @@
 
 	--scrollbar: hsla(var(--background-h), var(--background-s), 50%, 1);
 	--scrollbar-track: hsla(var(--background-h), var(--background-s), 90%, 1);
-
-	--border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 20%));
-	--shadow-color: hsla(0, 0%, 0%, 0.07);
-	--light-text: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 20%));
 }
 
 .dark {
-	--background: hsl(0, 0%, 12%);
+	--background: hsl(0, 0%, 10%);
 	--background-h: 0;
 	--background-s: 0%;
-	--background-l: 12%;
+	--background-l: 10%;
+
+	--background-100: hsl(var(--background-h), var(--background-s), 10%);
+	--background-95: hsl(var(--background-h), var(--background-s), 15%);
+	--background-90: hsl(var(--background-h), var(--background-s), 20%);
+	--background-85: hsl(var(--background-h), var(--background-s), 25%);
+	--background-80: hsl(var(--background-h), var(--background-s), 30%);
+	--background-70: hsl(var(--background-h), var(--background-s), 40%);
+	--background-60: hsl(var(--background-h), var(--background-s), 50%);
 
 	--text: hsl(0, 0%, 100%);
 	--text-h: 0;
@@ -80,7 +92,4 @@
 
 	--scrollbar: hsla(var(--background-h), var(--background-s), 50%, 1);
 	--scrollbar-track: hsla(var(--background-h), var(--background-s), 90%, 1);
-
-	--border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 20%));
-	--shadow-color: hsla(0, 0%, 0%, 0.426);
 }

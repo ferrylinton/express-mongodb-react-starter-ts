@@ -37,5 +37,14 @@
 	"method": "Method",
 	"createdAt": "Created At",
 	"keyword": "Keyword",
-	"duplicateData": "Data [{arg}] already exists"
+	"duplicateData": "Data [{arg}] already exists",
+	"login": "Login",
+	"register": "Register",
+	"username": "Username",
+	"password": "Password",
+	"email": "Email",
+	"role": "Role",
+	"reset": "Reset",
+	"passwordConfirm": "Confirm Password",
+	"forgotPassword": "Forgot Password"
 }

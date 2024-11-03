@@ -1,54 +1,40 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
 import { IntlProvider } from 'react-intl';
-import { DEFAULT_LOCALE } from '../utils/constant';
 import enJson from '../messages/en.json';
 import idJson from '../messages/id.json';
-
-const THEME = 'theme';
-
-const getTheme = (): Theme => {
-	let theme = localStorage.getItem(THEME);
-
-	if (!theme) {
-		theme = 'light';
-		localStorage.setItem(THEME, theme);
-	}
-
-	document.body.classList.add(theme);
-	return theme as Theme;
-};
+import { DEFAULT_LOCALE, LOGGED_USER_COOKIE } from '../utils/constant';
+import { getLoggedUser } from '../utils/cookie-util';
+import Cookies from 'js-cookie';
 
 export const AppContext = createContext<AppContextProps>({
-	getTheme,
-	setTheme: (theme: Theme) => Function(theme),
 	locale: DEFAULT_LOCALE,
 	setLocale: () => Function(),
+	loggedUser: null,
+	setLogggedUser: () => Function(),
 });
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
 	const [locale, setCurrentLocale] = useState<string>(DEFAULT_LOCALE);
 
-	const setTheme = (theme: Theme) => {
-		localStorage.setItem(THEME, theme);
-
-		if (theme === 'dark') {
-			document.body.classList.add('dark');
-			document.body.classList.remove('light');
-		} else {
-			document.body.classList.remove('dark');
-			document.body.classList.add('light');
-		}
-	};
+	const [loggedUser, _setLogggedUser] = useState(getLoggedUser());
 
 	const setLocale = (locale: string) => {
 		setCurrentLocale(locale);
 	};
 
+	const setLogggedUser = (loggedUser: LoggedUser | null) => {
+		_setLogggedUser(loggedUser);
+		const inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+		Cookies.set(LOGGED_USER_COOKIE, JSON.stringify(loggedUser), {
+			expires: inFifteenMinutes,
+		});
+	};
+
 	const value: AppContextProps = {
-		getTheme,
-		setTheme,
 		locale,
 		setLocale,
+		loggedUser,
+		setLogggedUser,
 	};
 
 	return (

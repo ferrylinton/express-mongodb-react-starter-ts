@@ -2,8 +2,8 @@ import { AxiosError, isAxiosError } from 'axios';
 import { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ActionFunctionArgs, Form, Link, redirect, useRouteError } from 'react-router-dom';
-import { useAlertStore } from '../hooks/alert-store';
-import { axiosInstance } from '../utils/axios';
+import { useAlertStore } from '../../hooks/alert-store';
+import { axiosInstance } from '../../utils/axios';
 
 type ErrorResponse = {
 	task?: string[];
@@ -43,7 +43,13 @@ export const Component = () => {
 
 	return (
 		<>
-			<Form action="/add" method="post" noValidate autoComplete="off" className="todo-form">
+			<Form
+				action="/todo/create"
+				method="post"
+				noValidate
+				autoComplete="off"
+				className="todo-form"
+			>
 				<div className="form-group">
 					<label>
 						<FormattedMessage id="task" />
@@ -78,8 +84,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 	const payload = Object.fromEntries(formData.entries());
 	await axiosInstance.post<Todo>(`/api/todoes`, payload);
 
-	return redirect('/');
+	return redirect('/todo');
 };
 
-Component.displayName = 'TodoAddRoute';
-ErrorBoundary.displayName = 'TodoAddBoundary';
+Component.displayName = 'TodoCreateRoute';
+ErrorBoundary.displayName = 'TodoCreateBoundary';

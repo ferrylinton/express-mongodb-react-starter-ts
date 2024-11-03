@@ -1,28 +1,24 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
 import clsx from 'clsx';
 import { ReactNode, useState } from 'react';
-import styles from './CollapsibleMenuItem.module.css';
 
-export const CollapsibleMenuItem = ({
-	label,
-	children,
-}: {
+type Props = {
 	label: string;
 	children: ReactNode;
-}) => {
+};
+
+export const CollapsibleMenuItem = ({ label, children }: Props) => {
 	const [open, setOpen] = useState(false);
 
 	return (
-		<Collapsible.Root open={open} onOpenChange={setOpen} className={styles['collapsible-menu']}>
+		<Collapsible.Root open={open} onOpenChange={setOpen} className="collapsible-menu">
 			<Collapsible.Trigger asChild>
-				<button className={styles['collapsible-trigger']}>
+				<button className="collapsible-trigger">
 					<span>{label}</span>
 					<span className={clsx(open ? 'triangle-up' : 'triangle-down')}></span>
 				</button>
 			</Collapsible.Trigger>
-			<Collapsible.Content className={styles['collapsible-content']}>
-				{children}
-			</Collapsible.Content>
+			<Collapsible.Content className="collapsible-content">{children}</Collapsible.Content>
 		</Collapsible.Root>
 	);
 };

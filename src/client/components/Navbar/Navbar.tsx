@@ -1,40 +1,25 @@
-import { LanguageMenu } from '../LanguageMenu';
-import { ProfileMenu } from '../ProfileMenu';
+import { useAppContext } from '../../providers/app-provider';
+import { LanguageMenu } from '../Dropdown/LanguageMenu';
+import { ProfileMenu } from '../Dropdown/ProfileMenu';
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
 import { ToggleMenu } from '../ToggleMenu/ToggleMenu';
-import './Navbar.css';
+import styles from './Navbar.module.css';
 
 export const Navbar = () => {
+	const { loggedUser } = useAppContext();
+
 	return (
-		<nav className="navbar">
-			<div className="navbar-content">
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						gap: '0.3rem',
-						margin: '0 0.5rem',
-					}}
-				>
-					<ToggleMenu />
-					<div className="logo">
-						<a href="/">TODO</a>
-					</div>
+		<nav className={styles['navbar']}>
+			<div className={styles['navbar-group']}>
+				{loggedUser && <ToggleMenu />}
+				<div className={styles['logo']}>
+					<a href="/">Simple Admin</a>
 				</div>
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						gap: '0.3rem',
-						margin: '0 0.5rem',
-					}}
-				>
-					<ThemeSwitcher />
-					<LanguageMenu />
-					<ProfileMenu />
-				</div>
+			</div>
+			<div className={styles['navbar-group']}>
+				<ThemeSwitcher />
+				<LanguageMenu />
+				{loggedUser && <ProfileMenu />}
 			</div>
 		</nav>
 	);

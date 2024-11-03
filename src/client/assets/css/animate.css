@@ -1,0 +1,23 @@
+@keyframes slideUpAndFade {
+	from {
+		opacity: 0;
+		transform: translateY(2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slidedown {
+	from {
+		translate: 0 -50px;
+		scale: 75%;
+	}
+
+	to {
+		translate: 0 0;
+		scale: 100%;
+	}
+}

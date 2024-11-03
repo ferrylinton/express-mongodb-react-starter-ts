@@ -31,6 +31,10 @@ export const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
 export const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
 export const MONGODB_DATABASE = process.env.MONGODB_DATABASE;
 
+export const JWT_SECRET =
+	process.env.JWT_SECRET || '268980feac54d920e3c147e3a3d42179393102d3dea5e7e31c282bc9fd76dffe';
+export const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '15m';
+
 export const RATE_LIMIT_WINDOW_IN_SECONDS = parseInt(
 	process.env.RATE_LIMIT_WINDOW_IN_SECONDS || '300'
 );

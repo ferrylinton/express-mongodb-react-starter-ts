@@ -1,9 +1,10 @@
 import { MONGODB_DATABASE } from '../config/constant';
 import { getMongoClient } from '../config/mongodb';
 import logger from '../config/winston';
-import { RATE_LIMIT_COLLECTION, TODO_COLLECTION } from './db-constant';
+import { RATE_LIMIT_COLLECTION, TODO_COLLECTION, USER_COLLECTION } from './db-constant';
 import { createRateLimitSchema } from './rate-limit-schema';
 import { createTodoSchema } from './todo-schema';
+import { createUserSchema } from './user-schema';
 
 export const initDb = async () => {
 	logger.info('[MONGODB] create collection');
@@ -18,6 +19,9 @@ export const initDb = async () => {
 		const collectionNames = collections.map(c => c.name);
 
 		// Create collections if not exist
+		if (!collectionNames.includes(USER_COLLECTION)) {
+			await createUserSchema(db);
+		}
 		if (!collectionNames.includes(TODO_COLLECTION)) {
 			await createTodoSchema(db);
 		}

@@ -18,7 +18,7 @@ export const TodoTable = ({ response }: LoaderData) => {
 				<div className="total">
 					<FormattedMessage id="total" values={{ total }} />
 				</div>
-				<Link to={'/add'} className="btn btn-primary">
+				<Link to={'/todo/create'} className="btn btn-primary">
 					<FormattedMessage id="newTask" />
 				</Link>
 			</div>

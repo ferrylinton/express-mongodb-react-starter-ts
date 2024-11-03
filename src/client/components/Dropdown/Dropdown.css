@@ -2,46 +2,61 @@
 	width: 26px;
 	height: 20px;
 	box-shadow:
-		var(--shadow-color) 0px 1px 2px,
-		var(--shadow-color) 0px 2px 4px,
-		var(--shadow-color) 0px 4px 8px,
-		var(--shadow-color) 0px 8px 16px,
-		var(--shadow-color) 0px 16px 32px,
-		var(--shadow-color) 0px 32px 64px;
+		var(--background-90) 0px 4px 8px -2px,
+		var(--background-85) 0px 0px 0px 1px;
 }
 
 .dropdown-menu-trigger {
 	display: flex;
-	height: 40px;
+	height: 50px;
 	width: 50px;
 	padding: 0 5px;
-	border-radius: 5px;
 	align-items: center;
 	justify-content: center;
 	gap: 5px;
-	border: solid 1px var(--border-color);
+	backdrop-filter: blur(10px);
+
+	&:hover {
+		background-color: var(--background-95);
+	}
+
+	&[data-state='open'] {
+		background-color: var(--background-95);
+	}
 
 	& svg {
-		height: 22px;
+		height: 20px;
 		width: auto;
+	}
+
+	& .triangle-down {
+		border-top: 6px solid var(--background-60);
+	}
+
+	& .triangle-up {
+		border-bottom: 6px solid var(--background-60);
 	}
 }
 
 .dropdown-menu-content {
 	min-width: 220px;
-	background-color: white;
 	border-radius: 6px;
 	padding: 0.5rem 0.5rem;
-	box-shadow:
-		0px 10px 38px -10px rgba(22, 23, 24, 0.35),
-		0px 10px 20px -15px rgba(22, 23, 24, 0.2);
 	animation-duration: 400ms;
 	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 	will-change: transform, opacity;
 	animation-name: slideUpAndFade;
+	backdrop-filter: blur(10px);
+	border: solid 1px var(--background-90);
+	background-color: var(--background);
+	box-shadow:
+		var(--background-90) 0px 30px 60px -12px,
+		var(--background-70) 0px 18px 36px -18px;
 
 	& span svg {
-		fill: var(--background);
+		width: 15px;
+		height: 10px;
+		fill: var(--background-80);
 	}
 
 	& [role='menuitemradio'],
@@ -60,10 +75,10 @@
 		user-select: none;
 		outline: none;
 		text-transform: uppercase;
+		color: var(--text);
 
 		&:hover {
-			color: var(--inverse-text);
-			background-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 10%));
+			background-color: var(--background-95);
 		}
 
 		& span:first-child {
@@ -73,23 +88,12 @@
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
+			color: var(--background-60);
 
 			& svg {
 				width: 20px;
 				height: 20px;
 			}
 		}
-	}
-}
-
-@keyframes slideUpAndFade {
-	from {
-		opacity: 0;
-		transform: translateY(2px);
-	}
-
-	to {
-		opacity: 1;
-		transform: translateY(0);
 	}
 }
