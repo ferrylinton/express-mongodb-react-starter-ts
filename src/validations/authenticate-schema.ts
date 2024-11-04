@@ -1,8 +1,8 @@
 import { object, string, TypeOf } from 'zod';
 
 export const AuthenticateSchema = object({
-	username: string().min(4),
-	password: string().min(4),
+	username: string().min(3, 'invalid.username').max(20, 'invalid.username'),
+	password: string().min(6, 'invalid.password').max(30, 'invalid.password'),
 });
 
 export const RegisterSchema = object({

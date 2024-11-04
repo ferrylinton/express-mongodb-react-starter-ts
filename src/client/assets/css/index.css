@@ -64,6 +64,13 @@ body {
 	opacity: 1;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+	transition:
+		background-color 0s 600000s,
+		color 0s 600000s !important;
+}
+
 .dark ::placeholder {
 	color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 20%));
 }
@@ -96,6 +103,7 @@ svg {
 	justify-content: center;
 	align-items: center;
 }
+
 .container-center > *:first-child {
 	width: 100%;
 	max-width: 350px;
@@ -105,7 +113,7 @@ svg {
 	.container-center > *:first-child {
 		border: solid 1px var(--background-80);
 		border-radius: 5px;
-		padding: 4rem 1.5rem;
+		padding: 2.7rem 1.5rem;
 	}
 }
 

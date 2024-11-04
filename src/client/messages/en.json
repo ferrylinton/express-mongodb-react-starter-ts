@@ -46,5 +46,8 @@
 	"role": "Role",
 	"reset": "Reset",
 	"passwordConfirm": "Confirm Password",
-	"forgotPassword": "Forgot Password"
+	"forgotPassword": "Forgot Password",
+	"required": "Required",
+	"invalid.username": "Username min 3 and max 20 characters",
+	"invalid.password": "Password min 6 and max 30 characters"
 }

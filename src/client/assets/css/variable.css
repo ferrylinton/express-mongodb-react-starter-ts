@@ -11,6 +11,8 @@
 	--background-80: hsl(var(--background-h), var(--background-s), 80%);
 	--background-70: hsl(var(--background-h), var(--background-s), 70%);
 	--background-60: hsl(var(--background-h), var(--background-s), 60%);
+	--background-50: hsl(var(--background-h), var(--background-s), 50%);
+	--background-40: hsl(var(--background-h), var(--background-s), 40%);
 
 	--text: hsl(0, 0%, 14%);
 	--text-h: 0;
@@ -59,6 +61,8 @@
 	--background-80: hsl(var(--background-h), var(--background-s), 30%);
 	--background-70: hsl(var(--background-h), var(--background-s), 40%);
 	--background-60: hsl(var(--background-h), var(--background-s), 50%);
+	--background-50: hsl(var(--background-h), var(--background-s), 60%);
+	--background-40: hsl(var(--background-h), var(--background-s), 70%);
 
 	--text: hsl(0, 0%, 100%);
 	--text-h: 0;

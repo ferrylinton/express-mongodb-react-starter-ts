@@ -1,14 +1,10 @@
 import { AxiosError, isAxiosError } from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link, useNavigate, useRouteError } from 'react-router-dom';
 import { useAlertStore } from '../hooks/alert-store';
 import { useAppContext } from '../providers/app-provider';
 import { axiosInstance } from '../utils/axios';
-import { AuthenticateSchema } from '../../validations/authenticate-schema';
-import { getErrorsObject, errorMap } from '../../validations/validation-util';
-import clsx from 'clsx';
-import { InputForm } from '../components/Form/InputForm';
 
 type ErrorResponse = {
 	task?: string[];
@@ -18,8 +14,6 @@ type ErrorResponse = {
 
 export const Component = () => {
 	const intl = useIntl();
-
-	const [validationError, setValidationError] = useState<ValidationError | null>(null);
 
 	const navigate = useNavigate();
 
@@ -51,16 +45,10 @@ export const Component = () => {
 
 		const formData = new FormData(event.currentTarget);
 		const payload = Object.fromEntries(formData.entries());
-		const validation = AuthenticateSchema.safeParse(payload, { errorMap });
+		const { data } = await axiosInstance.post<LoggedUser>(`/api/token`, payload);
 
-		if (validation.success) {
-			const { data } = await axiosInstance.post<LoggedUser>(`/api/token`, payload);
-			setLogggedUser(data);
-			navigate('/', { replace: true });
-		} else {
-			console.log(validation.error);
-			setValidationError(getErrorsObject(validation.error));
-		}
+		setLogggedUser(data);
+		navigate('/', { replace: true });
 	};
 
 	useEffect(() => {
@@ -78,34 +66,35 @@ export const Component = () => {
 					noValidate
 					autoComplete="off"
 					className="form"
+					style={{ gap: '1.2rem' }}
 				>
-					<InputForm
-						type="text"
-						maxLength={20}
-						name="username"
-						validationError={validationError}
-					/>
-					<InputForm
-						type="password"
-						maxLength={30}
-						name="password"
-						validationError={validationError}
-					/>
-					<button type="submit" className="btn btn-primary">
-						<FormattedMessage id="login" />
-					</button>
-					<div
-						style={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							textTransform: 'uppercase',
-						}}
+					<div className="form-group">
+						<input
+							type="text"
+							maxLength={30}
+							placeholder={intl.formatMessage({ id: 'email' })}
+							name="email"
+							autoComplete="off"
+							autoFocus
+						/>
+						<label>
+							<FormattedMessage id="email" />
+						</label>
+					</div>
+
+					<button
+						type="submit"
+						className="btn btn-primary"
+						style={{ display: 'block', fontSize: '1.2rem' }}
 					>
+						<FormattedMessage id="forgotPassword" />
+					</button>
+					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 						<Link to="/register">
 							<FormattedMessage id="register" />
 						</Link>
-						<Link to="/forgotpassword">
-							<FormattedMessage id="forgotPassword" />
+						<Link to="/login">
+							<FormattedMessage id="login" />
 						</Link>
 					</div>
 				</form>

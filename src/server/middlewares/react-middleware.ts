@@ -16,10 +16,10 @@ export const reactMiddleware = (req: Request, res: Response, _next: NextFunction
 				indexContent = fs.readFileSync(path.join(__dirname, 'main.html'), 'utf8');
 			}
 
-			res.send(indexContent);
+			return res.send(indexContent);
 		}
 	} catch (error: any) {
 		logger.error(error);
-		res.status(500).json({ message: error.message, NODE_ENV });
+		return res.status(500).json({ message: error.message, NODE_ENV });
 	}
 };

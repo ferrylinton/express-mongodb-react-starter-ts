@@ -12,10 +12,8 @@
 		"dev": "cross-env NODE_ENV=development nodemon",
 		"test": "jest --runInBand --detectOpenHandles --forceExit",
 		"lint": "eslint --fix .",
-		"lint-staged": "lint-staged",
 		"format": "prettier . --write",
-		"prepare": "husky",
-		"precommit": "eslint ."
+		"prepare": "husky"
 	},
 	"husky": {
 		"hooks": {

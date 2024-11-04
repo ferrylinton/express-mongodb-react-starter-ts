@@ -1,0 +1,46 @@
+:root {
+	--bg: #2c2537;
+	--text: #fff;
+	--accent: gold;
+}
+
+.form-group {
+	--pad: 0.75rem;
+	position: relative;
+}
+
+.form-input {
+	padding: var(--pad);
+	border-radius: 8px;
+	background-color: blue;
+	border: 1px solid #eee;
+	color: inherit;
+	width: 300px;
+	outline: none;
+}
+
+label {
+	position: absolute;
+	left: var(--pad);
+	top: var(--pad);
+	background: var(--bg);
+	padding-inline: 0.3em;
+	transition: transform 200ms;
+	pointer-events: none;
+	transform-origin: left;
+	translate: -0.3em;
+}
+
+.form-input::placeholder {
+	opacity: 0;
+}
+
+.form-input:focus + label,
+.form-input:not(:placeholder-shown) + label {
+	transform: translateY(calc(-50% - var(--pad))) scale(0.8);
+	color: var(--accent);
+}
+
+.form-input:focus {
+	border: 1px solid var(--accent);
+}

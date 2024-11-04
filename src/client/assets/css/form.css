@@ -1,51 +1,66 @@
 .form {
 	width: 100%;
 	display: flex;
-	gap: 1rem;
+	gap: 2rem;
 	flex-direction: column;
 }
 
-.form input[type='text'],
-.form input[type='password'] {
-	font-size: 16px;
-	line-height: 28px;
-	padding: 8px 16px;
-	width: 100%;
-	min-height: 44px;
-	border-radius: 4px;
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
-	border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
-}
-
-.form input[type='text']:focus,
-.form input[type='password']:focus {
-	outline: none;
-	box-shadow: 0 0 0 3px
-		hsla(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 15%), 0.5);
-}
-
-.dark .form input[type='text'] {
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 5%));
-	border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 15%));
-}
-
-.dark .form input[type='text']:focus {
-	box-shadow: 0 0 0 3px
-		hsla(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 15%), 0.5);
-}
-
-.form label {
-	padding: 0 0.5rem;
-	text-transform: uppercase;
-	font-weight: bold;
+.form a {
 	font-size: 0.9rem;
+	color: var(--background-40);
+
+	&:hover {
+		color: var(--primary);
+	}
 }
 
-.form .btn,
-.todo-detail .btn {
-	min-width: 100px;
+.form-group {
+	--pad: 0.75rem;
+	position: relative;
 }
 
-.no-records {
-	padding: 1rem;
+.form-group label {
+	position: absolute;
+	left: 4px;
+	top: 0;
+	transition: transform 200ms;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	pointer-events: none;
+	color: var(--background-60);
+}
+
+.form-group input::placeholder {
+	opacity: 0;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+	transform: translate(-12px, -80%) scale(0.8);
+	color: var(--primary);
+}
+
+.form-group input {
+	background-color: transparent;
+	width: 100%;
+	font-size: 0.9rem;
+	line-height: 1;
+	padding: 0 0 4px 8px;
+	border-bottom: solid 1px var(--background-80);
+}
+
+.form-group input:focus {
+	outline: none;
+	box-shadow: none;
+	border-bottom: solid 2px var(--primary);
+}
+
+.form-group.error .validation-error {
+	color: var(--danger);
+	font-size: 0.8rem;
+}
+
+.form-group + .btn {
+	display: block;
+	font-size: 1.15rem;
 }

@@ -10,24 +10,24 @@ export const restErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
 			const { password, passwordConfirm, ...formData } = req.body;
 
 			if ((err.message as string).includes('duplicate')) {
-				res.status(400).json({
+				return res.status(400).json({
 					message: 'duplicateData',
 					formData,
 				});
 			} else {
-				res.status(400).json({
+				return res.status(400).json({
 					message: err.message,
 					formData,
 				});
 			}
 		} else {
 			res.status(err.status || 500);
-			res.json({ message: err.message });
+			return res.json({ message: err.message });
 		}
 	} catch (error) {
 		logger.error(error);
 
 		res.status(err.status || 500);
-		res.json({ message: err.message });
+		return res.json({ message: err.message });
 	}
 };

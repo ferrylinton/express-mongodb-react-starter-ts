@@ -46,5 +46,8 @@
 	"role": "Peran",
 	"reset": "Ulang",
 	"passwordConfirm": "Konfirmasi Kata Sandi",
-	"forgotPassword": "Lupa Kata Sandi"
+	"forgotPassword": "Lupa Kata Sandi",
+	"required": "Harus diisi",
+	"invalid.username": "Nama pengguna min 3 dan maks 20 karakter",
+	"invalid.password": "Kata sandi min 6 dan maks 30 karakter"
 }

@@ -3,9 +3,8 @@ import express, { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { JWT_EXPIRES_IN, JWT_SECRET } from '../config/constant';
 import * as userService from '../services/user-service';
-import { AuthenticateSchema, RegisterSchema } from '../validations/authenticate-schema';
-import { CreateUserSchema } from '../validations/user-validation';
-import { getErrorsObject } from '../utils/validation-util';
+import { getErrorsObject } from '../../validations/validation-util';
+import { AuthenticateSchema, RegisterSchema } from '../../validations/authenticate-schema';
 
 /**
  * A router that handles User REST API
@@ -28,7 +27,7 @@ const generateTokenHandler = async (req: Request, res: Response, next: NextFunct
 					}
 
 					const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-					res.status(200).json({ username, role: user.role, token });
+					return res.status(200).json({ username, role: user.role, token });
 				}
 			}
 		}
@@ -48,7 +47,6 @@ const registerHandler = async (req: Request, res: Response, next: NextFunction) 
 			const user = await userService.create({ ...input, role: 'USER' });
 			res.status(201).json(user);
 		} else {
-			const { fieldErrors } = validation.error.flatten();
 			res.status(400).json(getErrorsObject(validation.error));
 		}
 	} catch (error) {

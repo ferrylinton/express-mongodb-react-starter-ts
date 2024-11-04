@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import * as userService from '../services/user-service';
-import { CreateUserSchema } from '../validations/user-validation';
+import { CreateUserSchema } from '../../validations/user-validation';
 
 /**
  * A router that handles User REST API
@@ -15,6 +15,7 @@ const getUserHandler = async (req: Request, res: Response, next: NextFunction) =
 		const users = await userService.find();
 		res.status(200).json(users);
 	} catch (error) {
+		console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 		next(error);
 	}
 };

@@ -61,9 +61,6 @@ export const Component = () => {
 					className="form"
 				>
 					<div className="form-group">
-						<label>
-							<FormattedMessage id="email" />
-						</label>
 						<input
 							type="text"
 							maxLength={50}
@@ -72,11 +69,11 @@ export const Component = () => {
 							autoComplete="off"
 							autoFocus
 						/>
+						<label>
+							<FormattedMessage id="email" />
+						</label>
 					</div>
 					<div className="form-group">
-						<label>
-							<FormattedMessage id="username" />
-						</label>
 						<input
 							maxLength={30}
 							type="text"
@@ -84,11 +81,11 @@ export const Component = () => {
 							name="username"
 							autoComplete="off"
 						/>
+						<label>
+							<FormattedMessage id="username" />
+						</label>
 					</div>
 					<div className="form-group">
-						<label>
-							<FormattedMessage id="password" />
-						</label>
 						<input
 							maxLength={30}
 							type="password"
@@ -96,11 +93,11 @@ export const Component = () => {
 							name="password"
 							autoComplete="off"
 						/>
+						<label>
+							<FormattedMessage id="password" />
+						</label>
 					</div>
 					<div className="form-group">
-						<label>
-							<FormattedMessage id="passwordConfirm" />
-						</label>
 						<input
 							maxLength={30}
 							type="password"
@@ -108,6 +105,9 @@ export const Component = () => {
 							name="passwordConfirm"
 							autoComplete="off"
 						/>
+						<label>
+							<FormattedMessage id="passwordConfirm" />
+						</label>
 					</div>
 					<button
 						type="submit"
@@ -116,7 +116,7 @@ export const Component = () => {
 					>
 						<FormattedMessage id="register" />
 					</button>
-					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+					<div style={{ display: 'flex', justifyContent: 'center' }}>
 						<Link to="/login">
 							<FormattedMessage id="login" />
 						</Link>
