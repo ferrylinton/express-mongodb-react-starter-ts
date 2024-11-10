@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { getLoggedUser } from './cookie-util';
+import Cookies from 'js-cookie';
+import { LOGGED_USER_COOKIE } from './constant';
 
 export const axiosInstance = axios.create({
 	baseURL: '/',
@@ -7,25 +9,39 @@ export const axiosInstance = axios.create({
 		'Accept': 'application/json',
 		'Content-Type': 'application/json',
 	},
-	validateStatus: function (status) {
-		return (status >= 200 && status < 300) || status === 400 || status === 409;
-	},
 	timeout: 15000,
 	timeoutErrorMessage: 'Request time out',
 });
 
 axiosInstance.interceptors.request.use(
 	function (config) {
-		if (!config.url?.includes('/api/token') || !config.url?.includes('/api/register')) {
-			const loggedUser = getLoggedUser();
+		const loggedUser = getLoggedUser();
+
+		if (
+			loggedUser &&
+			(!config.url?.includes('/api/token') || !config.url?.includes('/api/register'))
+		) {
 			config.headers.authorization = `Bearer ${loggedUser?.token}`;
-			console.log(`Bearer ${loggedUser?.token}`);
 		}
 
 		return config;
 	},
+
 	function (error) {
 		console.error(error);
+		return Promise.reject(error);
+	}
+);
+
+axiosInstance.interceptors.response.use(
+	function (response) {
+		return response;
+	},
+	function (error) {
+		if (error.status === 401) {
+			Cookies.remove(LOGGED_USER_COOKIE);
+			window.location.replace('/login');
+		}
 		return Promise.reject(error);
 	}
 );

@@ -1,9 +1,11 @@
 import Cookies from 'js-cookie';
+import { FormattedMessage } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
-import { CollapsibleMenuItem } from './CollapsibleMenuItem';
-import { LOGGED_USER_COOKIE } from '../../utils/constant';
 import { useAppContext } from '../../providers/app-provider';
 import { toggleSidebar } from '../../utils/app-util';
+import { LOGGED_USER_COOKIE } from '../../utils/constant';
+import { Button } from '../Button/Button';
+import { CollapsibleMenuItem } from './CollapsibleMenuItem';
 
 export const Sidebar = () => {
 	const { loggedUser, setLogggedUser } = useAppContext();
@@ -48,10 +50,18 @@ export const Sidebar = () => {
 								Create Todo
 							</Link>
 						</CollapsibleMenuItem>
+						<CollapsibleMenuItem label={'User'}>
+							<Link onClick={handleLink} to="/user">
+								View User
+							</Link>
+							<Link onClick={handleLink} to="/user/create">
+								Create User
+							</Link>
+						</CollapsibleMenuItem>
 					</div>
-					<button className="btn btn-primary" onClick={() => logout()}>
-						Logout
-					</button>
+					<Button variant='primary' size='big' onClick={() => logout()} className='m-2'>
+						<FormattedMessage id="logout" />
+					</Button>
 				</aside>
 			</>
 		);

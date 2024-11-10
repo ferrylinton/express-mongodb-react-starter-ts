@@ -25,6 +25,10 @@ export const router = createBrowserRouter([
 						lazy: () => import('../pages/ChangePassword'),
 					},
 					{
+						path: '/user',
+						lazy: () => import('../pages/User/UserListPage'),
+					},
+					{
 						path: '/todo',
 						lazy: () => import('../pages/Todo/TodoListPage'),
 					},

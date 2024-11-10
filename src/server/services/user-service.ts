@@ -1,13 +1,115 @@
-import { ObjectId } from 'mongodb';
+import { ObjectId, WithId } from 'mongodb';
 import { USER_COLLECTION } from '../db/db-constant';
 import { mapToObject } from '../utils/json-util';
 import { getCollection } from '../config/mongodb';
 import bcrypt from 'bcryptjs';
+import { getSort, PAGE_SIZE } from '../utils/pager-util';
+import logger from '../config/winston';
 
-export const find = async (): Promise<User[]> => {
+export const find = async ({ page, column, keyword, sort }: RequestParams) => {
+	sort = sort || 'createdAt,desc';
+	console.log({ page, column, keyword, sort });
 	const userCollection = await getCollection<User>(USER_COLLECTION);
-	const users = await userCollection.find().sort({ createdAt: -1 }).toArray();
-	return users.map(user => mapToObject(user));
+
+	const pipeline = [
+		{
+			$match: {},
+		},
+		{
+			$project: {
+				content: 0,
+			},
+		},
+		{
+			$sort: getSort(sort),
+		},
+		{
+			$facet: {
+				data: [
+					{
+						$skip: (page || 0) * PAGE_SIZE,
+					},
+					{
+						$limit: PAGE_SIZE,
+					},
+				],
+				pagination: [
+					{
+						$count: 'total',
+					},
+				],
+			},
+		},
+		{
+			$unwind: '$pagination',
+		},
+	];
+
+	if (column && keyword) {
+		const regex = new RegExp(keyword, 'i');
+		pipeline[0]['$match'] = {
+			$and: [
+				{
+					columns: { $in: [column] },
+				},
+				{
+					$or: [{ username: regex }, { email: regex }],
+				},
+			],
+		};
+
+		logger.info('find : ' + JSON.stringify(pipeline).replaceAll('{}', regex.toString()));
+	} else if (!column && keyword) {
+		const regex = new RegExp(keyword, 'i');
+		pipeline[0]['$match'] = {
+			$or: [{ username: regex }, { email: regex }],
+		};
+
+		logger.info('find : ' + JSON.stringify(pipeline).replaceAll('{}', regex.toString()));
+	} else if (column && !keyword) {
+		pipeline[0]['$match'] = {
+			columns: { $in: [column] },
+		};
+		logger.info('find : ' + JSON.stringify(pipeline));
+	} else {
+		pipeline.shift();
+		logger.info('POST.find : ' + JSON.stringify(pipeline));
+	}
+
+	const arr = await userCollection.aggregate<Pageable<WithId<User>>>(pipeline).toArray();
+
+	const result: Pageable<Omit<User, 'password'>> = {
+		data: [],
+		pagination: {
+			total: 0,
+			totalPage: 0,
+			page: 0,
+			pageSize: PAGE_SIZE,
+		},
+		sort,
+		keyword,
+		column,
+	};
+
+	if (arr.length) {
+		if (keyword) {
+			result.keyword = keyword;
+		}
+
+		result.pagination.page = page || 0;
+		result.pagination.totalPage = Math.ceil(arr[0].pagination.total / PAGE_SIZE);
+		result.pagination.pageSize = PAGE_SIZE;
+		result.pagination.total = arr[0].pagination.total;
+
+		result.data = arr[0].data.map(item => {
+			const { password, ...obj } = mapToObject(item);
+			return obj;
+		});
+
+		return result;
+	}
+
+	return result;
 };
 
 export const count = async (): Promise<number> => {

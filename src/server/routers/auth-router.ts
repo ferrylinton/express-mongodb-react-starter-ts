@@ -23,16 +23,18 @@ const generateTokenHandler = async (req: Request, res: Response, next: NextFunct
 			if (user) {
 				if (bcrypt.compareSync(password, user.password)) {
 					if (user.locked) {
-						return res.status(401).json({ message: 'User is locked' });
+						return res.status(401).json({ message: 'usernameIsLocked' });
 					}
 
-					const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+					const token = jwt.sign({ username }, JWT_SECRET, {
+						expiresIn: `${JWT_EXPIRES_IN}m`,
+					});
 					return res.status(200).json({ username, role: user.role, token });
 				}
 			}
 		}
 
-		res.status(401).json({ message: 'Invalid username or password' });
+		res.status(401).json({ message: 'invalidUsernameOrPassword' });
 	} catch (error) {
 		next(error);
 	}

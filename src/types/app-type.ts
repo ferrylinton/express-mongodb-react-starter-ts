@@ -6,3 +6,7 @@ type AppContextProps = {
 	loggedUser: LoggedUser | null;
 	setLogggedUser: (loggedUser: LoggedUser | null) => void;
 };
+
+type ToastContextProps = {
+	toast: (message: string) => void;
+};

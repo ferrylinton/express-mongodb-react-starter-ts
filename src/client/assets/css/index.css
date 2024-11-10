@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-@import './reset.css';
-@import './normalize.css';
+
 @import './variable.css';
 @import 'animate.css';
 @import './animate.css';
 @import '../../components/Layout/Layout.css';
 @import '../../components/Sidebar/Sidebar.css';
 @import '../../components/Dropdown/Dropdown.css';
+@import './toast.css';
 @import './form.css';
+@import './data-list.css';
 @import './todo.css';
+@import './pagination.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 *,
 button {
@@ -19,7 +23,7 @@ button {
 }
 
 body {
-	font-family: 'Poppins', sans-serif !important;
+	font-family: var(--body-font);
 }
 
 #root {
@@ -119,59 +123,7 @@ svg {
 
 /** Button **/
 
-.btn {
-	display: inline-block;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 0.9rem;
-	padding: 0.5rem;
-	border-radius: 0.2rem;
-	color: var(--inverse-text);
-}
 
-.btn-primary {
-	color: hsl(var(--primary-h), var(--primary-s), 90%);
-	background-color: var(--primary);
-	box-shadow: var(--primary) 0 5px 10px -5px;
-}
-
-.btn-primary:hover {
-	color: var(--inverse-text);
-	background-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 10%));
-}
-
-.btn-secondary {
-	color: hsl(var(--background-h), var(--background-s), 90%);
-	background-color: hsl(var(--background-h), var(--background-s), 40%);
-	box-shadow: hsl(var(--background-h), var(--background-s), 40%) 0 5px 10px -5px;
-}
-
-.btn-secondary:hover {
-	color: var(--inverse-text);
-	background-color: hsl(var(--background-h), var(--background-s), 30%);
-}
-
-.btn-danger {
-	color: hsl(var(--danger-h), var(--danger-s), 90%);
-	background-color: var(--danger);
-	box-shadow: var(--danger) 0 5px 10px -5px;
-}
-
-.btn-danger:hover {
-	color: var(--inverse-text);
-	background-color: hsl(var(--danger-h), var(--danger-s), calc(var(--danger-l) - 10%));
-}
-
-.dark .btn-primary,
-.dark .btn-secondary,
-.dark .btn-danger {
-	box-shadow: #000000 0 5px 10px -5px;
-}
-
-.btn svg {
-	width: 20px;
-	height: 20px;
-}
 
 /** Alert **/
 
@@ -399,13 +351,8 @@ svg {
 	--skeleton2: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 30%));
 }
 
-.dark .skeleton-line,
 .skeleton-square {
-	--skeleton1: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 30%));
-	--skeleton2: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 10%));
-}
-
-.skeleton-square {
+	display: inline-block;
 	width: 40px;
 	height: 40px;
 	border-radius: 5px;

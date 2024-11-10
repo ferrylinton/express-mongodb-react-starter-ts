@@ -6,13 +6,13 @@ export const AuthenticateSchema = object({
 });
 
 export const RegisterSchema = object({
-	username: string().min(3, 'usernameMin').max(30, 'usernameMax'),
-	email: string().max(50, 'emailMax').email('emailInvalid'),
-	password: string().min(6, 'passwordMin').max(30, 'passwordMax'),
-	passwordConfirm: string().min(6, 'passwordConfirmMin').max(30, 'passwordConfirmMax'),
+	username: string().min(3, 'invalid.username').max(20, 'invalid.username'),
+	email: string().max(50, 'invalid.email').email('invalid.email'),
+	password: string().min(6, 'invalid.password').max(30, 'invalid.password'),
+	passwordConfirm: string().min(6, 'invalid.passwordConfirm').max(30, 'invalid.passwordConfirm'),
 }).refine(data => data.password === data.passwordConfirm, {
 	path: ['passwordConfirm'],
-	message: 'password.notMatch',
+	message: 'notMatch.passwordConfirm',
 });
 
 export type AuthenticateType = TypeOf<typeof AuthenticateSchema>;

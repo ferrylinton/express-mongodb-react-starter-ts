@@ -7,10 +7,13 @@ type TokenData = {
 	username: string;
 } & JwtPayload;
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
 	logger.info(`originalUrl : ${req.originalUrl}`);
 
 	if (req.originalUrl.startsWith('/api/')) {
+		await new Promise(r => setTimeout(r, 1000));
+		//throw new Error("testing");
+
 		const token = req.header('Authorization')?.replace('Bearer ', '');
 
 		if (!token || token === 'undefined' || token.trim().length === 0) {

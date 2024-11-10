@@ -10,12 +10,10 @@ import { CreateUserSchema } from '../../validations/user-validation';
 
 const getUserHandler = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		await new Promise(r => setTimeout(r, 1000));
-		//throw new Error("testing");
-		const users = await userService.find();
-		res.status(200).json(users);
+		const page: number = parseInt((req.query.page as string) || '0');
+		const result = await userService.find({ ...req.query, page });
+		res.status(200).json(result);
 	} catch (error) {
-		console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 		next(error);
 	}
 };
