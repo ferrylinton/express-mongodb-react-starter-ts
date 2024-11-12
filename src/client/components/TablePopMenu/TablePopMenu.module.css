@@ -14,7 +14,8 @@
 	will-change: transform, opacity;
 	background-color: var(--background);
 	border: solid 1px var(--background-70);
-	box-shadow: hsla(var(--background-h), var(--background-s), var(--background-l), 0.5) 0px 0px 10px;
+	box-shadow: hsla(var(--background-h), var(--background-s), var(--background-l), 0.5) 0px 0px
+		10px;
 
 	& section {
 		display: flex;
@@ -22,32 +23,33 @@
 		gap: 0.3rem;
 		min-width: 100px;
 
-		& button, & a{
+		& button,
+		& a {
 			padding: 4px 6px;
 			line-height: 1;
 			border-radius: 4px;
 			color: var(--background-40);
 
-			&:hover{
+			&:hover {
 				color: var(--text);
 			}
 		}
 	}
 }
 
-.table-pop-menu[data-state="open"][data-side="top"] {
+.table-pop-menu[data-state='open'][data-side='top'] {
 	animation-name: slideDownAndFade;
 }
 
-.table-pop-menu[data-state="open"][data-side="right"] {
+.table-pop-menu[data-state='open'][data-side='right'] {
 	animation-name: slideLeftAndFade;
 }
 
-.table-pop-menu[data-state="open"][data-side="bottom"] {
+.table-pop-menu[data-state='open'][data-side='bottom'] {
 	animation-name: slideUpAndFade;
 }
 
-.table-pop-menu[data-state="open"][data-side="left"] {
+.table-pop-menu[data-state='open'][data-side='left'] {
 	animation-name: slideRightAndFade;
 }
 

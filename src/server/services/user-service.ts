@@ -168,14 +168,11 @@ export const create = async (createUser: CreateUser, createdBy?: string) => {
  * @param {boolean} updateData.done - The task status
  * @returns Object of {@link UpdateResult}.
  */
-export const update = async (_id: string) => {
+export const update = async (id: string, user: Partial<User>) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
-	const updatedAt = new Date();
-	const done = true;
-	return await userCollection.updateOne(
-		{ _id: new ObjectId(_id) },
-		{ $set: { done, updatedAt } }
-	);
+	user.updatedAt = new Date();
+	console.log(user);
+	return await userCollection.updateOne({ _id: new ObjectId(id) }, { $set: user });
 };
 
 /**

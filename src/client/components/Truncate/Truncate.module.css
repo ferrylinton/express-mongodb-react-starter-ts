@@ -9,19 +9,20 @@
 	will-change: transform, opacity;
 	background-color: var(--background);
 	border: solid 1px var(--background-70);
-	box-shadow: hsla(var(--background-h), var(--background-s), var(--background-l), 0.5) 0px 0px 10px;
+	box-shadow: hsla(var(--background-h), var(--background-s), var(--background-l), 0.5) 0px 0px
+		10px;
 }
 
-.tooltip-content[data-state="delayed-open"][data-side="top"] {
+.tooltip-content[data-state='delayed-open'][data-side='top'] {
 	animation-name: slideDownAndFade;
 }
-.tooltip-content[data-state="delayed-open"][data-side="right"] {
+.tooltip-content[data-state='delayed-open'][data-side='right'] {
 	animation-name: slideLeftAndFade;
 }
-.tooltip-content[data-state="delayed-open"][data-side="bottom"] {
+.tooltip-content[data-state='delayed-open'][data-side='bottom'] {
 	animation-name: slideUpAndFade;
 }
-.tooltip-content[data-state="delayed-open"][data-side="left"] {
+.tooltip-content[data-state='delayed-open'][data-side='left'] {
 	animation-name: slideRightAndFade;
 }
 

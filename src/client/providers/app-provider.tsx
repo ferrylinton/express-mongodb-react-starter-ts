@@ -24,7 +24,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 
 	const setLogggedUser = (loggedUser: LoggedUser | null) => {
 		_setLogggedUser(loggedUser);
-		const inFifteenMinutes = new Date(new Date().getTime() + (parseInt(import.meta.env.JWT_EXPIRES_IN)) * 60 * 1000);
+		const inFifteenMinutes = new Date(
+			new Date().getTime() + parseInt(import.meta.env.JWT_EXPIRES_IN) * 60 * 1000
+		);
 		Cookies.set(LOGGED_USER_COOKIE, JSON.stringify(loggedUser), {
 			expires: inFifteenMinutes,
 		});

@@ -8,7 +8,6 @@ import { useAppContext } from '../providers/app-provider';
 import { axiosInstance } from '../utils/axios';
 import { Button } from '../components/Button/Button';
 
-
 export const Component = () => {
 	const intl = useIntl();
 
@@ -20,7 +19,7 @@ export const Component = () => {
 
 	const location = useLocation();
 
-	const from = location.state?.from?.pathname || "/";
+	const from = location.state?.from?.pathname || '/';
 
 	const { setLogggedUser } = useAppContext();
 
@@ -28,7 +27,7 @@ export const Component = () => {
 		event.preventDefault();
 		setErrorMessage(null);
 		setValidationError(null);
-		
+
 		const formData = new FormData(event.currentTarget);
 		const payload = Object.fromEntries(formData.entries());
 		const validation = AuthenticateSchema.safeParse(payload);
@@ -40,9 +39,9 @@ export const Component = () => {
 				navigate(from, { replace: true });
 			} catch (error: any) {
 				if (error.response.data) {
-					setErrorMessage(intl.formatMessage({ "id": error.response.data.message }))
+					setErrorMessage(intl.formatMessage({ id: error.response.data.message }));
 				} else {
-					setErrorMessage(error.message)
+					setErrorMessage(error.message);
 				}
 			}
 		} else {
@@ -58,27 +57,29 @@ export const Component = () => {
 					method="post"
 					noValidate
 					autoComplete="off"
-					className="form">
-
+					className="form"
+				>
 					{errorMessage && <p>{errorMessage}</p>}
 
 					<InputForm
 						type="text"
 						maxLength={20}
 						name="username"
-						validationError={validationError} />
+						validationError={validationError}
+					/>
 
 					<InputForm
 						type="password"
 						maxLength={30}
 						name="password"
-						validationError={validationError} />
+						validationError={validationError}
+					/>
 
-					<Button type="submit" variant='primary' size='big'>
+					<Button type="submit" variant="primary" size="big">
 						<FormattedMessage id="login" />
 					</Button>
 
-					<div className='links'>
+					<div className="links">
 						<Link to="/register">
 							<FormattedMessage id="register" />
 						</Link>
@@ -86,7 +87,6 @@ export const Component = () => {
 							<FormattedMessage id="forgotPassword" />
 						</Link>
 					</div>
-
 				</form>
 			</div>
 		</>

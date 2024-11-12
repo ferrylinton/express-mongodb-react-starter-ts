@@ -58,5 +58,8 @@
 	"locked": "Terkunci",
 	"logout": "Keluar",
 	"lock": "Kunci",
-	"detail": "Detil"
+	"unlock": "Buka kunci",
+	"detail": "Detil",
+	"lockUser": "Kunci {username}?",
+	"unlockUser": "Buka kunci {username}?"
 }

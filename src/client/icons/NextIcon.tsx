@@ -1,5 +1,3 @@
-import clsx from 'clsx';
-
 type Props = {
 	rotate?: boolean;
 };
@@ -11,7 +9,7 @@ export const NextIcon = ({ rotate }: Props) => {
 			width="24"
 			height="24"
 			viewBox="0 0 24 24"
-			className={clsx(rotate && 'rotate_180')}
+			style={{ rotate: rotate ? '180deg' : '0deg' }}
 		>
 			<path d="M21 12l-18 12v-24z" />
 		</svg>

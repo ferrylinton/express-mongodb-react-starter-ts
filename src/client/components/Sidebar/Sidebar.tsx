@@ -59,7 +59,7 @@ export const Sidebar = () => {
 							</Link>
 						</CollapsibleMenuItem>
 					</div>
-					<Button variant='primary' size='big' onClick={() => logout()} className='m-2'>
+					<Button variant="primary" size="big" onClick={() => logout()} className="m-2">
 						<FormattedMessage id="logout" />
 					</Button>
 				</aside>

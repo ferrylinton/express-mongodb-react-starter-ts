@@ -8,7 +8,6 @@ import { axiosInstance } from '../utils/axios';
 import { useToastContext } from '../providers/toast-provider';
 import { Button } from '../components/Button/Button';
 
-
 export const Component = () => {
 	const intl = useIntl();
 
@@ -32,13 +31,13 @@ export const Component = () => {
 			try {
 				const arg = validation.data.username;
 				await axiosInstance.post(`/api/register`, validation.data);
-				toast(intl.formatMessage({ "id": "dataIsSaved" }, { arg }));
+				toast(intl.formatMessage({ id: 'dataIsSaved' }, { arg }));
 				form.reset();
 			} catch (error: any) {
 				if (error.response?.data) {
-					setErrorMessage(intl.formatMessage({ "id": error.response.data.message }));
+					setErrorMessage(intl.formatMessage({ id: error.response.data.message }));
 				} else {
-					setErrorMessage(error.message)
+					setErrorMessage(error.message);
 				}
 			}
 		} else {
@@ -54,44 +53,47 @@ export const Component = () => {
 					method="post"
 					noValidate
 					autoComplete="off"
-					className="form">
-
+					className="form"
+				>
 					{errorMessage && <p>{errorMessage}</p>}
 
 					<InputForm
 						type="text"
 						maxLength={50}
 						name="email"
-						validationError={validationError} />
+						validationError={validationError}
+					/>
 
 					<InputForm
 						type="text"
 						maxLength={20}
 						name="username"
-						validationError={validationError} />
+						validationError={validationError}
+					/>
 
 					<InputForm
 						type="password"
 						maxLength={30}
 						name="password"
-						validationError={validationError} />
+						validationError={validationError}
+					/>
 
 					<InputForm
 						type="password"
 						maxLength={30}
 						name="passwordConfirm"
-						validationError={validationError} />
+						validationError={validationError}
+					/>
 
-					<Button type="submit" variant='primary' size='big'>
+					<Button type="submit" variant="primary" size="big">
 						<FormattedMessage id="register" />
 					</Button>
 
-					<div className='links'>
+					<div className="links">
 						<Link to="/login">
 							<FormattedMessage id="login" />
 						</Link>
 					</div>
-
 				</form>
 			</div>
 		</>

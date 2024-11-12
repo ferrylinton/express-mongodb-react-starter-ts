@@ -58,5 +58,8 @@
 	"locked": "Locked",
 	"logout": "Logout",
 	"lock": "Lock",
-	"detail": "Detail"
+	"unlock": "Unlock",
+	"detail": "Detail",
+	"lockUser": "Lock {username}?",
+	"unlockUser": "Unlock {username}?"
 }

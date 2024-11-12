@@ -1,0 +1,29 @@
+.data-detail {
+	width: 100%;
+
+	& table {
+		width: 100%;
+
+		& th,
+		& td {
+			font-size: 0.9rem;
+			padding: 0.5rem;
+			border: solid 1px var(--background-90);
+		}
+
+		& th {
+			text-align: right;
+			background-color: var(--background-95);
+		}
+	}
+}
+
+@media (min-width: 640px) {
+	.data-detail {
+		& table {
+			& th {
+				width: 160px;
+			}
+		}
+	}
+}

@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { ToastProvider } from '../../providers/toast-provider';
 import { AppProvider } from '../../providers/app-provider';
 import { AlertMessageContainer } from '../AlertMessageContainer';
-import { ConfirmDialog } from '../ConfirmDialog';
+import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog';
 import { Navbar } from '../Navbar/Navbar';
 import { Sidebar } from '../Sidebar/Sidebar';
 

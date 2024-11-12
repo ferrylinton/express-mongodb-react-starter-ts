@@ -1,46 +1,100 @@
 import { AxiosResponse } from 'axios';
-import { UserItem } from './UserItem';
-import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
-import { CheckIcon } from '../../icons/CheckIcon';
-import EyeIcon from '../../icons/EyeIcon';
-import { SearchForm } from '../SearchForm/SearchForm';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useNavigate } from 'react-router-dom';
+import styles from '../../assets/css/DataList.module.css';
+import { useConfirmStore } from '../../hooks/confirm-store';
+import { axiosInstance } from '../../utils/axios';
 import { Pager } from '../Pager/Pager';
+import { SearchForm } from '../SearchForm/SearchForm';
 import { TablePopMenu } from '../TablePopMenu/TablePopMenu';
+import { UserItem } from './UserItem';
 
-export type LoaderData = {
-	response: AxiosResponse<Pageable<Omit<User, "password">>>;
+type UserTableProps = {
+	response: AxiosResponse<Pageable<Omit<User, 'password'>>>;
 };
 
-export const UserTable = ({ response }: LoaderData) => {
-	const result = response.data as Pageable<Omit<User, "password">>;
+export const UserTable = ({ response }: UserTableProps) => {
+	const result = response.data as Pageable<Omit<User, 'password'>>;
 
-	const total = result.pagination.total;
+	const { showConfirm, hideConfirm } = useConfirmStore();
+
+	const intl = useIntl();
+
+	const navigate = useNavigate();
+
+	const goToDetail = (id: string) => {
+		navigate(`/user/detail/${id}`);
+	};
+
+	const okHandler = async (user: Omit<User, 'password'>) => {
+		try {
+			await axiosInstance.put(`/api/users/${user.id}`, { locked: !user.locked });
+			hideConfirm();
+			navigate('/user', { replace: true });
+		} catch (error: any) {
+			console.log(error);
+		}
+	};
+
+	const toggleLockUser = (user: Omit<User, 'password'>) => {
+		showConfirm(
+			intl.formatMessage(
+				{ id: user.locked ? 'unlockUser' : 'lockUser' },
+				{ username: user.username }
+			),
+			() => okHandler(user)
+		);
+	};
 
 	return (
 		<>
-			<div className="data-toolbar">
-				<SearchForm action='/user'/>
+			<div className={styles['data-toolbar']}>
+				<SearchForm action="/user" />
 			</div>
-			<div className="data-list">
-				<div className='table-data'>
+			<div className={styles['data-list']}>
+				<div table-type="data">
 					<table>
 						<thead>
 							<tr>
 								<th>#</th>
-								<th><FormattedMessage id="username" /></th>
-								<th><FormattedMessage id="email" /></th>
-								<th><FormattedMessage id="createdAt" /></th>
+								<th>
+									<FormattedMessage id="username" />
+								</th>
+								<th>
+									<FormattedMessage id="email" />
+								</th>
+								<th>
+									<FormattedMessage id="createdAt" />
+								</th>
 							</tr>
 						</thead>
 						<tbody>
+							{result.pagination.total === 0 && (
+								<tr>
+									<td colSpan={4}>
+										<div className="no-records">
+											<FormattedMessage id="noRecords" />
+										</div>
+									</td>
+								</tr>
+							)}
 							{result.data.map((user, index) => {
-								return <UserItem key={index} index={result.pagination.page * result.pagination.pageSize + index + 1} user={user} />;
+								return (
+									<UserItem
+										key={index}
+										index={
+											result.pagination.page * result.pagination.pageSize +
+											index +
+											1
+										}
+										user={user}
+									/>
+								);
 							})}
 						</tbody>
 					</table>
 				</div>
-				<div className='table-action'>
+				<div table-type="action">
 					<table>
 						<thead>
 							<tr>
@@ -49,11 +103,17 @@ export const UserTable = ({ response }: LoaderData) => {
 						</thead>
 						<tbody>
 							{result.data.map((user, index) => {
-								return <tr key={index}>
-									<td>
-										<TablePopMenu detail={`/detail/${user.id}` } />
-									</td>
-								</tr>;
+								return (
+									<tr key={index}>
+										<td>
+											<TablePopMenu
+												locked={user.locked}
+												goToDetail={() => goToDetail(user.id)}
+												toggleLockUser={() => toggleLockUser(user)}
+											/>
+										</td>
+									</tr>
+								);
 							})}
 						</tbody>
 					</table>

@@ -72,7 +72,8 @@ const getUserByIdHandler = async (req: Request, res: Response, next: NextFunctio
  */
 const putUserHandler = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const updateResult = await userService.update(req.params.id);
+		console.log(req.params);
+		const updateResult = await userService.update(req.params.id, req.body);
 		res.status(200).json(updateResult);
 	} catch (error) {
 		next(error);

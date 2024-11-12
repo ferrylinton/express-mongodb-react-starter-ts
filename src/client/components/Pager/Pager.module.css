@@ -1,0 +1,46 @@
+.pagination {
+	display: flex;
+
+	& ul {
+		margin: 0 1rem;
+		display: flex;
+		gap: 0.3rem;
+	}
+
+	& button {
+		padding: 0.2rem 0.5rem;
+		padding: 0;
+		cursor: pointer;
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		color: var(--background-50);
+
+		&:not(:has(svg)) {
+			background-color: var(--background-90);
+
+			&:not(.active):hover {
+				background-color: var(--background-80);
+			}
+		}
+
+		&:hover {
+			color: var(--background-40);
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			color: var(--background-80);
+		}
+
+		&.active {
+			cursor: not-allowed;
+			background-color: var(--primary);
+			color: var(--inverse-text);
+		}
+	}
+}
