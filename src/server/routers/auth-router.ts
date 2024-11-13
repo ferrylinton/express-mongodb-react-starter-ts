@@ -26,10 +26,11 @@ const generateTokenHandler = async (req: Request, res: Response, next: NextFunct
 						return res.status(401).json({ message: 'usernameIsLocked' });
 					}
 
-					const token = jwt.sign({ username }, JWT_SECRET, {
+					const { id, role } = user;
+					const token = jwt.sign({ id, role, username }, JWT_SECRET, {
 						expiresIn: `${JWT_EXPIRES_IN}m`,
 					});
-					return res.status(200).json({ username, role: user.role, token });
+					return res.status(200).json({ id, role, username, token });
 				}
 			}
 		}

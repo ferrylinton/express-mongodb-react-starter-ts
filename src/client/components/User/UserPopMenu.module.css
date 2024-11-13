@@ -14,14 +14,13 @@
 	will-change: transform, opacity;
 	background-color: var(--background);
 	border: solid 1px var(--background-70);
-	box-shadow: hsla(var(--background-h), var(--background-s), var(--background-l), 0.5) 0px 0px
-		10px;
+	box-shadow: var(--background-50) 0px 0px 10px;
 
 	& section {
 		display: flex;
 		flex-direction: column;
 		gap: 0.3rem;
-		min-width: 100px;
+		min-width: 120px;
 
 		& button,
 		& a {

@@ -112,20 +112,15 @@ export const find = async ({ page, column, keyword, sort }: RequestParams) => {
 	return result;
 };
 
-export const count = async (): Promise<number> => {
-	const userCollection = await getCollection<User>(USER_COLLECTION);
-	return await userCollection.countDocuments();
-};
-
 /**
  * Find a User document by ID
  *
- * @param {string} _id - The ID of user document
+ * @param {string} id - The ID of user document
  * @returns A {@link User} document
  */
-export const findById = async (_id: string) => {
+export const findById = async (id: string) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
-	const user = await userCollection.findOne({ _id: new ObjectId(_id) });
+	const user = await userCollection.findOne({ _id: new ObjectId(id) });
 	return user ? mapToObject(user) : null;
 };
 
@@ -141,12 +136,6 @@ export const findByEmail = async (email: string) => {
 	return user ? mapToObject(user) : null;
 };
 
-/**
- * Create a new User document.
- *
- * @param {string} task - The task
- * @returns Object of {@link InsertOneResult}
- */
 export const create = async (createUser: CreateUser, createdBy?: string) => {
 	createUser.password = bcrypt.hashSync(createUser.password, 10);
 	const user: Omit<User, 'id'> = {
@@ -159,28 +148,17 @@ export const create = async (createUser: CreateUser, createdBy?: string) => {
 	return await userCollection.insertOne(user);
 };
 
-/**
- * Update a user document in a collection
- *
- * @param {string} _id - The ID of user document
- * @param {Object} updateData - The new data
- * @param {string} updateData.task - The new task
- * @param {boolean} updateData.done - The task status
- * @returns Object of {@link UpdateResult}.
- */
-export const update = async (id: string, user: Partial<User>) => {
-	const userCollection = await getCollection<User>(USER_COLLECTION);
-	user.updatedAt = new Date();
-	console.log(user);
-	return await userCollection.updateOne({ _id: new ObjectId(id) }, { $set: user });
+export const changePassword = async (input: ChangePassword) => {
+	input.password = bcrypt.hashSync(input.password, 10);
+	const userCollection = await getCollection<Omit<User, 'id'>>(USER_COLLECTION);
+	return await userCollection.updateOne({ username: input.username }, { $set: input });
 };
 
-/**
- * Delete a user document from a collection.
- *
- * @param {string} _id - The ID of user document
- * @returns Object of {@link DeleteResult}.
- */
+export const update = async ({ id, ...input }: UpdateUser) => {
+	const userCollection = await getCollection<User>(USER_COLLECTION);
+	return await userCollection.updateOne({ _id: new ObjectId(id) }, { $set: input });
+};
+
 export const deleteById = async (_id: string) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
 	return await userCollection.deleteOne({ _id: new ObjectId(_id) });

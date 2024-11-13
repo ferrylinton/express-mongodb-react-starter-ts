@@ -61,5 +61,9 @@
 	"unlock": "Unlock",
 	"detail": "Detail",
 	"lockUser": "Lock {username}?",
-	"unlockUser": "Unlock {username}?"
+	"unlockUser": "Unlock {username}?",
+	"create": "Create",
+	"modify": "Modify",
+	"changePassword": "Change Password",
+	"update": "Update"
 }

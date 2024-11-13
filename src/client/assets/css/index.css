@@ -3,7 +3,6 @@
 @import './variable.css';
 @import 'animate.css';
 @import './animate.css';
-@import '../../components/Layout/Layout.css';
 @import '../../components/Sidebar/Sidebar.css';
 @import '../../components/Dropdown/Dropdown.css';
 @import './toast.css';
@@ -82,6 +81,17 @@ a {
 
 svg {
 	fill: currentColor;
+}
+
+.form-buttons {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 0.4rem;
+
+	& button {
+		flex: 0 0 50%;
+	}
 }
 
 .container {

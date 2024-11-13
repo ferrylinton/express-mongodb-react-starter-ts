@@ -61,5 +61,9 @@
 	"unlock": "Buka kunci",
 	"detail": "Detil",
 	"lockUser": "Kunci {username}?",
-	"unlockUser": "Buka kunci {username}?"
+	"unlockUser": "Buka kunci {username}?",
+	"create": "Tambah",
+	"modify": "Ubah",
+	"changePassword": "Ubah Kata Sandi",
+	"update": "Update"
 }

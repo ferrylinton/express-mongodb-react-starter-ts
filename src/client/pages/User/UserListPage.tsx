@@ -1,14 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { Suspense, useEffect } from 'react';
-import {
-	Await,
-	defer,
-	LoaderFunction,
-	useLoaderData,
-	useNavigation,
-	useRevalidator,
-	useSearchParams,
-} from 'react-router-dom';
+import { Suspense } from 'react';
+import { Await, defer, LoaderFunction, useLoaderData, useNavigation } from 'react-router-dom';
 import { SimpleErrorBoundary } from '../../components/SimpleErrorBoundary';
 import { UserTable } from '../../components/User/UserTable';
 import { UserTableSkeleton } from '../../components/User/UserTableSkeleton';

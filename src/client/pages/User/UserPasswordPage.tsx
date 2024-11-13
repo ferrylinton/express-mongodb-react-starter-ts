@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { Suspense } from 'react';
 import { Await, defer, LoaderFunction, useLoaderData } from 'react-router-dom';
-import { UserDetail } from '../../components/User/UserDetail';
-import { UserDetailSkeleton } from '../../components/User/UserDetailSkeleton';
 import { SimpleErrorBoundary } from '../../components/SimpleErrorBoundary';
+import { UserPasswordForm } from '../../components/User/UserPasswordForm';
+import { UserPasswordSkeleton } from '../../components/User/UserPasswordSkeleton';
 import { axiosInstance } from '../../utils/axios';
 
 type LoaderData = {
@@ -15,11 +15,11 @@ export const Component = () => {
 
 	return (
 		<>
-			<Suspense fallback={<UserDetailSkeleton />}>
+			<Suspense fallback={<UserPasswordSkeleton />}>
 				<Await
 					resolve={loaderData.response}
 					errorElement={<SimpleErrorBoundary />}
-					children={response => <UserDetail response={response} />}
+					children={response => <UserPasswordForm response={response} />}
 				/>
 			</Suspense>
 		</>
@@ -36,5 +36,5 @@ export function ErrorBoundary() {
 	return <SimpleErrorBoundary />;
 }
 
-Component.displayName = 'UserDetailRoute';
-ErrorBoundary.displayName = 'UserDetailErrorBoundary';
+Component.displayName = 'UserPasswordRoute';
+ErrorBoundary.displayName = 'UserPasswordErrorBoundary';

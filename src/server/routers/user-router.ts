@@ -1,6 +1,11 @@
 import express, { NextFunction, Request, Response } from 'express';
+import {
+	ChangePasswordSchema,
+	CreateUserSchema,
+	UpdateUserSchema,
+} from '../../validations/user-validation';
+import { hasAuthority } from '../middlewares/has-authority-middleware';
 import * as userService from '../services/user-service';
-import { CreateUserSchema } from '../../validations/user-validation';
 
 /**
  * A router that handles User REST API
@@ -31,8 +36,7 @@ const postUserHandler = async (req: Request, res: Response, next: NextFunction) 
 
 		if (validation.success) {
 			const { passwordConfirm, ...input } = validation.data;
-			console.log(validation.data);
-			const user = await userService.create(input);
+			const user = await userService.create(input, req.loggedUser.username);
 			res.status(201).json(user);
 		} else {
 			const { fieldErrors } = validation.error.flatten();
@@ -72,9 +76,54 @@ const getUserByIdHandler = async (req: Request, res: Response, next: NextFunctio
  */
 const putUserHandler = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		console.log(req.params);
-		const updateResult = await userService.update(req.params.id, req.body);
-		res.status(200).json(updateResult);
+		const validation = UpdateUserSchema.safeParse(req.body);
+
+		if (validation.success) {
+			const input = {
+				id: req.params.id,
+				updatedBy: validation.data.username,
+				updatedAt: new Date(),
+				...validation.data,
+			};
+
+			if (req.loggedUser.username !== input.updatedBy) {
+				input.updatedBy = req.loggedUser.username;
+			}
+
+			const updateResult = await userService.update(input);
+			res.status(200).json(updateResult);
+		} else {
+			const { fieldErrors } = validation.error.flatten();
+			return res.status(400).json(fieldErrors);
+		}
+	} catch (error) {
+		next(error);
+	}
+};
+
+const changePasswordHandler = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const validation = ChangePasswordSchema.safeParse(req.body);
+
+		if (validation.success) {
+			const { username, password } = validation.data;
+			const input = {
+				username,
+				password,
+				updatedBy: validation.data.username,
+				updatedAt: new Date(),
+			};
+
+			if (req.loggedUser.username !== input.updatedBy) {
+				input.updatedBy = req.loggedUser.username;
+			}
+
+			const updateResult = await userService.changePassword(input);
+			res.status(200).json(updateResult);
+		} else {
+			const { fieldErrors } = validation.error.flatten();
+			return res.status(400).json(fieldErrors);
+		}
 	} catch (error) {
 		next(error);
 	}
@@ -101,10 +150,11 @@ const deleteUserHandler = async (req: Request, res: Response, next: NextFunction
  */
 const router = express.Router();
 
-router.get('/users', getUserHandler);
-router.post('/users', postUserHandler);
-router.get('/users/:id', getUserByIdHandler);
-router.put('/users/:id', putUserHandler);
-router.delete('/users/:id', deleteUserHandler);
+router.get('/users', hasAuthority(['ADMIN']), getUserHandler);
+router.post('/users', hasAuthority(['ADMIN']), postUserHandler);
+router.post('/users/password', hasAuthority(['owner', 'ADMIN']), changePasswordHandler);
+router.get('/users/:id', hasAuthority(['owner', 'ADMIN']), getUserByIdHandler);
+router.put('/users/:id', hasAuthority(['owner', 'ADMIN']), putUserHandler);
+router.delete('/users/:id', hasAuthority(['ADMIN']), deleteUserHandler);
 
 export default router;

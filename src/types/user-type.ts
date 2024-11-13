@@ -19,3 +19,19 @@ type CreateUser = {
 	password: string;
 	role: Role;
 };
+
+type UpdateUser = {
+	id: string;
+	email: string;
+	username: string;
+	role: Role;
+	updatedBy: string;
+	updatedAt: Date;
+};
+
+type ChangePassword = {
+	username: string;
+	password: string;
+	updatedBy: string;
+	updatedAt: Date;
+};

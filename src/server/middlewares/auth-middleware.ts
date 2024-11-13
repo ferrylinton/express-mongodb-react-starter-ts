@@ -3,15 +3,13 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { JWT_SECRET } from '../config/constant';
 import logger from '../config/winston';
 
-type TokenData = {
-	username: string;
-} & JwtPayload;
+type TokenData = Omit<LoggedUser, 'token'> & JwtPayload;
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
 	logger.info(`originalUrl : ${req.originalUrl}`);
 
 	if (req.originalUrl.startsWith('/api/')) {
-		await new Promise(r => setTimeout(r, 1000));
+		await new Promise(r => setTimeout(r, 500));
 		//throw new Error("testing");
 
 		const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -22,8 +20,8 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
 		}
 
 		try {
-			const data = jwt.verify(token, JWT_SECRET) as TokenData;
-			logger.info(data);
+			const { id, username, role } = jwt.verify(token, JWT_SECRET) as TokenData;
+			req.loggedUser = { id, username, role };
 		} catch (error) {
 			logger.error(error);
 			return res.status(401).json({ message: 'Invalid token', code: 'invalidToken' });

@@ -1,8 +1,8 @@
 import styles from './Skeleton.module.css';
 
 type SkeletonSquareProps = {
-	width?: number;
-	height?: number;
+	width?: number | string;
+	height?: number | string;
 };
 
 export const SkeletonSquare = ({ height = 20, width = 60 }: SkeletonSquareProps) => {

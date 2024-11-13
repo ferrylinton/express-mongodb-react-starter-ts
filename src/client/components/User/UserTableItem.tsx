@@ -7,7 +7,7 @@ type Props = {
 	user: Omit<User, 'password'>;
 };
 
-export const UserItem = ({ index, user }: Props) => {
+export const UserTableItem = ({ index, user }: Props) => {
 	return (
 		<>
 			<tr data-locked={user.locked}>

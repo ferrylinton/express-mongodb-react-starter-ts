@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 
 type InputFormProps = {
 	name: string;
-	validationError: ValidationError | null;
+	validationError?: ValidationError | null;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const InputForm = ({ name, validationError, ...otherProps }: InputFormProps) => {

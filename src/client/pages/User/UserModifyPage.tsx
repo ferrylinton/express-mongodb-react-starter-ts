@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { Suspense } from 'react';
 import { Await, defer, LoaderFunction, useLoaderData } from 'react-router-dom';
-import { UserDetail } from '../../components/User/UserDetail';
-import { UserDetailSkeleton } from '../../components/User/UserDetailSkeleton';
 import { SimpleErrorBoundary } from '../../components/SimpleErrorBoundary';
+import { UserModifyForm } from '../../components/User/UserModifyForm';
 import { axiosInstance } from '../../utils/axios';
+import { UserModifySkeleton } from '../../components/User/UserModifySkeleton';
 
 type LoaderData = {
 	response: Promise<AxiosResponse<Omit<User, 'password'>>>;
@@ -15,11 +15,11 @@ export const Component = () => {
 
 	return (
 		<>
-			<Suspense fallback={<UserDetailSkeleton />}>
+			<Suspense fallback={<UserModifySkeleton />}>
 				<Await
 					resolve={loaderData.response}
 					errorElement={<SimpleErrorBoundary />}
-					children={response => <UserDetail response={response} />}
+					children={response => <UserModifyForm response={response} />}
 				/>
 			</Suspense>
 		</>
@@ -36,5 +36,5 @@ export function ErrorBoundary() {
 	return <SimpleErrorBoundary />;
 }
 
-Component.displayName = 'UserDetailRoute';
-ErrorBoundary.displayName = 'UserDetailErrorBoundary';
+Component.displayName = 'UserModifyRoute';
+ErrorBoundary.displayName = 'UserModifyErrorBoundary';

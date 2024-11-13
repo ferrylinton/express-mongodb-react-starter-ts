@@ -3,11 +3,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../assets/css/DataList.module.css';
 import { useConfirmStore } from '../../hooks/confirm-store';
+import { useToastContext } from '../../providers/toast-provider';
 import { axiosInstance } from '../../utils/axios';
 import { Pager } from '../Pager/Pager';
 import { SearchForm } from '../SearchForm/SearchForm';
-import { TablePopMenu } from '../TablePopMenu/TablePopMenu';
-import { UserItem } from './UserItem';
+import { UserPopMenu } from './UserPopMenu';
+import { UserTableItem } from './UserTableItem';
 
 type UserTableProps = {
 	response: AxiosResponse<Pageable<Omit<User, 'password'>>>;
@@ -18,17 +19,28 @@ export const UserTable = ({ response }: UserTableProps) => {
 
 	const { showConfirm, hideConfirm } = useConfirmStore();
 
+	const { toast } = useToastContext();
+
 	const intl = useIntl();
 
 	const navigate = useNavigate();
 
-	const goToDetail = (id: string) => {
+	const toDetail = (id: string) => {
 		navigate(`/user/detail/${id}`);
+	};
+
+	const toModify = (id: string) => {
+		navigate(`/user/modify/${id}`);
+	};
+
+	const toPassword = (id: string) => {
+		navigate(`/user/password/${id}`);
 	};
 
 	const okHandler = async (user: Omit<User, 'password'>) => {
 		try {
 			await axiosInstance.put(`/api/users/${user.id}`, { locked: !user.locked });
+			toast(intl.formatMessage({ id: 'dataIsUpdated' }, { arg: user.username }));
 			hideConfirm();
 			navigate('/user', { replace: true });
 		} catch (error: any) {
@@ -80,7 +92,7 @@ export const UserTable = ({ response }: UserTableProps) => {
 							)}
 							{result.data.map((user, index) => {
 								return (
-									<UserItem
+									<UserTableItem
 										key={index}
 										index={
 											result.pagination.page * result.pagination.pageSize +
@@ -106,9 +118,11 @@ export const UserTable = ({ response }: UserTableProps) => {
 								return (
 									<tr key={index}>
 										<td>
-											<TablePopMenu
+											<UserPopMenu
 												locked={user.locked}
-												goToDetail={() => goToDetail(user.id)}
+												toModify={() => toModify(user.id)}
+												toDetail={() => toDetail(user.id)}
+												toPassword={() => toPassword(user.id)}
 												toggleLockUser={() => toggleLockUser(user)}
 											/>
 										</td>

@@ -10,7 +10,6 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
 	const [message, setMessage] = useState('');
 
 	const toast = (message: string) => {
-		console.log('message : ', message);
 		setMessage(message);
 		setOpen(true);
 	};
