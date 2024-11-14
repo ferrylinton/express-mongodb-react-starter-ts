@@ -8,7 +8,7 @@ import { Button } from '../Button/Button';
 import { CollapsibleMenuItem } from './CollapsibleMenuItem';
 
 export const Sidebar = () => {
-	const { loggedUser, setLogggedUser } = useAppContext();
+	const { loggedUser, setLoggedUser } = useAppContext();
 
 	const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export const Sidebar = () => {
 	const logout = () => {
 		toggleSidebar();
 		Cookies.remove(LOGGED_USER_COOKIE);
-		setLogggedUser(null);
+		setLoggedUser(null);
 		navigate('/login');
 	};
 

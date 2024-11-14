@@ -65,5 +65,7 @@
 	"create": "Create",
 	"modify": "Modify",
 	"changePassword": "Change Password",
-	"update": "Update"
+	"update": "Update",
+	"welcome.hi": "Hi, <strong>{username}</strong>",
+	"welcome.message": "Welcome to <strong>Simple Admin</strong>"
 }

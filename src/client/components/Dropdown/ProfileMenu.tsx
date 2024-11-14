@@ -10,7 +10,7 @@ import { LOGGED_USER_COOKIE } from '../../utils/constant';
 export const ProfileMenu = () => {
 	const [open, setOpen] = useState<boolean>(false);
 
-	const { setLogggedUser } = useAppContext();
+	const { setLoggedUser } = useAppContext();
 
 	const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ export const ProfileMenu = () => {
 
 	const logout = () => {
 		Cookies.remove(LOGGED_USER_COOKIE);
-		setLogggedUser(null);
+		setLoggedUser(null);
 		navigate('/login');
 	};
 

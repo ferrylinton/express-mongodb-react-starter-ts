@@ -21,7 +21,7 @@ export const Component = () => {
 
 	const from = location.state?.from?.pathname || '/';
 
-	const { setLogggedUser } = useAppContext();
+	const { setLoggedUser } = useAppContext();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -35,7 +35,7 @@ export const Component = () => {
 		if (validation.success) {
 			try {
 				const { data } = await axiosInstance.post<LoggedUser>(`/api/token`, payload);
-				setLogggedUser(data);
+				setLoggedUser(data);
 				navigate(from, { replace: true });
 			} catch (error: any) {
 				if (error.response.data) {

@@ -65,5 +65,7 @@
 	"create": "Tambah",
 	"modify": "Ubah",
 	"changePassword": "Ubah Kata Sandi",
-	"update": "Update"
+	"update": "Update",
+	"welcome.hi": "Horas, <strong>{username}</strong>",
+	"welcome.message": "Selamat datang di <strong>Simple Admin</strong>"
 }

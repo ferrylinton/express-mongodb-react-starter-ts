@@ -1,39 +1,15 @@
 import { AxiosResponse } from 'axios';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
 import styles from '../../assets/css/DataDetail.module.css';
-import { useConfirmStore } from '../../hooks/confirm-store';
-import { axiosInstance } from '../../utils/axios';
-import { Button } from '../Button/Button';
 
-type UserDetailProps = {
+type ProfileProps = {
 	response: AxiosResponse<Omit<User, 'password'>>;
 };
 
-export const UserDetail = ({ response }: UserDetailProps) => {
+export const Profile = ({ response }: ProfileProps) => {
 	const { data: user } = response;
 
-	const { showConfirm, hideConfirm } = useConfirmStore();
-
 	const intl = useIntl();
-
-	const navigate = useNavigate();
-
-	const okHandler = async () => {
-		try {
-			await axiosInstance.delete(`/api/users/${user.id}`);
-			hideConfirm();
-			navigate('/user', { replace: true });
-		} catch (error: any) {
-			console.log(error);
-		}
-	};
-
-	const onClickDelete = () => {
-		if (user) {
-			showConfirm(intl.formatMessage({ id: 'deleteData' }), okHandler);
-		}
-	};
 
 	return (
 		<>
@@ -82,14 +58,6 @@ export const UserDetail = ({ response }: UserDetailProps) => {
 						</tr>
 					</tbody>
 				</table>
-			</div>
-			<div className="flex gap-1">
-				<Button minWidth={100} onClick={() => navigate('/user')}>
-					<FormattedMessage id="back" />
-				</Button>
-				<Button minWidth={100} variant="danger" onClick={onClickDelete}>
-					<FormattedMessage id="delete" />
-				</Button>
 			</div>
 		</>
 	);

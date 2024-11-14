@@ -1,11 +1,8 @@
 import { SimpleErrorBoundary } from '../components/SimpleErrorBoundary';
+import { WelcomeMessage } from '../components/WelcomeMessage/WelcomeMessage';
 
 export const Component = () => {
-	return (
-		<>
-			<>Home</>
-		</>
-	);
+	return <WelcomeMessage />;
 };
 
 export function ErrorBoundary() {

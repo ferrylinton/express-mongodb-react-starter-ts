@@ -17,7 +17,7 @@ export const Component = () => {
 
 	const navigate = useNavigate();
 
-	const { setLogggedUser } = useAppContext();
+	const { setLoggedUser } = useAppContext();
 
 	const { alert } = useAlertStore();
 
@@ -47,7 +47,7 @@ export const Component = () => {
 		const payload = Object.fromEntries(formData.entries());
 		const { data } = await axiosInstance.post<LoggedUser>(`/api/token`, payload);
 
-		setLogggedUser(data);
+		setLoggedUser(data);
 		navigate('/', { replace: true });
 	};
 

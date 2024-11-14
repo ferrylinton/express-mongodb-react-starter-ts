@@ -10,20 +10,20 @@ export const AppContext = createContext<AppContextProps>({
 	locale: DEFAULT_LOCALE,
 	setLocale: () => Function(),
 	loggedUser: null,
-	setLogggedUser: () => Function(),
+	setLoggedUser: () => Function(),
 });
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
 	const [locale, setCurrentLocale] = useState<string>(DEFAULT_LOCALE);
 
-	const [loggedUser, _setLogggedUser] = useState(getLoggedUser());
+	const [loggedUser, _setLoggedUser] = useState(getLoggedUser());
 
 	const setLocale = (locale: string) => {
 		setCurrentLocale(locale);
 	};
 
-	const setLogggedUser = (loggedUser: LoggedUser | null) => {
-		_setLogggedUser(loggedUser);
+	const setLoggedUser = (loggedUser: LoggedUser | null) => {
+		_setLoggedUser(loggedUser);
 		const inFifteenMinutes = new Date(
 			new Date().getTime() + parseInt(import.meta.env.JWT_EXPIRES_IN) * 60 * 1000
 		);
@@ -36,7 +36,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 		locale,
 		setLocale,
 		loggedUser,
-		setLogggedUser,
+		setLoggedUser,
 	};
 
 	return (
