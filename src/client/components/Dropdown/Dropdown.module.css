@@ -53,10 +53,21 @@
 		var(--background-90) 0px 30px 60px -12px,
 		var(--background-70) 0px 18px 36px -18px;
 
+	& svg {
+		height: 20px;
+		width: auto;
+	}
+
 	& span svg {
 		width: 15px;
 		height: 10px;
 		fill: var(--background-80);
+	}
+
+	& [role='separator'] {
+		height: 1px;
+		margin: 5px;
+		background-color: var(--background-95);
 	}
 
 	& [role='menuitemradio'],
@@ -95,5 +106,16 @@
 				height: 20px;
 			}
 		}
+	}
+}
+
+@keyframes slideUpAndFade {
+	from {
+		opacity: 0;
+		transform: translateY(2px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }

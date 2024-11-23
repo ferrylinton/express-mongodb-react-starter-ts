@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { ToastProvider } from '../../providers/toast-provider';
-import { AppProvider } from '../../providers/app-provider';
+import { AppProvider } from '../../providers/AppProvider';
+import { ToastProvider } from '../../providers/ToastProvider';
 import { AlertMessageContainer } from '../AlertMessageContainer';
 import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog';
 import { Navbar } from '../Navbar/Navbar';
@@ -11,14 +11,16 @@ export default function Layout() {
 	return (
 		<AppProvider>
 			<ToastProvider>
-				<Navbar />
-				<div className={styles['main-wrapper']}>
+				<div className={styles.layout}>
 					<Sidebar />
-					<main className={styles['main']}>
-						<ConfirmDialog />
-						<AlertMessageContainer />
-						<Outlet />
-					</main>
+					<div className={styles['main-wrapper']}>
+						<Navbar />
+						<main>
+							<ConfirmDialog />
+							<AlertMessageContainer />
+							<Outlet />
+						</main>
+					</div>
 				</div>
 			</ToastProvider>
 		</AppProvider>

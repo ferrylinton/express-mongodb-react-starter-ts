@@ -1,76 +1,82 @@
-import { AxiosError, isAxiosError } from 'axios';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { ActionFunctionArgs, Form, Link, redirect, useRouteError } from 'react-router-dom';
-import { useAlertStore } from '../../hooks/alert-store';
+import { ActionFunctionArgs, Link, redirect, useNavigate } from 'react-router-dom';
+import { InputForm } from '../../../client/components/Form/InputForm';
+import { CreateTodoSchema } from '../../../validations/todo-validation';
+import { getErrorsObject } from '../../../validations/validation-util';
+import { useToastContext } from '../../providers/ToastProvider';
 import { axiosInstance } from '../../utils/axios';
-
-type ErrorResponse = {
-	task?: string[];
-	message?: string;
-	formData?: any;
-};
+import { Button } from '../../../client/components/Button/Button';
 
 export const Component = () => {
 	const intl = useIntl();
 
-	const { alert } = useAlertStore();
+	const navigate = useNavigate();
 
-	const error = useRouteError();
+	const { toast } = useToastContext();
 
-	const getErrorMessage = (error: unknown) => {
-		console.error(error);
+	const [validationError, setValidationError] = useState<ValidationError | null>(null);
 
-		if (isAxiosError(error)) {
-			const axiosError = error as AxiosError<ErrorResponse>;
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-			if (axiosError.response?.data.task) {
-				return intl.formatMessage({ id: axiosError.response?.data.task[0] });
-			} else if (axiosError.response?.data.message === 'duplicateData') {
-				const arg = axiosError.response?.data.formData.task || 'unknown';
-				return intl.formatMessage({ id: 'duplicateData' }, { arg });
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setErrorMessage(null);
+		setValidationError(null);
+
+		const form = event.currentTarget;
+		const formData = new FormData(form);
+		const payload = Object.fromEntries(formData.entries());
+		const validation = CreateTodoSchema.safeParse(payload);
+
+		if (validation.success) {
+			try {
+				const arg = validation.data.task;
+				await axiosInstance.post(`/api/todoes`, validation.data);
+				toast(intl.formatMessage({ id: 'dataIsSaved' }, { arg }));
+				form.reset();
+			} catch (error: any) {
+				console.log(error);
+				if (error.response?.data) {
+					setErrorMessage(intl.formatMessage({ id: error.response.data.message }));
+				} else {
+					setErrorMessage(error.message);
+				}
 			}
+		} else {
+			setValidationError(getErrorsObject(validation.error));
 		}
-
-		return (error as any).message;
 	};
-
-	useEffect(() => {
-		if (error) {
-			alert.error(getErrorMessage(error));
-		}
-	}, [error]);
 
 	return (
 		<>
-			<Form
-				action="/todo/create"
-				method="post"
-				noValidate
-				autoComplete="off"
-				className="todo-form"
-			>
-				<div className="form-group">
-					<label>
-						<FormattedMessage id="task" />
-					</label>
-					<input
+			<div className="container-center">
+				<form
+					onSubmit={handleSubmit}
+					method="post"
+					noValidate
+					autoComplete="off"
+					className="form"
+				>
+					{errorMessage && <p>{errorMessage}</p>}
+
+					<InputForm
 						type="text"
-						placeholder={intl.formatMessage({ id: 'task' })}
+						maxLength={50}
 						name="task"
-						autoComplete="off"
-						autoFocus
+						validationError={validationError}
 					/>
-				</div>
-				<section className="buttons">
-					<Link to={'/'} className="btn btn-secondary">
-						<FormattedMessage id="back" />
-					</Link>
-					<button type="submit" className="btn btn-primary">
-						<FormattedMessage id="save" />
-					</button>
-				</section>
-			</Form>
+
+					<div className="flex gap-1 mt-3">
+						<Button className="grow" size="big" onClick={() => navigate('/todo')}>
+							<FormattedMessage id="back" />
+						</Button>
+						<Button className="grow" type="submit" variant="primary" size="big">
+							<FormattedMessage id="create" />
+						</Button>
+					</div>
+				</form>
+			</div>
 		</>
 	);
 };

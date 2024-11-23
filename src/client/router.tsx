@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import ErrorPage from './pages/ErrorPage';
-import { NotFoundPage } from './pages/NotFoundPage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
+import PublicLayout from './components/Layout/PublicLayout';
 
 export const router = createBrowserRouter([
 	{
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
 					},
 					{
 						path: '/changepassword',
-						lazy: () => import('./pages/ChangePassword'),
+						lazy: () => import('./pages/ChangePasswordPage'),
 					},
 					{
 						path: '/user',
@@ -58,6 +59,12 @@ export const router = createBrowserRouter([
 					},
 				],
 			},
+		],
+	},
+	{
+		element: <PublicLayout />,
+		errorElement: <ErrorPage />,
+		children: [
 			{
 				path: '/login',
 				lazy: () => import('./pages/LoginPage'),
@@ -69,6 +76,10 @@ export const router = createBrowserRouter([
 			{
 				path: '/forgotpassword',
 				lazy: () => import('./pages/ForgotPasswordPage'),
+			},
+			{
+				path: '/resetpassword',
+				lazy: () => import('./pages/ResetPasswordPage'),
 			},
 			{
 				path: '*',

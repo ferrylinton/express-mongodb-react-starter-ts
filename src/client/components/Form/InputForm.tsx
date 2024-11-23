@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { InputHTMLAttributes } from 'react';
 import { useIntl } from 'react-intl';
+import styles from './InputForm.module.css';
 
 type InputFormProps = {
 	name: string;
@@ -11,7 +12,7 @@ export const InputForm = ({ name, validationError, ...otherProps }: InputFormPro
 	const intl = useIntl();
 
 	return (
-		<div className={clsx('form-group', validationError?.[name] && 'error')}>
+		<div className={styles['form-group']}>
 			<input
 				name={name}
 				placeholder={intl.formatMessage({ id: name })}
@@ -19,11 +20,7 @@ export const InputForm = ({ name, validationError, ...otherProps }: InputFormPro
 				{...otherProps}
 			/>
 			<label>{intl.formatMessage({ id: name })}</label>
-			{validationError?.[name] && (
-				<div className="validation-error">
-					{intl.formatMessage({ id: validationError[name] })}
-				</div>
-			)}
+			{validationError?.[name] && <p>{intl.formatMessage({ id: validationError[name] })}</p>}
 		</div>
 	);
 };

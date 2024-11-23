@@ -6,6 +6,8 @@ import { useConfirmStore } from '../../hooks/confirm-store';
 import { CheckIcon } from '../../icons/CheckIcon';
 import EyeIcon from '../../icons/EyeIcon';
 import { axiosInstance } from '../../utils/axios';
+import styles from './Todo.module.css';
+import { Button } from '../Button/Button';
 
 type Props = {
 	index: number;
@@ -42,7 +44,7 @@ export const TodoItem = ({ index, todo }: Props) => {
 
 	return (
 		<>
-			<tr className={clsx(todo.done && 'task-done')}>
+			<tr className={clsx(todo.done && styles['task-done'])}>
 				<td>{index + 1} </td>
 				<td>
 					<span>{todo.task}</span>
@@ -51,13 +53,17 @@ export const TodoItem = ({ index, todo }: Props) => {
 					</em>
 				</td>
 				<td>
-					<div className="action">
-						<button className="btn btn-primary" onClick={onClickUpdate}>
+					<div className="flex gap-1 px-1">
+						<Button variant="primary" size="small" onClick={onClickUpdate}>
 							<CheckIcon />
-						</button>
-						<Link to={'/detail/' + todo.id} className="btn btn-secondary">
+						</Button>
+						<Button
+							variant="secondary"
+							size="small"
+							onClick={() => navigate('/todo/detail/' + todo.id)}
+						>
 							<EyeIcon />
-						</Link>
+						</Button>
 					</div>
 				</td>
 			</tr>

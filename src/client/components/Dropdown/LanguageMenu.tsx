@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { EnglishIcon } from '../../icons/EnglishIcon';
 import { IndonesiaIcon } from '../../icons/IndonesiaIcon';
-import { useAppContext } from '../../providers/app-provider';
+import { useAppContext } from '../../providers/AppProvider';
+import styles from './Dropdown.module.css';
 
 export const LanguageMenu = () => {
 	const { locale, setLocale } = useAppContext();
@@ -14,13 +15,17 @@ export const LanguageMenu = () => {
 	return (
 		<DropdownMenu.Root open={open} onOpenChange={() => setOpen(!open)}>
 			<DropdownMenu.Trigger asChild>
-				<button className="dropdown-menu-trigger" aria-label="Customise options">
+				<button className={styles['dropdown-menu-trigger']} aria-label="Customise options">
 					{locale === 'id' ? <IndonesiaIcon /> : <EnglishIcon />}
 					<span className={clsx(open ? 'triangle-up' : 'triangle-down')}></span>
 				</button>
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
-				<DropdownMenu.Content className="dropdown-menu-content" sideOffset={5} align="end">
+				<DropdownMenu.Content
+					className={styles['dropdown-menu-content']}
+					sideOffset={5}
+					align="end"
+				>
 					<DropdownMenu.RadioGroup
 						value={locale}
 						onValueChange={(value: string) => setLocale(value)}

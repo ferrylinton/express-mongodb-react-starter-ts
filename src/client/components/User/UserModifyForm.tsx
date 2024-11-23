@@ -4,11 +4,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { UpdateUserSchema } from '../../../validations/user-validation';
 import { getErrorsObject } from '../../../validations/validation-util';
-import { useToastContext } from '../../providers/toast-provider';
+import { useToastContext } from '../../providers/ToastProvider';
 import { axiosInstance } from '../../utils/axios';
 import { Button } from '../Button/Button';
 import { InputForm } from '../Form/InputForm';
 import { SelectRole } from '../Select/SelectRole';
+import { Checkbox } from '../Form/Checkbox';
 
 type UserFormProps = {
 	response?: AxiosResponse<Omit<User, 'password'>>;
@@ -37,14 +38,12 @@ export const UserModifyForm = ({ response }: UserFormProps) => {
 
 		if (validation.success) {
 			try {
-				console.log(validation.data);
 				const arg = validation.data.username;
 				await axiosInstance.put(`/api/users/${response?.data.id}`, validation.data);
 				toast(intl.formatMessage({ id: 'dataIsSaved' }, { arg }));
 				form.reset();
 				navigate('/user', { replace: true });
 			} catch (error: any) {
-				console.log(error);
 				if (error.response?.data) {
 					setErrorMessage(intl.formatMessage({ id: error.response.data.message }));
 				} else {
@@ -85,6 +84,13 @@ export const UserModifyForm = ({ response }: UserFormProps) => {
 					/>
 
 					<SelectRole defaultValue={response?.data?.role} />
+
+					<Checkbox
+						name="locked"
+						label={intl.formatMessage({ id: 'locked' })}
+						checked={response?.data.locked || false}
+						validationError={validationError}
+					/>
 
 					<div className="form-buttons">
 						<Button

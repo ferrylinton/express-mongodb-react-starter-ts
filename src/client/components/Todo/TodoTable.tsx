@@ -1,28 +1,33 @@
 import { AxiosResponse } from 'axios';
-import { TodoItem } from './TodoItem';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../Button/Button';
+import { Card } from '../Card/Card';
+import styles from './Todo.module.css';
+import { TodoItem } from './TodoItem';
 
 export type LoaderData = {
 	response: AxiosResponse<Todo[]>;
 };
 
 export const TodoTable = ({ response }: LoaderData) => {
+	const navigate = useNavigate();
+
 	const todoes = response.data as Todo[];
 
 	const total = todoes.length;
 
 	return (
-		<>
-			<div className="todo-list-toolbar">
+		<Card title="Todo">
+			<div className={styles['todo-list-toolbar']}>
 				<div className="total">
 					<FormattedMessage id="total" values={{ total }} />
 				</div>
-				<Link to={'/todo/create'} className="btn btn-primary">
-					<FormattedMessage id="newTask" />
-				</Link>
+				<Button minWidth={100} variant="primary" onClick={() => navigate('/todo/create')}>
+					<FormattedMessage id="create" />
+				</Button>
 			</div>
-			<div className="todo-list">
+			<div className={styles['todo-list']}>
 				<table>
 					<tbody>
 						{todoes.map((todo, index) => {
@@ -31,6 +36,6 @@ export const TodoTable = ({ response }: LoaderData) => {
 					</tbody>
 				</table>
 			</div>
-		</>
+		</Card>
 	);
 };

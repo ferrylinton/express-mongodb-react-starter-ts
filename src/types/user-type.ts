@@ -25,6 +25,7 @@ type UpdateUser = {
 	email: string;
 	username: string;
 	role: Role;
+	locked: boolean;
 	updatedBy: string;
 	updatedAt: Date;
 };

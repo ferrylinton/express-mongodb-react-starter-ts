@@ -1,14 +1,24 @@
 .data-detail {
 	width: 100%;
+	background-color: var(--background-100);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	border: solid 1px var(--background-90);
 
 	& table {
 		width: 100%;
+
+		& tr:not(:last-child) {
+			& th,
+			& td {
+				border-bottom: solid 1px var(--background-90);
+			}
+		}
 
 		& th,
 		& td {
 			font-size: 0.9rem;
 			padding: 0.5rem;
-			border: solid 1px var(--background-90);
 		}
 
 		& th {

@@ -1,18 +1,17 @@
-/* reset */
-button {
-	all: unset;
+.sidebar {
+	--text: var(--background-90);
 }
 
 .sidebar {
-	min-width: 240px;
-	width: 240px;
+	flex: none;
+	box-sizing: border-box;
+	width: var(--sidebar-width);
 	overflow: auto;
 	position: fixed;
-	z-index: 200;
+	z-index: 600;
 	top: 0;
 	bottom: 0;
-	padding-top: 50px;
-	left: -100px;
+	transform: translateX(-100%);
 	transition-property: transform, opacity, visibility;
 	transition-duration: 0.3s;
 	transition-timing-function: ease-in-out;
@@ -22,7 +21,7 @@ button {
 	display: flex;
 	flex-direction: column;
 	color: var(--text);
-	background-color: var(--background-95);
+	background-color: var(--background-20);
 	border-right: solid 1px var(--background-90);
 
 	& .btn {
@@ -30,10 +29,20 @@ button {
 	}
 }
 
-.showSidebar .sidebar {
+.sidebar[data-show='true'] {
 	visibility: visible;
 	opacity: 1;
-	transform: translateX(100px) translateY(0);
+	transform: translateX(0);
+}
+
+.sidebar-top {
+	display: flex;
+	height: 50px;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: solid 1px var(--background-40);
+	padding: 0 1rem;
 }
 
 .sidebar-overlay {
@@ -48,16 +57,16 @@ button {
 	z-index: 100;
 }
 
-.showSidebar .sidebar-overlay {
+.sidebar-overlay[data-show='true'] {
 	display: block;
 }
 
 .sidebar-menu {
 	width: 100%;
-	margin: 2rem 0;
+	padding: 0.5rem;
 
 	& a,
-	& .collapsible-trigger {
+	& button {
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
@@ -68,18 +77,25 @@ button {
 		font-weight: normal;
 		cursor: pointer;
 		color: var(--text);
-		border-bottom: solid 1px var(--background-90);
+		border-radius: 0.2rem;
 
 		&:hover {
-			background-color: var(--background-85);
+			background-color: var(--background-30);
 		}
 
 		& .triangle-down {
-			border-top: 6px solid var(--background-60);
+			border-top: 6px solid var(--background-90);
 		}
 
 		& .triangle-up {
-			border-bottom: 6px solid var(--background-60);
+			border-bottom: 6px solid var(--background-90);
+		}
+	}
+
+	& button {
+		margin: 0.2rem 0;
+		&[data-state='open'] {
+			background-color: var(--background-30);
 		}
 	}
 }
@@ -89,9 +105,6 @@ button {
 }
 
 .collapsible-content {
-	background-color: var(--background-90);
-	border-bottom: solid 1px var(--background-85);
-
 	& a {
 		border-bottom: none;
 		padding-left: 2rem;
@@ -99,15 +112,22 @@ button {
 }
 
 @media (min-width: 768px) {
-	.showSidebar .sidebar,
 	.sidebar {
-		transform: translateX(0) translateY(0);
-		position: static;
+		transform: translateX(0);
+		position: relative;
 		visibility: visible;
 		opacity: 1;
 	}
 
-	.showSidebar .sidebar-overlay {
+	.sidebar-top {
+		justify-content: center;
+
+		button {
+			display: none;
+		}
+	}
+
+	.sidebar-overlay[data-show='true'] {
 		display: none;
 	}
 }

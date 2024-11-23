@@ -36,5 +36,5 @@ export function ErrorBoundary() {
 	return <SimpleErrorBoundary />;
 }
 
-Component.displayName = 'HomeRoute';
-ErrorBoundary.displayName = 'HomeErrorBoundary';
+Component.displayName = 'TodoRoute';
+ErrorBoundary.displayName = 'TodoErrorBoundary';

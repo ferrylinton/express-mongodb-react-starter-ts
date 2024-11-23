@@ -154,7 +154,7 @@ export const changePassword = async (input: ChangePassword) => {
 	return await userCollection.updateOne({ username: input.username }, { $set: input });
 };
 
-export const update = async ({ id, ...input }: UpdateUser) => {
+export const update = async ({ id, ...input }: Partial<UpdateUser>) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
 	return await userCollection.updateOne({ _id: new ObjectId(id) }, { $set: input });
 };

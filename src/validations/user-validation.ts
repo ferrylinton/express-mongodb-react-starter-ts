@@ -1,8 +1,14 @@
-import { object, string, z } from 'zod';
+import { boolean, literal, object, string, z } from 'zod';
 
 const RoleTypeSchema = z.union([z.literal('ADMIN'), z.literal('USER')], {
 	message: 'invalid.role',
 });
+
+const LockedSchema = z
+	.union([z.literal('true'), z.literal('false')], {
+		message: 'invalid.locked',
+	})
+	.transform(value => value === 'true');
 
 export const CreateUserSchema = object({
 	username: string().min(3, 'invalid.username').max(20, 'invalid.username'),
@@ -28,4 +34,5 @@ export const UpdateUserSchema = object({
 	username: string().min(3, 'invalid.username').max(20, 'invalid.username'),
 	email: string().max(50, 'invalid.email').email('invalid.email'),
 	role: RoleTypeSchema,
-});
+	locked: LockedSchema,
+}).partial();

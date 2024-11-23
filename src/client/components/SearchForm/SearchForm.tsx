@@ -2,7 +2,6 @@ import { useIntl } from 'react-intl';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ReloadIcon } from '../../icons/ReloadIcon';
 import { SearchIcon } from '../../icons/SearchIcon';
-import { Button } from '../Button/Button';
 import styles from './SearchForm.module.css';
 
 type SearchFormProps = {
@@ -14,7 +13,7 @@ export const SearchForm = ({ action }: SearchFormProps) => {
 
 	const navigate = useNavigate();
 
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -33,23 +32,27 @@ export const SearchForm = ({ action }: SearchFormProps) => {
 	};
 
 	return (
-		<div className={styles['search-form']}>
-			<form method="get" autoComplete="off" name="search-form" onSubmit={handleSubmit}>
-				<input
-					type="text"
-					name="keyword"
-					autoComplete="off"
-					maxLength={40}
-					defaultValue={searchParams.get('keyword') || undefined}
-					placeholder={intl.formatMessage({ id: 'keyword' })}
-				/>
-				<button type="submit">
-					<SearchIcon />
-				</button>
-				<button type="reset" onClick={() => handleReset()}>
-					<ReloadIcon />
-				</button>
-			</form>
-		</div>
+		<form
+			method="get"
+			autoComplete="off"
+			name="search-form"
+			onSubmit={handleSubmit}
+			className={styles['search-form']}
+		>
+			<input
+				type="text"
+				name="keyword"
+				autoComplete="off"
+				maxLength={30}
+				defaultValue={searchParams.get('keyword') || undefined}
+				placeholder={intl.formatMessage({ id: 'keyword' })}
+			/>
+			<button type="submit">
+				<SearchIcon />
+			</button>
+			<button type="reset" onClick={() => handleReset()}>
+				<ReloadIcon />
+			</button>
+		</form>
 	);
 };

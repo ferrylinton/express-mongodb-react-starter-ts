@@ -33,3 +33,7 @@ type PaginationProps = {
 	pagination: Pagination;
 	goToPage: (page: number) => void;
 };
+
+type KeyValue = {
+	[key: string]: string;
+};

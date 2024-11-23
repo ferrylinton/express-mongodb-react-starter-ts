@@ -1,0 +1,32 @@
+.not-found-page {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	gap: 1rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	& h1 {
+		font-size: 8rem;
+		font-weight: bold;
+		line-height: 1;
+		color: var(--background-50);
+	}
+
+	& h2 {
+		font-size: 1.5rem;
+		font-weight: lighter;
+		line-height: 1;
+		text-transform: uppercase;
+		color: var(--background-50);
+	}
+
+	& a {
+		font-size: 1.2rem;
+		font-weight: lighter;
+		line-height: 1;
+		text-transform: uppercase;
+		color: var(--primary);
+	}
+}

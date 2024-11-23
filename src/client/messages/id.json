@@ -67,5 +67,12 @@
 	"changePassword": "Ubah Kata Sandi",
 	"update": "Update",
 	"welcome.hi": "Horas, <strong>{username}</strong>",
-	"welcome.message": "Selamat datang di <strong>Simple Admin</strong>"
+	"welcome.message": "Selamat datang di <strong>Simple Admin</strong>",
+	"emailNotFound": "Email tidak ditemukan",
+	"token": "Token",
+	"invalid.token": "Token tidak valid",
+	"emailSent": "Email sudah dikirim",
+	"profile": "Profile",
+	"user": "Pengguna",
+	"list": "Daftar"
 }

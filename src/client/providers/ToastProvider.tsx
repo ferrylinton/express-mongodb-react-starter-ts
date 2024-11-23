@@ -1,5 +1,7 @@
 import * as Toast from '@radix-ui/react-toast';
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
+import styles from './ToastProvider.module.css';
+import CloseIcon from '../icons/CloseIcon';
 
 export const ToastContext = createContext<ToastContextProps>({
 	toast: () => Function(),
@@ -22,15 +24,15 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
 		<ToastContext.Provider value={value}>
 			<Toast.Provider duration={5000}>
 				{children}
-				<Toast.Root className="ToastRoot" open={open} onOpenChange={setOpen}>
+				<Toast.Root className={styles.ToastRoot} open={open} onOpenChange={setOpen}>
 					<Toast.Description asChild>
 						<p>{message}</p>
 					</Toast.Description>
 					<Toast.Close aria-label="Close">
-						<span aria-hidden>×</span>
+						<CloseIcon />
 					</Toast.Close>
 				</Toast.Root>
-				<Toast.Viewport className="ToastViewport" />
+				<Toast.Viewport className={styles.ToastViewport} />
 			</Toast.Provider>
 		</ToastContext.Provider>
 	);

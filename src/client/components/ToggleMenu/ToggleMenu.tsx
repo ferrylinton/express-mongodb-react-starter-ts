@@ -1,9 +1,20 @@
-import { toggleSidebar } from '../../utils/app-util';
-import './ToggleMenu.css';
+import clsx from 'clsx';
+import { useAppContext } from '../../providers/AppProvider';
+import styles from './ToggleMenu.module.css';
 
-export const ToggleMenu = () => {
+type ToggleMenuProps = {
+	className?: string;
+};
+
+export const ToggleMenu = ({ className }: ToggleMenuProps) => {
+	const { toggleSidebar, getSidebarState } = useAppContext();
+
 	return (
-		<button className="toggle-menu" onClick={() => toggleSidebar()}>
+		<button
+			className={clsx(className, styles['toggle-menu'])}
+			data-show={getSidebarState()}
+			onClick={() => toggleSidebar()}
+		>
 			<span></span>
 			<span></span>
 			<span></span>

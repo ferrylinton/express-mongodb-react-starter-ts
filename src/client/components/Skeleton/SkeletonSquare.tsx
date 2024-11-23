@@ -5,6 +5,6 @@ type SkeletonSquareProps = {
 	height?: number | string;
 };
 
-export const SkeletonSquare = ({ height = 20, width = 60 }: SkeletonSquareProps) => {
+export const SkeletonSquare = ({ height = 15, width = 60 }: SkeletonSquareProps) => {
 	return <div className={styles['skeleton-square']} style={{ width, height }}></div>;
 };

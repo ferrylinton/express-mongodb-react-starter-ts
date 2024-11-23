@@ -38,7 +38,8 @@ axiosInstance.interceptors.response.use(
 		return response;
 	},
 	function (error) {
-		if (error.status === 401) {
+		console.log(window.location.href);
+		if (error.status === 401 && !window.location.href.includes('/login')) {
 			Cookies.remove(LOGGED_USER_COOKIE);
 			window.location.replace('/login');
 		}

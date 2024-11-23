@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { CreateUserSchema } from '../../../validations/user-validation';
 import { getErrorsObject } from '../../../validations/validation-util';
-import { useToastContext } from '../../providers/toast-provider';
+import { useToastContext } from '../../providers/ToastProvider';
 import { axiosInstance } from '../../utils/axios';
 import { Button } from '../Button/Button';
 import { InputForm } from '../Form/InputForm';
@@ -30,7 +30,6 @@ export const UserCreateForm = ({ response }: UserFormProps) => {
 		const form = event.currentTarget;
 		const formData = new FormData(form);
 		const payload = Object.fromEntries(formData.entries());
-		console.log(payload);
 		const validation = CreateUserSchema.safeParse(payload);
 
 		if (validation.success) {

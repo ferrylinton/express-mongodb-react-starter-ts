@@ -67,5 +67,12 @@
 	"changePassword": "Change Password",
 	"update": "Update",
 	"welcome.hi": "Hi, <strong>{username}</strong>",
-	"welcome.message": "Welcome to <strong>Simple Admin</strong>"
+	"welcome.message": "Welcome to <strong>Simple Admin</strong>",
+	"emailNotFound": "Email not found",
+	"token": "Token",
+	"invalid.token": "Invalid token",
+	"emailSent": "Email sent",
+	"profile": "Profil",
+	"user": "User",
+	"list": "List"
 }

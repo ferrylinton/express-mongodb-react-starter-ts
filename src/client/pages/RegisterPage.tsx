@@ -5,7 +5,7 @@ import { RegisterSchema } from '../../validations/authenticate-schema';
 import { getErrorsObject } from '../../validations/validation-util';
 import { InputForm } from '../components/Form/InputForm';
 import { axiosInstance } from '../utils/axios';
-import { useToastContext } from '../providers/toast-provider';
+import { useToastContext } from '../providers/ToastProvider';
 import { Button } from '../components/Button/Button';
 
 export const Component = () => {

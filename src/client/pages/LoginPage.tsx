@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthenticateSchema } from '../../validations/authenticate-schema';
 import { getErrorsObject } from '../../validations/validation-util';
-import { InputForm } from '../components/Form/InputForm';
-import { useAppContext } from '../providers/app-provider';
-import { axiosInstance } from '../utils/axios';
 import { Button } from '../components/Button/Button';
+import { InputForm } from '../components/Form/InputForm';
+import { useAppContext } from '../providers/AppProvider';
+import { axiosInstance } from '../utils/axios';
 
 export const Component = () => {
 	const intl = useIntl();
@@ -15,13 +15,7 @@ export const Component = () => {
 
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-	const navigate = useNavigate();
-
-	const location = useLocation();
-
-	const from = location.state?.from?.pathname || '/';
-
-	const { setLoggedUser } = useAppContext();
+	const { login } = useAppContext();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -35,8 +29,7 @@ export const Component = () => {
 		if (validation.success) {
 			try {
 				const { data } = await axiosInstance.post<LoggedUser>(`/api/token`, payload);
-				setLoggedUser(data);
-				navigate(from, { replace: true });
+				login(data);
 			} catch (error: any) {
 				if (error.response.data) {
 					setErrorMessage(intl.formatMessage({ id: error.response.data.message }));
@@ -57,7 +50,7 @@ export const Component = () => {
 					method="post"
 					noValidate
 					autoComplete="off"
-					className="form"
+					className="flex flex-col gap-8"
 				>
 					{errorMessage && <p>{errorMessage}</p>}
 
@@ -79,7 +72,7 @@ export const Component = () => {
 						<FormattedMessage id="login" />
 					</Button>
 
-					<div className="links">
+					<div className="flex justify-between">
 						<Link to="/register">
 							<FormattedMessage id="register" />
 						</Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useAppContext } from '../../providers/app-provider';
+import { useAppContext } from '../../providers/AppProvider';
 import styles from './WelcomeMessage.module.css';
 
 export const WelcomeMessage = () => {

@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../assets/css/DataList.module.css';
 import { useConfirmStore } from '../../hooks/confirm-store';
-import { useToastContext } from '../../providers/toast-provider';
+import { useToastContext } from '../../providers/ToastProvider';
 import { axiosInstance } from '../../utils/axios';
 import { Pager } from '../Pager/Pager';
 import { SearchForm } from '../SearchForm/SearchForm';
@@ -44,6 +44,7 @@ export const UserTable = ({ response }: UserTableProps) => {
 			hideConfirm();
 			navigate('/user', { replace: true });
 		} catch (error: any) {
+			toast(error.message);
 			console.log(error);
 		}
 	};

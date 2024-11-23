@@ -1,36 +1,3 @@
-.form {
-	width: 100%;
-	display: flex;
-	gap: 2rem;
-	flex-direction: column;
-}
-
-.form p {
-	text-align: center;
-	font-size: 0.9rem;
-	color: var(--danger);
-	margin-bottom: 1rem;
-}
-
-.form .links {
-	display: flex;
-	justify-content: space-between;
-}
-
-.form .links:has(> :last-child:nth-child(1)) {
-	justify-content: center;
-}
-
-.form a {
-	text-transform: uppercase;
-	font-size: 0.9rem;
-	color: var(--background-40);
-
-	&:hover {
-		color: var(--primary);
-	}
-}
-
 .form-group {
 	--pad: 0.75rem;
 	position: relative;
@@ -64,17 +31,24 @@
 	line-height: 1;
 	padding: 4px 4px 4px 12px;
 	border-bottom: solid 1px var(--background-80);
+
+	&:not([readonly]):focus {
+		outline: none;
+		box-shadow: none;
+		border-bottom: solid 1px var(--primary);
+	}
 }
 
-.form-group input:focus {
-	outline: none;
-	box-shadow: none;
-	border-bottom: solid 2px var(--primary);
+.form-group input:read-only {
+	background-color: var(--background-95);
+	color: var(--background-50);
+	cursor: not-allowed;
 }
 
-.form-group.error .validation-error {
+.form-group p {
 	color: var(--danger);
 	font-size: 0.8rem;
+	text-align: left;
 }
 
 .form-group + .btn {

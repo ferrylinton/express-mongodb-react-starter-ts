@@ -1,9 +1,13 @@
 import { AxiosError, isAxiosError } from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Link, useNavigate, useRouteError } from 'react-router-dom';
+import { Link, useRouteError } from 'react-router-dom';
+import { ForgotPasswordSchema } from '../../validations/authenticate-schema';
+import { getErrorsObject } from '../../validations/validation-util';
+import { Button } from '../components/Button/Button';
+import { InputForm } from '../components/Form/InputForm';
 import { useAlertStore } from '../hooks/alert-store';
-import { useAppContext } from '../providers/app-provider';
+import { useToastContext } from '../providers/ToastProvider';
 import { axiosInstance } from '../utils/axios';
 
 type ErrorResponse = {
@@ -15,9 +19,11 @@ type ErrorResponse = {
 export const Component = () => {
 	const intl = useIntl();
 
-	const navigate = useNavigate();
+	const { toast } = useToastContext();
 
-	const { setLoggedUser } = useAppContext();
+	const [validationError, setValidationError] = useState<ValidationError | null>(null);
+
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	const { alert } = useAlertStore();
 
@@ -43,12 +49,26 @@ export const Component = () => {
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		const formData = new FormData(event.currentTarget);
+		const form = event.currentTarget;
+		const formData = new FormData(form);
 		const payload = Object.fromEntries(formData.entries());
-		const { data } = await axiosInstance.post<LoggedUser>(`/api/token`, payload);
+		const validation = ForgotPasswordSchema.safeParse(payload);
 
-		setLoggedUser(data);
-		navigate('/', { replace: true });
+		if (validation.success) {
+			try {
+				await axiosInstance.post<KeyValue>(`/api/forgotpassword`, validation.data);
+				toast(intl.formatMessage({ id: 'emailSent' }));
+				form.reset();
+			} catch (error: any) {
+				if (error.response?.data) {
+					setErrorMessage(intl.formatMessage({ id: error.response.data.message }));
+				} else {
+					setErrorMessage(error.message);
+				}
+			}
+		} else {
+			setValidationError(getErrorsObject(validation.error));
+		}
 	};
 
 	useEffect(() => {
@@ -66,30 +86,21 @@ export const Component = () => {
 					noValidate
 					autoComplete="off"
 					className="form"
-					style={{ gap: '1.2rem' }}
 				>
-					<div className="form-group">
-						<input
-							type="text"
-							maxLength={30}
-							placeholder={intl.formatMessage({ id: 'email' })}
-							name="email"
-							autoComplete="off"
-							autoFocus
-						/>
-						<label>
-							<FormattedMessage id="email" />
-						</label>
-					</div>
+					{errorMessage && <p>{errorMessage}</p>}
 
-					<button
-						type="submit"
-						className="btn btn-primary"
-						style={{ display: 'block', fontSize: '1.2rem' }}
-					>
+					<InputForm
+						type="text"
+						maxLength={50}
+						name="email"
+						validationError={validationError}
+					/>
+
+					<Button type="submit" variant="primary" size="big">
 						<FormattedMessage id="forgotPassword" />
-					</button>
-					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+					</Button>
+
+					<div className="links">
 						<Link to="/register">
 							<FormattedMessage id="register" />
 						</Link>

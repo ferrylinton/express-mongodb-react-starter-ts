@@ -1,8 +1,3 @@
-/* reset */
-button {
-	all: unset;
-}
-
 .ToastViewport {
 	--viewport-padding: 25px;
 	position: fixed;
@@ -42,6 +37,11 @@ button {
 
 		&:hover {
 			color: var(--primary);
+		}
+
+		& svg {
+			width: 12px;
+			height: 12px;
 		}
 	}
 }

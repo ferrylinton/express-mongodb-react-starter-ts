@@ -1,8 +1,11 @@
 :root {
+	--sidebar-width: 250px;
+	--navbar-height: 50px;
 	--body-font: 'Poppins', sans-serif;
-	--background: hsl(0, 0%, 100%);
-	--background-h: 0;
-	--background-s: 0%;
+
+	--background: hsl(210, 10%, 100%);
+	--background-h: 210;
+	--background-s: 10%;
 	--background-l: 100%;
 
 	--background-100: hsl(var(--background-h), var(--background-s), 100%);
@@ -14,6 +17,9 @@
 	--background-60: hsl(var(--background-h), var(--background-s), 60%);
 	--background-50: hsl(var(--background-h), var(--background-s), 50%);
 	--background-40: hsl(var(--background-h), var(--background-s), 40%);
+	--background-30: hsl(var(--background-h), var(--background-s), 30%);
+	--background-20: hsl(var(--background-h), var(--background-s), 20%);
+	--background-10: hsl(var(--background-h), var(--background-s), 10%);
 
 	--text: hsl(0, 0%, 14%);
 	--text-h: 0;
@@ -64,6 +70,9 @@
 	--background-60: hsl(var(--background-h), var(--background-s), 50%);
 	--background-50: hsl(var(--background-h), var(--background-s), 60%);
 	--background-40: hsl(var(--background-h), var(--background-s), 70%);
+	--background-30: hsl(var(--background-h), var(--background-s), 80%);
+	--background-20: hsl(var(--background-h), var(--background-s), 90%);
+	--background-10: hsl(var(--background-h), var(--background-s), 100%);
 
 	--text: hsl(0, 0%, 100%);
 	--text-h: 0;

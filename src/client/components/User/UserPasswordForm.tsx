@@ -1,22 +1,20 @@
 import { AxiosResponse } from 'axios';
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useNavigate } from 'react-router-dom';
 import { ChangePasswordSchema } from '../../../validations/user-validation';
 import { getErrorsObject } from '../../../validations/validation-util';
-import { useToastContext } from '../../providers/toast-provider';
+import { useToastContext } from '../../providers/ToastProvider';
 import { axiosInstance } from '../../utils/axios';
+import { getLoggedUser } from '../../utils/cookie-util';
 import { Button } from '../Button/Button';
 import { InputForm } from '../Form/InputForm';
-import { SelectRole } from '../Select/SelectRole';
-import { useNavigate } from 'react-router-dom';
 
 type UserFormProps = {
-	response: AxiosResponse<Omit<User, 'password'>>;
+	response?: AxiosResponse<Omit<User, 'password'>>;
 };
 
 export const UserPasswordForm = ({ response }: UserFormProps) => {
-	const user = response.data;
-
 	const intl = useIntl();
 
 	const navigate = useNavigate();
@@ -40,12 +38,14 @@ export const UserPasswordForm = ({ response }: UserFormProps) => {
 		if (validation.success) {
 			try {
 				const arg = validation.data.username;
-				await axiosInstance.post(`/api/users`, validation.data);
+				await axiosInstance.post(`/api/users/password`, validation.data);
 				toast(intl.formatMessage({ id: 'dataIsSaved' }, { arg }));
 				form.reset();
-				navigate('/user', { replace: true });
+
+				if (response) {
+					navigate('/user', { replace: true });
+				}
 			} catch (error: any) {
-				console.log(error);
 				if (error.response?.data) {
 					setErrorMessage(intl.formatMessage({ id: error.response.data.message }));
 				} else {
@@ -73,7 +73,7 @@ export const UserPasswordForm = ({ response }: UserFormProps) => {
 						type="text"
 						maxLength={20}
 						name="username"
-						value={user.username}
+						value={response?.data.username || getLoggedUser()?.username}
 						readOnly
 					/>
 
@@ -91,18 +91,26 @@ export const UserPasswordForm = ({ response }: UserFormProps) => {
 						validationError={validationError}
 					/>
 
-					<div className="form-buttons">
-						<Button
-							type="button"
-							size="big"
-							onClick={() => navigate('/user', { replace: true })}
-						>
-							<FormattedMessage id="back" />
-						</Button>
+					{!response && (
 						<Button type="submit" variant="primary" size="big">
 							<FormattedMessage id="update" />
 						</Button>
-					</div>
+					)}
+					{response && (
+						<div className="form-buttons">
+							<Button
+								type="button"
+								size="big"
+								onClick={() => navigate('/user', { replace: true })}
+							>
+								<FormattedMessage id="back" />
+							</Button>
+
+							<Button type="submit" variant="primary" size="big">
+								<FormattedMessage id="update" />
+							</Button>
+						</div>
+					)}
 				</form>
 			</div>
 		</>

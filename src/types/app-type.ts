@@ -1,10 +1,13 @@
 type Theme = 'light' | 'dark';
 
 type AppContextProps = {
+	getSidebarState: () => boolean;
+	toggleSidebar: () => void;
 	locale: string;
 	setLocale: (locale: string) => void;
 	loggedUser: LoggedUser | null;
-	setLoggedUser: (loggedUser: LoggedUser | null) => void;
+	login: (loggedUser: LoggedUser) => void;
+	logout: () => void;
 };
 
 type ToastContextProps = {
