@@ -29,9 +29,13 @@
 	column-gap: 15px;
 	align-items: start;
 
+	&[data-state='true'] {
+		color: var(--danger);
+	}
+
 	& button {
 		font-size: 1.8rem;
-		color: var(--background-60);
+		color: var(--base-60);
 		line-height: 1;
 		font-weight: lighter;
 

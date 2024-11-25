@@ -2,7 +2,7 @@
 	width: 100%;
 	display: flex;
 	flex-wrap: nowrap;
-	border: solid 1px var(--background-90);
+	border: solid 1px var(--base-75);
 	border-radius: 0.3rem;
 	overflow: hidden;
 
@@ -24,7 +24,7 @@
 	& input {
 		width: 100%;
 		display: inline-block;
-		background-color: var(--background);
+		background-color: var(--base);
 		padding: 0 1rem;
 	}
 
@@ -33,13 +33,13 @@
 		justify-content: center;
 		align-items: center;
 		width: 50px;
-		border-left: solid 1px var(--background-90);
-		background-color: var(--background-95);
-		color: var(--background-60);
+		border-left: solid 1px var(--base-75);
+		background-color: var(--base-90);
+		color: var(--base-60);
 
 		&:hover {
-			background-color: var(--background-90);
-			color: var(--background-50);
+			background-color: var(--base-90);
+			color: var(--base-50);
 		}
 	}
 }

@@ -100,7 +100,7 @@ export const Component = () => {
 						<FormattedMessage id="forgotPassword" />
 					</Button>
 
-					<div className="links">
+					<div className="flex justify-between uppercase">
 						<Link to="/register">
 							<FormattedMessage id="register" />
 						</Link>

@@ -11,7 +11,7 @@
 		font-size: 8rem;
 		font-weight: bold;
 		line-height: 1;
-		color: var(--background-50);
+		color: var(--base-50);
 	}
 
 	& h2 {
@@ -19,7 +19,7 @@
 		font-weight: lighter;
 		line-height: 1;
 		text-transform: uppercase;
-		color: var(--background-50);
+		color: var(--base-50);
 	}
 
 	& a {

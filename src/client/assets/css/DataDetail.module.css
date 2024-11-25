@@ -1,9 +1,9 @@
 .data-detail {
 	width: 100%;
-	background-color: var(--background-100);
+	background-color: var(--base);
 	border-radius: 0.5rem;
 	overflow: hidden;
-	border: solid 1px var(--background-90);
+	border: solid 1px var(--base-90);
 
 	& table {
 		width: 100%;
@@ -11,7 +11,7 @@
 		& tr:not(:last-child) {
 			& th,
 			& td {
-				border-bottom: solid 1px var(--background-90);
+				border-bottom: solid 1px var(--base-80);
 			}
 		}
 
@@ -23,7 +23,7 @@
 
 		& th {
 			text-align: right;
-			background-color: var(--background-95);
+			background-color: var(--base-90);
 		}
 	}
 }

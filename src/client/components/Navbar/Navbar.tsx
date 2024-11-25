@@ -20,7 +20,7 @@ export const Navbar = () => {
 						<FormattedMessage id="home" />
 					</Link>
 				</div>
-				<div className="flex">
+				<div className="flex gap-1 sm:gap-3">
 					<ThemeSwitcher />
 					<LanguageMenu />
 					{loggedUser && <ProfileMenu />}

@@ -1,7 +1,7 @@
 .skeleton-line,
 .skeleton-square {
-	--skeleton1: var(--background-90);
-	--skeleton2: var(--background-60);
+	--skeleton1: var(--base-90);
+	--skeleton2: var(--base-60);
 }
 
 .skeleton-square {

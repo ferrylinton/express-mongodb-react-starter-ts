@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getLoggedUser } from './cookie-util';
 import Cookies from 'js-cookie';
-import { LOGGED_USER_COOKIE } from './constant';
+import { LOGGED_USER_COOKIE, PREVIOUS_URL } from './constant';
 
 export const axiosInstance = axios.create({
 	baseURL: '/',
@@ -38,11 +38,12 @@ axiosInstance.interceptors.response.use(
 		return response;
 	},
 	function (error) {
-		console.log(window.location.href);
 		if (error.status === 401 && !window.location.href.includes('/login')) {
+			Cookies.set(PREVIOUS_URL, window.location.href);
 			Cookies.remove(LOGGED_USER_COOKIE);
 			window.location.replace('/login');
 		}
+
 		return Promise.reject(error);
 	}
 );

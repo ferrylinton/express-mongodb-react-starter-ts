@@ -7,10 +7,9 @@
 	animation-duration: 400ms;
 	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 	will-change: transform, opacity;
-	background-color: var(--background);
-	border: solid 1px var(--background-70);
-	box-shadow: hsla(var(--background-h), var(--background-s), var(--background-l), 0.5) 0px 0px
-		10px;
+	background-color: var(--base);
+	border: solid 1px var(--base-70);
+	box-shadow: hsla(var(--base-h), var(--base-s), var(--base-l), 0.5) 0px 0px 10px;
 }
 
 .tooltip-content[data-state='delayed-open'][data-side='top'] {
@@ -27,5 +26,5 @@
 }
 
 .tooltip-arrow {
-	fill: var(--background-60);
+	fill: var(--base-60);
 }

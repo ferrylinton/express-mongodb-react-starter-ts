@@ -1,14 +1,18 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
+import { useConfirmStore } from '../../hooks/confirm-store';
 import { useAppContext } from '../../providers/AppProvider';
 import { Button } from '../Button/Button';
+import { ToggleMenu } from '../ToggleMenu/ToggleMenu';
 import { CollapsibleMenuItem } from './CollapsibleMenuItem';
 import styles from './Sidebar.module.css';
-import { ToggleMenu } from '../ToggleMenu/ToggleMenu';
-import clsx from 'clsx';
 
 export const Sidebar = () => {
 	const { loggedUser, logout, toggleSidebar, getSidebarState } = useAppContext();
+
+	const intl = useIntl();
+
+	const { showConfirm, hideConfirm } = useConfirmStore();
 
 	const navigate = useNavigate();
 
@@ -18,13 +22,23 @@ export const Sidebar = () => {
 		navigate(event.currentTarget.pathname);
 	};
 
+	const okHandler = async () => {
+		hideConfirm();
+		logout();
+	};
+
+	const onClickLogout = () => {
+		showConfirm(intl.formatMessage({ id: 'logout' }) + ' ?', okHandler);
+	};
+
 	if (loggedUser) {
 		return (
 			<>
 				<aside className={styles['sidebar']} data-show={getSidebarState()}>
 					<div className={styles['sidebar-top']}>
 						<a className="logo" href="/">
-							Simple Admin
+							<span>Simple</span>
+							<span>Admin</span>
 						</a>
 						<ToggleMenu />
 					</div>
@@ -58,7 +72,7 @@ export const Sidebar = () => {
 							</Link>
 						</CollapsibleMenuItem>
 					</div>
-					<Button variant="primary" size="big" onClick={() => logout()} className="m-2">
+					<Button variant="primary" size="big" onClick={onClickLogout} className="m-2">
 						<FormattedMessage id="logout" />
 					</Button>
 				</aside>

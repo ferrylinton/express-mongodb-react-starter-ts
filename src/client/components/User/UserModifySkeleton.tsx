@@ -7,9 +7,9 @@ export const UserModifySkeleton = () => {
 				<SkeletonSquare width={'100%'} height={35} />
 				<SkeletonSquare width={'100%'} height={35} />
 				<SkeletonSquare width={'100%'} height={35} />
-				<div className="form-buttons">
-					<SkeletonSquare width={'50%'} height={50} />
-					<SkeletonSquare width={'50%'} height={50} />
+				<div className="grid grid-cols-2 gap-1">
+					<SkeletonSquare width={'100%'} height={50} />
+					<SkeletonSquare width={'100%'} height={50} />
 				</div>
 			</div>
 		</div>

@@ -3,6 +3,7 @@ import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../assets/css/DataDetail.module.css';
 import { useConfirmStore } from '../../hooks/confirm-store';
+import { useToastContext } from '../../providers/ToastProvider';
 import { axiosInstance } from '../../utils/axios';
 import { Button } from '../Button/Button';
 import { Card } from '../Card/Card';
@@ -13,6 +14,8 @@ type TodoDetailProps = {
 
 export const TodoDetail = ({ response }: TodoDetailProps) => {
 	const { data: todo } = response;
+
+	const { toast } = useToastContext();
 
 	const { showConfirm, hideConfirm } = useConfirmStore();
 
@@ -27,6 +30,7 @@ export const TodoDetail = ({ response }: TodoDetailProps) => {
 			navigate('/todo', { replace: true });
 		} catch (error: any) {
 			console.log(error);
+			toast(error.message, true);
 		}
 	};
 

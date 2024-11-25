@@ -1,9 +1,10 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { DotFilledIcon } from '@radix-ui/react-icons';
-import clsx from 'clsx';
 import { useState } from 'react';
 import { EnglishIcon } from '../../icons/EnglishIcon';
 import { IndonesiaIcon } from '../../icons/IndonesiaIcon';
+import { TriangleDown } from '../../icons/TriangleDown';
+import { TriangleUp } from '../../icons/TriangleUp';
 import { useAppContext } from '../../providers/AppProvider';
 import styles from './Dropdown.module.css';
 
@@ -17,13 +18,13 @@ export const LanguageMenu = () => {
 			<DropdownMenu.Trigger asChild>
 				<button className={styles['dropdown-menu-trigger']} aria-label="Customise options">
 					{locale === 'id' ? <IndonesiaIcon /> : <EnglishIcon />}
-					<span className={clsx(open ? 'triangle-up' : 'triangle-down')}></span>
+					{open ? <TriangleUp /> : <TriangleDown />}
 				</button>
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
 					className={styles['dropdown-menu-content']}
-					sideOffset={5}
+					sideOffset={3}
 					align="end"
 				>
 					<DropdownMenu.RadioGroup
@@ -45,7 +46,6 @@ export const LanguageMenu = () => {
 							<span>Indonesia</span>
 						</DropdownMenu.RadioItem>
 					</DropdownMenu.RadioGroup>
-					<DropdownMenu.Arrow />
 				</DropdownMenu.Content>
 			</DropdownMenu.Portal>
 		</DropdownMenu.Root>

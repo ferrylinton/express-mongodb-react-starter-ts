@@ -2,6 +2,7 @@ import * as Toast from '@radix-ui/react-toast';
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
 import styles from './ToastProvider.module.css';
 import CloseIcon from '../icons/CloseIcon';
+import clsx from 'clsx';
 
 export const ToastContext = createContext<ToastContextProps>({
 	toast: () => Function(),
@@ -9,9 +10,13 @@ export const ToastContext = createContext<ToastContextProps>({
 
 export const ToastProvider = ({ children }: PropsWithChildren) => {
 	const [open, setOpen] = useState(false);
+
 	const [message, setMessage] = useState('');
 
-	const toast = (message: string) => {
+	const [isError, setIsError] = useState(false);
+
+	const toast = (message: string, isError?: boolean) => {
+		setIsError(isError || false);
 		setMessage(message);
 		setOpen(true);
 	};
@@ -24,7 +29,12 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
 		<ToastContext.Provider value={value}>
 			<Toast.Provider duration={5000}>
 				{children}
-				<Toast.Root className={styles.ToastRoot} open={open} onOpenChange={setOpen}>
+				<Toast.Root
+					className={styles.ToastRoot}
+					data-state={isError}
+					open={open}
+					onOpenChange={setOpen}
+				>
 					<Toast.Description asChild>
 						<p>{message}</p>
 					</Toast.Description>

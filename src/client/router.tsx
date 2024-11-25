@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import ErrorPage from './pages/ErrorPage';
-import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import PublicLayout from './components/Layout/PublicLayout';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 export const router = createBrowserRouter([
 	{

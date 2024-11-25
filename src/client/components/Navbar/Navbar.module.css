@@ -1,16 +1,14 @@
 .navbar {
+	flex: none;
 	width: 100%;
 	height: 50px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 500;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--background-100);
-	border-bottom: solid 1px var(--background-90);
-	padding: 0 0.5rem;
+	background-color: var(--navbar-bg);
+	border-bottom: solid 1px var(--navbar-border);
+	padding: 0 1rem;
+	color: var(--base-60);
 }
 
 .navbar .logged {
@@ -22,22 +20,22 @@
 
 	& a {
 		text-transform: uppercase;
-		color: var(--background-60);
+		color: var(--base-60);
 
 		&:hover {
-			color: var(--background-50);
+			color: var(--base-50);
 		}
 	}
 }
 
 @media (min-width: 768px) {
-	.navbar .logged {
-		padding: 0 1rem 0 calc(var(--sidebar-width) + 1rem);
+	.navbarx .logged {
+		padding: 0 1rem;
 	}
 }
 
 @media (min-width: 1024px) {
-	.navbar .logged {
-		padding: 0 2rem 0 calc(var(--sidebar-width) + 2rem);
+	.navbarx .logged {
+		padding: 0 2rem;
 	}
 }

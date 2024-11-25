@@ -3,23 +3,40 @@
 	--navbar-height: 50px;
 	--body-font: 'Poppins', sans-serif;
 
-	--background: hsl(210, 10%, 100%);
-	--background-h: 210;
-	--background-s: 10%;
-	--background-l: 100%;
+	--base-h: 210;
+	--base-s: 10%;
+	--base: hsl(var(--base-h), var(--base-s), 100%);
 
-	--background-100: hsl(var(--background-h), var(--background-s), 100%);
-	--background-95: hsl(var(--background-h), var(--background-s), 95%);
-	--background-90: hsl(var(--background-h), var(--background-s), 90%);
-	--background-85: hsl(var(--background-h), var(--background-s), 85%);
-	--background-80: hsl(var(--background-h), var(--background-s), 80%);
-	--background-70: hsl(var(--background-h), var(--background-s), 70%);
-	--background-60: hsl(var(--background-h), var(--background-s), 60%);
-	--background-50: hsl(var(--background-h), var(--background-s), 50%);
-	--background-40: hsl(var(--background-h), var(--background-s), 40%);
-	--background-30: hsl(var(--background-h), var(--background-s), 30%);
-	--background-20: hsl(var(--background-h), var(--background-s), 20%);
-	--background-10: hsl(var(--background-h), var(--background-s), 10%);
+	--body-bg: hsl(var(--base-h), var(--base-s), 95%);
+	--body-text: hsl(0, 0%, 14%);
+
+	--navbar-bg: var(--base);
+	--navbar-border: hsl(var(--base-h), var(--base-s), 90%);
+
+	--sidebar-bg: hsl(var(--base-h), var(--base-s), 30%);
+	--sidebar-hover: hsl(var(--base-h), var(--base-s), 35%);
+	--sidebar-text: hsl(var(--base-h), var(--base-s), 90%);
+	--sidebar-border: hsl(var(--base-h), var(--base-s), 40%);
+
+	--base-95: hsl(var(--base-h), var(--base-s), 95%);
+	--base-90: hsl(var(--base-h), var(--base-s), 90%);
+	--base-85: hsl(var(--base-h), var(--base-s), 85%);
+	--base-80: hsl(var(--base-h), var(--base-s), 80%);
+	--base-75: hsl(var(--base-h), var(--base-s), 75%);
+	--base-70: hsl(var(--base-h), var(--base-s), 70%);
+	--base-65: hsl(var(--base-h), var(--base-s), 65%);
+	--base-60: hsl(var(--base-h), var(--base-s), 60%);
+	--base-55: hsl(var(--base-h), var(--base-s), 55%);
+	--base-50: hsl(var(--base-h), var(--base-s), 50%);
+	--base-45: hsl(var(--base-h), var(--base-s), 45%);
+	--base-40: hsl(var(--base-h), var(--base-s), 40%);
+	--base-35: hsl(var(--base-h), var(--base-s), 35%);
+	--base-30: hsl(var(--base-h), var(--base-s), 30%);
+	--base-25: hsl(var(--base-h), var(--base-s), 25%);
+	--base-20: hsl(var(--base-h), var(--base-s), 20%);
+	--base-15: hsl(var(--base-h), var(--base-s), 15%);
+	--base-10: hsl(var(--base-h), var(--base-s), 10%);
+	--base-5: hsl(var(--base-h), var(--base-s), 5%);
 
 	--text: hsl(0, 0%, 14%);
 	--text-h: 0;
@@ -31,7 +48,7 @@
 	--primary-s: 74%;
 	--primary-l: 45%;
 
-	--accent: hsl(21, 95%, 37%);
+	--accent: hsl(107, 100%, 63%);
 	--accent-h: 107;
 	--accent-s: 100%;
 	--accent-l: 63%;
@@ -51,28 +68,45 @@
 	--inverse-text-s: 0%;
 	--inverse-text-l: 100%;
 
-	--scrollbar: hsla(var(--background-h), var(--background-s), 50%, 1);
-	--scrollbar-track: hsla(var(--background-h), var(--background-s), 90%, 1);
+	--scrollbar: hsla(var(--base-h), var(--base-s), 50%, 1);
+	--scrollbar-track: hsla(var(--base-h), var(--base-s), 90%, 1);
 }
 
 .dark {
-	--background: hsl(0, 0%, 10%);
-	--background-h: 0;
-	--background-s: 0%;
-	--background-l: 10%;
+	--base-h: 0;
+	--base-s: 0%;
+	--base: hsl(var(--base-h), var(--base-s), 15%);
 
-	--background-100: hsl(var(--background-h), var(--background-s), 10%);
-	--background-95: hsl(var(--background-h), var(--background-s), 15%);
-	--background-90: hsl(var(--background-h), var(--background-s), 20%);
-	--background-85: hsl(var(--background-h), var(--background-s), 25%);
-	--background-80: hsl(var(--background-h), var(--background-s), 30%);
-	--background-70: hsl(var(--background-h), var(--background-s), 40%);
-	--background-60: hsl(var(--background-h), var(--background-s), 50%);
-	--background-50: hsl(var(--background-h), var(--background-s), 60%);
-	--background-40: hsl(var(--background-h), var(--background-s), 70%);
-	--background-30: hsl(var(--background-h), var(--background-s), 80%);
-	--background-20: hsl(var(--background-h), var(--background-s), 90%);
-	--background-10: hsl(var(--background-h), var(--background-s), 100%);
+	--body-bg: hsl(var(--base-h), var(--base-s), 10%);
+	--body-text: hsl(0, 0%, 100%);
+
+	--navbar-bg: hsl(var(--base-h), var(--base-s), 15%);
+	--navbar-border: hsl(var(--base-h), var(--base-s), 20%);
+
+	--sidebar-bg: hsl(var(--base-h), var(--base-s), 5%);
+	--sidebar-border: hsl(var(--base-h), var(--base-s), 20%);
+	--sidebar-hover: hsl(var(--base-h), var(--base-s), 25%);
+	--sidebar-text: hsl(var(--base-h), var(--base-s), 90%);
+
+	--base-95: hsl(var(--base-h), var(--base-s), 5%);
+	--base-90: hsl(var(--base-h), var(--base-s), 10%);
+	--base-85: hsl(var(--base-h), var(--base-s), 15%);
+	--base-80: hsl(var(--base-h), var(--base-s), 20%);
+	--base-75: hsl(var(--base-h), var(--base-s), 25%);
+	--base-70: hsl(var(--base-h), var(--base-s), 30%);
+	--base-65: hsl(var(--base-h), var(--base-s), 35%);
+	--base-60: hsl(var(--base-h), var(--base-s), 40%);
+	--base-55: hsl(var(--base-h), var(--base-s), 45%);
+	--base-50: hsl(var(--base-h), var(--base-s), 50%);
+	--base-45: hsl(var(--base-h), var(--base-s), 55%);
+	--base-40: hsl(var(--base-h), var(--base-s), 60%);
+	--base-35: hsl(var(--base-h), var(--base-s), 65%);
+	--base-30: hsl(var(--base-h), var(--base-s), 70%);
+	--base-25: hsl(var(--base-h), var(--base-s), 75%);
+	--base-20: hsl(var(--base-h), var(--base-s), 80%);
+	--base-15: hsl(var(--base-h), var(--base-s), 85%);
+	--base-10: hsl(var(--base-h), var(--base-s), 90%);
+	--base-5: hsl(var(--base-h), var(--base-s), 95%);
 
 	--text: hsl(0, 0%, 100%);
 	--text-h: 0;
@@ -104,6 +138,6 @@
 	--inverse-text-s: 0%;
 	--inverse-text-l: 100%;
 
-	--scrollbar: hsla(var(--background-h), var(--background-s), 50%, 1);
-	--scrollbar-track: hsla(var(--background-h), var(--background-s), 90%, 1);
+	--scrollbar: hsla(var(--base-h), var(--base-s), 50%, 1);
+	--scrollbar-track: hsla(var(--base-h), var(--base-s), 90%, 1);
 }

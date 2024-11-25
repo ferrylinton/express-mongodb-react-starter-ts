@@ -19,7 +19,7 @@
 
 .todo-list,
 .todo-detail {
-	--border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+	--border-color: hsl(var(--base-h), var(--base-s), calc(var(--base-l) - 15%));
 	width: 100%;
 	border-radius: 0.5em;
 	border: solid 1px var(--border-color);
@@ -29,7 +29,7 @@
 
 .dark .todo-list,
 .dark .todo-detail {
-	--border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 15%));
+	--border-color: hsl(var(--base-h), var(--base-s), calc(var(--base-l) + 15%));
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 	text-shadow: 1px 1px hsl(0, 0%, 5%);
 }
@@ -54,17 +54,17 @@
 
 .todo-list tr:nth-child(odd),
 .todo-detail tr:nth-child(odd) {
-	background-color: var(--background);
+	background-color: var(--base);
 }
 
 .todo-list tr:nth-child(even),
 .todo-detail tr:nth-child(even) {
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
+	background-color: hsl(var(--base-h), var(--base-s), calc(var(--base-l) - 5%));
 }
 
 .dark .todo-list tr:nth-child(even),
 .dark .todo-detail tr:nth-child(even) {
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 5%));
+	background-color: hsl(var(--base-h), var(--base-s), calc(var(--base-l) + 5%));
 }
 
 .todo-list tr td,
@@ -149,8 +149,8 @@
 	width: 100%;
 	min-height: 44px;
 	border-radius: 4px;
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
-	border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+	background-color: hsl(var(--base-h), var(--base-s), calc(var(--base-l) - 5%));
+	border: solid 1px hsl(var(--base-h), var(--base-s), calc(var(--base-l) - 15%));
 }
 
 .todo-form input[type='text']:focus {
@@ -160,8 +160,8 @@
 }
 
 .dark .todo-form input[type='text'] {
-	background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 5%));
-	border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 15%));
+	background-color: hsl(var(--base-h), var(--base-s), calc(var(--base-l) + 5%));
+	border: solid 1px hsl(var(--base-h), var(--base-s), calc(var(--base-l) + 15%));
 }
 
 .dark .todo-form input[type='text']:focus {

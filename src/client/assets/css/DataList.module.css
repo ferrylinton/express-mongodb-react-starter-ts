@@ -18,8 +18,7 @@
 }
 
 .data-list {
-	--border-color: var(--background-80);
-	width: 100%;
+	--border-color: var(--base-80);
 	border-radius: 0.5em;
 	border: solid 1px var(--border-color);
 	overflow: hidden;
@@ -35,7 +34,7 @@
 		text-overflow: ellipsis;
 
 		&:hover {
-			background-color: var(--background-90);
+			background-color: var(--base-90);
 		}
 	}
 
@@ -55,8 +54,8 @@
 			overflow: hidden;
 			font-size: 0.9rem;
 			font-weight: bold;
-			border-bottom: solid 1px var(--background-70);
-			background-color: var(--background-90);
+			border-bottom: solid 1px var(--base-70);
+			background-color: var(--base-95);
 		}
 
 		& tbody td {
@@ -72,11 +71,11 @@
 		}
 
 		& tr:nth-child(odd) {
-			background-color: var(--background);
+			background-color: var(--base-90);
 		}
 
 		& tr:nth-child(even) {
-			background-color: var(--background-95);
+			background-color: var(--base-95);
 		}
 
 		& [data-locked='true'] {
@@ -123,6 +122,14 @@
 					justify-content: center;
 					align-items: center;
 				}
+			}
+
+			& tr {
+				color: var(--base-70);
+			}
+
+			& tr:has([data-state='open']) {
+				color: var(--base-30);
 			}
 		}
 	}

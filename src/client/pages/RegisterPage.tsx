@@ -3,10 +3,10 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { RegisterSchema } from '../../validations/authenticate-schema';
 import { getErrorsObject } from '../../validations/validation-util';
-import { InputForm } from '../components/Form/InputForm';
-import { axiosInstance } from '../utils/axios';
-import { useToastContext } from '../providers/ToastProvider';
 import { Button } from '../components/Button/Button';
+import { InputForm } from '../components/Form/InputForm';
+import { useToastContext } from '../providers/ToastProvider';
+import { axiosInstance } from '../utils/axios';
 
 export const Component = () => {
 	const intl = useIntl();
@@ -89,7 +89,7 @@ export const Component = () => {
 						<FormattedMessage id="register" />
 					</Button>
 
-					<div className="links">
+					<div className="flex justify-center uppercase">
 						<Link to="/login">
 							<FormattedMessage id="login" />
 						</Link>

@@ -11,7 +11,7 @@
 	text-transform: uppercase;
 	font-size: 0.9rem;
 	pointer-events: none;
-	color: var(--background-60);
+	color: var(--base-60);
 }
 
 .form-group input::placeholder {
@@ -30,7 +30,7 @@
 	font-size: 0.9rem;
 	line-height: 1;
 	padding: 4px 4px 4px 12px;
-	border-bottom: solid 1px var(--background-80);
+	border-bottom: solid 1px var(--base-75);
 
 	&:not([readonly]):focus {
 		outline: none;
@@ -40,8 +40,8 @@
 }
 
 .form-group input:read-only {
-	background-color: var(--background-95);
-	color: var(--background-50);
+	background-color: var(--base-90);
+	color: var(--base-50);
 	cursor: not-allowed;
 }
 
@@ -49,6 +49,7 @@
 	color: var(--danger);
 	font-size: 0.8rem;
 	text-align: left;
+	margin: 0;
 }
 
 .form-group + .btn {

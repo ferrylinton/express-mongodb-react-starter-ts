@@ -1,0 +1,33 @@
+.error-page {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--danger);
+}
+
+.error-page .container {
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.error-page h1 {
+	line-height: 1;
+	font-size: 2rem;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.error-page h2 {
+	line-height: 1;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.error-page code {
+	line-height: 1;
+	font-size: 1rem;
+	font-weight: normal;
+}

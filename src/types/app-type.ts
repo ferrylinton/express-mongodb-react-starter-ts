@@ -11,5 +11,5 @@ type AppContextProps = {
 };
 
 type ToastContextProps = {
-	toast: (message: string) => void;
+	toast: (message: string, isError?: boolean) => void;
 };

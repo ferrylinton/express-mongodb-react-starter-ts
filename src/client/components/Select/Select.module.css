@@ -7,20 +7,19 @@
 	font-size: 0.9rem;
 	line-height: 1;
 	padding: 4px 4px 4px 12px;
-	border-bottom: solid 1px var(--background-80);
+	border-bottom: solid 1px var(--base-75);
 }
 
 .select-content {
 	width: 250px;
 	overflow: hidden;
 	border-radius: 6px;
-	backdrop-filter: blur(10px);
 	padding: 0.5rem;
-	border: solid 1px var(--background-90);
-	background-color: var(--background);
+	border: solid 1px var(--base-75);
+	background-color: var(--base);
 	box-shadow:
-		var(--background-90) 0px 30px 60px -12px,
-		var(--background-70) 0px 18px 36px -18px;
+		var(--base-90) 0px 30px 60px -12px,
+		var(--base-70) 0px 18px 36px -18px;
 }
 
 .select-item {
@@ -50,6 +49,6 @@
 
 	&[data-highlighted] {
 		outline: none;
-		background-color: var(--background-90);
+		background-color: var(--base-80);
 	}
 }

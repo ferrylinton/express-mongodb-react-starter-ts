@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthenticateSchema } from '../../validations/authenticate-schema';
 import { getErrorsObject } from '../../validations/validation-util';
 import { Button } from '../components/Button/Button';
 import { InputForm } from '../components/Form/InputForm';
 import { useAppContext } from '../providers/AppProvider';
 import { axiosInstance } from '../utils/axios';
+import { getLoggedUser } from '../utils/cookie-util';
 
 export const Component = () => {
 	const intl = useIntl();
+
+	const navigate = useNavigate();
 
 	const [validationError, setValidationError] = useState<ValidationError | null>(null);
 
@@ -42,6 +45,10 @@ export const Component = () => {
 		}
 	};
 
+	if (getLoggedUser()) {
+		return <Navigate replace to="/" />;
+	}
+
 	return (
 		<>
 			<div className="container-center">
@@ -50,7 +57,7 @@ export const Component = () => {
 					method="post"
 					noValidate
 					autoComplete="off"
-					className="flex flex-col gap-8"
+					className="form"
 				>
 					{errorMessage && <p>{errorMessage}</p>}
 
@@ -72,7 +79,7 @@ export const Component = () => {
 						<FormattedMessage id="login" />
 					</Button>
 
-					<div className="flex justify-between">
+					<div className="flex justify-between uppercase">
 						<Link to="/register">
 							<FormattedMessage id="register" />
 						</Link>

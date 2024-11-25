@@ -97,7 +97,7 @@ export const UserPasswordForm = ({ response }: UserFormProps) => {
 						</Button>
 					)}
 					{response && (
-						<div className="form-buttons">
+						<div className="grid grid-cols-2 gap-1">
 							<Button
 								type="button"
 								size="big"

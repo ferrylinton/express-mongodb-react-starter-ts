@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { AppProvider } from '../../providers/AppProvider';
 import { ToastProvider } from '../../providers/ToastProvider';
-import { AlertMessageContainer } from '../AlertMessageContainer';
 import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog';
 import { Navbar } from '../Navbar/Navbar';
 import { Sidebar } from '../Sidebar/Sidebar';
@@ -17,7 +16,6 @@ export default function Layout() {
 						<Navbar />
 						<main>
 							<ConfirmDialog />
-							<AlertMessageContainer />
 							<Outlet />
 						</main>
 					</div>

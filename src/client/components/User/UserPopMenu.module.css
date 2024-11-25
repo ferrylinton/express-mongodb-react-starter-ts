@@ -5,6 +5,7 @@
 }
 
 .table-pop-menu {
+	--shadow-color: hsla(var(--base-h), var(--base-s), 8%, 0.1);
 	position: relative;
 	border-radius: 4px;
 	padding: 15px 15px 15px 15px;
@@ -12,9 +13,12 @@
 	animation-duration: 400ms;
 	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 	will-change: transform, opacity;
-	background-color: var(--background);
-	border: solid 1px var(--background-70);
-	box-shadow: var(--background-50) 0px 0px 10px;
+	background-color: var(--base);
+	border: solid 1px var(--base-70);
+	box-shadow:
+		var(--shadow-color) 0px 8px 24px,
+		var(--shadow-color) 0px 16px 56px,
+		var(--shadow-color) 0px 24px 80px;
 
 	& section {
 		display: flex;
@@ -27,7 +31,7 @@
 			padding: 4px 6px;
 			line-height: 1;
 			border-radius: 4px;
-			color: var(--background-40);
+			color: var(--base-40);
 
 			&:hover {
 				color: var(--text);
@@ -53,21 +57,23 @@
 }
 
 .popover-arrow {
-	fill: var(--background-60);
+	width: 15px;
+	height: 10px;
+	fill: var(--base-70);
 }
 
 .popover-close {
 	font-family: inherit;
 	border-radius: 100%;
-	height: 10px;
-	width: 10px;
+	height: 12px;
+	width: 12px;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	position: absolute;
 	top: 8px;
 	right: 8px;
-	color: var(--background-60);
+	color: var(--base-60);
 }
 
 .popover-close:hover {
